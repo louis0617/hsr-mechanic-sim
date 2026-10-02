@@ -1,0 +1,261 @@
+{
+  "id": "acheron",
+  "name": "黄泉",
+  "name_en": "Acheron",
+  "level": 80,
+  "path": "nihility",
+  "elements": [
+    "lightning"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 1125.432,
+      "atk": 894.13632,
+      "defense": 436.59,
+      "speed": 101.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.74,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "lightning": 0.08
+      },
+      "res_pen": {},
+      "energy_max": 0.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "acheron_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "单体雷伤",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Trilateral Wiltcross",
+        "skill_level": {
+          "skill_id": 130801,
+          "base": 6,
+          "eidolon_add": 0,
+          "final": 6,
+          "from_ranks": [],
+          "param_list_level": 6
+        }
+      },
+      {
+        "id": "acheron_skill",
+        "name": "战技：玄玄玉牖兮",
+        "type": "skill",
+        "description": "对敌方全体造成雷伤并叠残梦（天赋 R3）",
+        "damage_instances": [
+          {
+            "multiplier": 1.6,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Octobolt Flash",
+        "skill_level": {
+          "skill_id": 130802,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "acheron_ult",
+        "name": "终结技：黒云压邑兮",
+        "type": "ultimate",
+        "description": "Rainblade ×3 + Stygian Resurge；消耗 9 层残梦",
+        "damage_instances": [
+          {
+            "multiplier": 0.24,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 0.0
+          },
+          {
+            "multiplier": 0.24,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 0.0
+          },
+          {
+            "multiplier": 0.24,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 0.0
+          },
+          {
+            "multiplier": 1.2,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 90.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {
+          "nihility_stacks": -9.0
+        },
+        "requires": [
+          "nihility_stacks>=9"
+        ],
+        "name_en": "Slashed Dream Cries in Red",
+        "skill_level": {
+          "skill_id": 130803,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      }
+    ],
+    "effects": [],
+    "variables": [
+      {
+        "id": "nihility_stacks",
+        "name": "残梦",
+        "value": 0.0,
+        "min_value": 0.0,
+        "max_value": 9.0,
+        "name_en": "Slashed Dream"
+      }
+    ]
+  },
+  "combat_profile": {
+    "role": "dps",
+    "damage_axes": [
+      "ultimate",
+      "skill",
+      "basic"
+    ],
+    "scaling": [
+      "atk_scaling"
+    ],
+    "support_axes": [],
+    "summary_zh": "终结技出伤 / 战技出伤 / 普攻出伤 / 攻击力缩放"
+  },
+  "avatar_base_type": "Warlock",
+  "avatar_id": 1308,
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "generated_at": "2026-09-20T02:49:37.872868+00:00",
+    "generation_eidolon": 0,
+    "enhanced": false,
+    "traces": "full",
+    "loadout": "promotion_plus_flat_traces_only",
+    "loadout_note": "BenchmarkLoadout 54× max 未应用；面板仅为晋升+无条件行迹。遗器/光锥待适配器。",
+    "skill_levels": {
+      "basic_attack": {
+        "skill_id": 130801,
+        "base": 6,
+        "eidolon_add": 0,
+        "final": 6,
+        "from_ranks": [],
+        "param_list_level": 6
+      },
+      "skill": {
+        "skill_id": 130802,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "ultimate": {
+        "skill_id": 130803,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "talent": {
+        "skill_id": 130804,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      }
+    },
+    "promotion_base": {
+      "hp": 1125.4319999999998,
+      "atk": 698.544,
+      "defense": 436.59000000000003,
+      "speed": 101.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {
+      "atk_pct": 0.28,
+      "crit_dmg": 0.24,
+      "dmg_boost.lightning": 0.08
+    },
+    "trace_side_stats_not_in_Stats_model": {
+      "ehr": 0.0,
+      "effect_res": 0.0
+    },
+    "sources": {
+      "multipliers": "AvatarSkillConfig.ParamList",
+      "energy_max": "AvatarConfig.SPNeed",
+      "avatar_base_type": "AvatarConfig.AvatarBaseType",
+      "skill_add": "AvatarRankConfig.SkillAddLevelList",
+      "traces_flat": "AvatarSkillTreeConfig.StatusAddList",
+      "traces_conditional": "data/hsr/triggers/conditional_traces.json",
+      "promotion": "AvatarPromotionConfig"
+    },
+    "_source": {
+      "enhanced": false,
+      "skill_list_table": "AvatarConfig",
+      "skill_ids": {
+        "basic_attack": 130801,
+        "skill": 130802,
+        "ultimate": 130803,
+        "talent": 130804
+      },
+      "rank_list_table": "AvatarConfig",
+      "rank_ids": [
+        130801,
+        130802,
+        130803,
+        130804,
+        130805,
+        130806
+      ]
+    },
+    "schema_gaps": []
+  }
+}

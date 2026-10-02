@@ -1,0 +1,281 @@
+{
+  "id": "sparkle",
+  "name": "花火",
+  "name_en": "Sparkle",
+  "level": 80,
+  "path": "harmony",
+  "elements": [
+    "quantum"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 1788.27264,
+      "atk": 523.908,
+      "defense": 485.1,
+      "speed": 101.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.74,
+      "break_effect": 0.0,
+      "dmg_boost": {},
+      "res_pen": {},
+      "energy_max": 110.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "sparkle_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "quantum",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Monodrama",
+        "skill_level": {
+          "skill_id": 1130601,
+          "base": 6,
+          "eidolon_add": 0,
+          "final": 6,
+          "from_ranks": [],
+          "param_list_level": 6
+        }
+      },
+      {
+        "id": "sparkle_skill",
+        "name": "战技",
+        "type": "skill",
+        "description": "单体暴伤 +0.24×自身暴伤+0.45（当前面板=0.6276），持续 2 回合，行动提前 50%；BenchmarkLoadout 未应用",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "sparkle_skill_buff"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Dreamdiver",
+        "skill_level": {
+          "skill_id": 1130602,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "sparkle_ult",
+        "name": "终结技",
+        "type": "ultimate",
+        "description": "回复 6 战技点。溢出记录上限 10 无法写入 Action，暂按无上限。谜诡：使我方全体获得【谜诡】；持有者触发花火天赋易伤时每层额外 +0.06，持续 3 回合。效果目标由 Effect.target=all_allies 决定；Action.effect_target 保持 enemy 以免 bot 普攻误伤队友。",
+        "damage_instances": [],
+        "energy_cost": 110.0,
+        "sp_cost": -6,
+        "applies_effects": [
+          "sparkle_enemy_vuln"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "The Hero with a Thousand Faces",
+        "skill_level": {
+          "skill_id": 1130603,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      }
+    ],
+    "effects": [
+      {
+        "id": "sparkle_skill_buff",
+        "name": "梦游鱼",
+        "is_buff": true,
+        "target": "single_ally",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "crit_dmg",
+            "operation": "add",
+            "value": 0.6276
+          }
+        ],
+        "conditions": [],
+        "action_advance_pct": 0.5,
+        "action_advance_skip_self": true,
+        "name_en": "Dreamdiver"
+      },
+      {
+        "id": "sparkle_enemy_vuln",
+        "name": "谜诡",
+        "is_buff": true,
+        "duration_turns": 3,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "vuln",
+            "operation": "add",
+            "value": 0.06
+          }
+        ],
+        "conditions": [],
+        "name_en": "Cipher",
+        "target": "all_allies",
+ "description": "我方增益标记。不直接改敌方易伤；持有者攻击时，花火幻相光环每层额外 +0.06 易伤（）。"
+      },
+      {
+        "id": "sparkle_figment",
+        "name": "幻相",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": 2,
+        "max_stacks": 3,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "vuln",
+            "operation": "add",
+            "value": 0.04
+          }
+        ],
+        "conditions": [],
+        "name_en": "Figment",
+ "description": "层数挂花火自身；对敌易伤以光环读取本层数进入 vuln 区，不发敌方 effect_applied（）。持续 2 回合按花火回合递减。"
+      }
+    ],
+    "variables": []
+  },
+  "combat_profile": {
+    "role": "hybrid",
+    "damage_axes": [
+      "basic"
+    ],
+    "scaling": [
+      "atk_scaling"
+    ],
+    "support_axes": [
+      "generic_amp",
+      "generic_vuln"
+    ],
+    "summary_zh": "泛用增伤/双暴 / 易伤 / 攻击力缩放"
+  },
+  "avatar_base_type": "Shaman",
+  "avatar_id": 1306,
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "generated_at": "2026-09-20T02:49:38.096311+00:00",
+    "generation_eidolon": 0,
+    "enhanced": true,
+    "traces": "full",
+    "loadout": "promotion_plus_flat_traces_only",
+    "loadout_note": "BenchmarkLoadout 54× max 未应用；面板仅为晋升+无条件行迹。遗器/光锥待适配器。",
+    "skill_levels": {
+      "basic_attack": {
+        "skill_id": 1130601,
+        "base": 6,
+        "eidolon_add": 0,
+        "final": 6,
+        "from_ranks": [],
+        "param_list_level": 6
+      },
+      "skill": {
+        "skill_id": 1130602,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "ultimate": {
+        "skill_id": 1130603,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "talent": {
+        "skill_id": 1130604,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      }
+    },
+    "promotion_base": {
+      "hp": 1397.088,
+      "atk": 523.908,
+      "defense": 485.1,
+      "speed": 101.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {
+      "hp_pct": 0.28,
+      "crit_dmg": 0.24,
+      "effect_res": 0.1
+    },
+    "trace_side_stats_not_in_Stats_model": {
+      "ehr": 0.0,
+      "effect_res": 0.1
+    },
+    "sources": {
+      "multipliers": "AvatarSkillConfig.ParamList",
+      "energy_max": "AvatarConfigEnhanced.SPNeed",
+      "avatar_base_type": "AvatarConfig.AvatarBaseType",
+      "skill_add": "AvatarRankConfig.SkillAddLevelList",
+      "traces_flat": "AvatarSkillTreeConfig.StatusAddList",
+      "traces_conditional": "data/hsr/triggers/conditional_traces.json",
+      "promotion": "AvatarPromotionConfig"
+    },
+    "_source": {
+      "enhanced": true,
+      "skill_list_table": "AvatarConfigEnhanced",
+      "skill_ids": {
+        "basic_attack": 1130601,
+        "skill": 1130602,
+        "ultimate": 1130603,
+        "talent": 1130604
+      },
+      "rank_list_table": "AvatarConfigEnhanced",
+      "rank_ids": [
+        1130601,
+        1130602,
+        1130603,
+        1130604,
+        1130605,
+        1130606
+      ]
+    },
+    "schema_gaps": [
+      {
+        "field": "ult_sp_overflow_cap",
+        "value": 10.0,
+        "treatment": "action.sp_pool_temp_max",
+ "note": "花火终结技战技点溢出上限 10：由 loader 从本字段写入 ultimate.sp_pool_temp_max（）。"
+      }
+    ]
+  }
+}

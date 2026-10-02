@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "note": "Shared L1/L2 intermediate representation for counter gains. Do not infer R3 from Action.variable_changes.",
+  "ZONE_PROC_COUNTS_FOR_DREAM": true,
+  "FIGMENT_COUNTS_FOR_DREAM": {
+    "status": "archived",
+    "note": "Figment stacks on Sparkle (ally buff) and never applies to enemies, so it does not fire R1. Historical Control A sensitivity (wrong holder model): FIGMENT=T → L2 ult≈0.696; FIGMENT=F → L2 ult≈0.487.",
+    "historical_l2_ult": {
+      "T": 0.696,
+      "F": 0.487
+    }
+  },
+  "dream_accounting": {
+    "acheron_r1_source_text": "任意单位施放技能期间使敌方目标陷入负面效果…每次施放技能最多触发1次",
+    "r1_definition": {
+      "rule": "Any unit action window (including enemies and follow_up when FOLLOWUP_COUNTS_AS_ACTION) that inflicts an enemy debuff grants +1 Slashed Dream; per-action cap 1. No apply_source gate. Figment does not apply to enemies, so it never fires R1.",
+      "evidence": [
+        "BWiki / 17173 4.0 enhanced Sparkle talent: 花火获得1层【幻相】, per-stack enemy received-dmg up (aura); enemies are never inflicted with Figment.",
+        "User video BV18wZTB7EjR: after Sparkle skill, Acheron Slashed Dream does not increase.",
+        "KQM Acheron guide: Slashed Dream from inflicting debuffs on enemies.",
+        " R1 follow_up: gao7/17173 —「施放技能期间」含普攻/战技/终结技/追加攻击/秘技；追加攻击挂负面可独立充点（与触发源行动分窗）。",
+        " 砂金：终结技【惊惶】为敌方减益 → 计入；23023 追击易伤在 follow_up 窗内施加 → 计入（社区：砂金专武易伤帮黄泉充点）。"
+      ]
+    },
+    "aventurine_r1": {
+      "follow_up_23023_vuln": {
+        "counts_for_slashed_dream": true,
+        "evidence": [
+          "原文（黄泉）：任意单位施放技能期间使敌方陷入负面…每次施放技能最多1次",
+          "社区（gao7 news/1113991；17173 黄泉一图流）：技能含追加攻击；追击挂负面可充残梦",
+          "CombatRules.followup_counts_as_action=true（ 确认）"
+        ],
+        "note": "不默认成立：有社区+规则开关证据后接通。"
+      },
+      "ult_unnerved": {
+        "counts_for_slashed_dream": true,
+        "evidence": [
+          "砂金终结技原文：使敌方陷入【惊惶】",
+          "米游社/攻略：砂金终结技挂负面协助黄泉残梦"
+        ]
+      }
+    },
+    "figment_note": {
+      "effect_id": "sparkle_figment",
+      "is_buff": true,
+      "holder": "sparkle",
+      "target_side": "ally_self",
+      "vuln_path": "aura_from_sparkle_stacks_into_defender_vuln",
+      "counts_for_slashed_dream": false,
+      "conclusion": " holder correction. exclusion conclusion retained; reason updated from apply_source/FIGMENT flag to 'never enemy infliction'.",
+      "flag": "FIGMENT_COUNTS_FOR_DREAM",
+      "flag_status": "archived",
+      "d1_13_sensitivity": "Historical only (wrong enemy-holder model)."
+    },
+    "rules": [
+      {
+        "id": "sparkle_figment_on_sp_consumed",
+        "effect_id": "sparkle_figment",
+        "paths": [
+          "sp_consumed_during_action"
+        ],
+        "counts_for_slashed_dream": false,
+        "verification": "accepted",
+        "note": "Stacks on Sparkle; duration 2 ticks on Sparkle turns; aura vuln; no enemy effect_applied."
+      },
+      {
+        "id": "ashen_roast_during_jiaoqiu_skill_cast",
+        "effect_id": "ashen_roast",
+        "paths": [
+          "talent_on_basic_skill_ult_hit",
+          "skill_extra_stack_on_main_target",
+          "ult_equalize_stacks"
+        ],
+        "counts_for_slashed_dream": true,
+        "verification": "accepted",
+        "note": "Shares per-action cap 1 with other debuffs on the same action window."
+      },
+      {
+        "id": "ashen_roast_zone_on_enemy_action",
+        "effect_id": "ashen_roast",
+        "paths": [
+          "ult_zone_enemy_take_action"
+        ],
+        "counts_for_slashed_dream": true,
+        "flag": "ZONE_PROC_COUNTS_FOR_DREAM",
+        "verification": "unverified",
+        "community_consensus": "counts",
+        "evidence": [
+          "Community guides / calculators (e.g. Mobalytics, Siliconera; Chinese one-pagers)",
+          "Not official skill-text confirmation — live verify or Fribbels before locking R1 engine change"
+        ],
+        "note": "Read ZONE_PROC_COUNTS_FOR_DREAM (default true). Ult L10: p=0.6, duration=3, max_triggers=6; per-enemy per-turn max 1."
+      },
+      {
+        "id": "ashen_roast_zone_on_enemy_enter_battle",
+        "effect_id": "ashen_roast",
+        "paths": [
+          "trace_1218103"
+        ],
+        "counts_for_slashed_dream": false,
+        "verification": "unverified",
+        "note": "Enemy entering battle while zone active. Keep non-counting."
+      }
+    ]
+  },
+  "gain_rules": [
+    {
+      "id": "acheron_r3_skill_inherent",
+      "resource": "nihility_stacks",
+      "holder_id": "acheron",
+      "increment": 1.0,
+      "per_action_cap": 1.0,
+      "kind": "action_inherent",
+      "filter": {
+        "actor_id": "acheron",
+        "action_type": "skill"
+      },
+      "l2_hook": "acheron_r3"
+    },
+    {
+      "id": "acheron_r2_debuff_on_skill_cast",
+      "resource": "nihility_stacks",
+      "holder_id": "acheron",
+      "increment": 1.0,
+      "per_action_cap": 1.0,
+      "kind": "applies_debuff_during_skill_cast",
+      "filter": {
+        "action_kind_in_skill_cast": true,
+        "is_debuff": true,
+        "target_side": "enemy"
+      },
+      "l2_hook": "acheron_r2",
+      "note": ": L1 expands fires for LC 23024 mirage on acheron basic+skill (not crimson knot — talent product)."
+    },
+    {
+      "id": "acheron_e2_turn_start",
+      "resource": "nihility_stacks",
+      "holder_id": "acheron",
+      "increment": 1.0,
+      "per_action_cap": 1.0,
+      "kind": "turn_start",
+      "filter": {
+        "actor_id": "acheron",
+        "min_eidolon": 2
+      },
+      "l2_hook": "acheron_e2_turn_start",
+      "note": "E2: own turn start +1 dream +1 knot. L1 fires on basic+skill (= once per normal turn)."
+    }
+  ]
+}

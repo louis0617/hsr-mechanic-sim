@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "source": "AvatarSkillConfig.SPBase",
+    "datamine_path": "data/external/turnbasedgamedata/ExcelOutput/AvatarSkillConfig.json",
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "note": "skill_id -> SPBase for skill ids present in data/hsr/characters. null = ABSENT (energy_max=0). SPBase does not vary by level."
+  },
+  "spbase_by_skill_id": {
+    "121801": 20.0,
+    "121802": 30.0,
+    "121803": 5.0,
+    "130401": 20.0,
+    "130402": 30.0,
+    "130403": 5.0,
+    "130801": null,
+    "130802": null,
+    "130803": null,
+    "1130601": 20.0,
+    "1130602": 30.0,
+    "1130603": 5.0
+  }
+}

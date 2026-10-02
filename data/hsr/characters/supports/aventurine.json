@@ -1,0 +1,340 @@
+{
+  "id": "aventurine",
+  "name": "砂金",
+  "name_en": "Aventurine",
+  "level": 80,
+  "path": "preservation",
+  "elements": [
+    "imaginary"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 1203.048,
+      "atk": 446.292,
+      "defense": 884.09475,
+      "speed": 106.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "imaginary": 0.14400000000000002
+      },
+      "res_pen": {},
+      "energy_max": 110.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "aventurine_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "DEF 倍率直伤（对齐 StarRailDamageCal is_hp=2）",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 25.0,
+            "scaling_stat": "defense"
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "requires": [],
+        "skill_level": {
+          "skill_id": 130401,
+          "base": 6,
+          "eidolon_add": 0,
+          "final": 6,
+          "from_ranks": [],
+          "param_list_level": 6
+        }
+      },
+      {
+        "id": "aventurine_skill",
+        "name": "战技",
+        "type": "skill",
+ "description": "为我方全体提供【坚垣筹码】护盾（存在+持续；无数值/血量；）",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "aventurine_chip"
+        ],
+        "effect_target": "all_allies",
+        "variable_changes": {},
+        "requires": [],
+        "skill_level": {
+          "skill_id": 130402,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "aventurine_ult",
+        "name": "终结技",
+        "type": "ultimate",
+        "description": "随机1–7点【盲注】+【惊惶】(CD+15%, 3回合)+DEF倍率直伤。盲注由引擎 RNG 结算。",
+        "damage_instances": [
+          {
+            "multiplier": 2.7,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "defense"
+          }
+        ],
+        "energy_cost": 110.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "aventurine_unnerved"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "skill_level": {
+          "skill_id": 130403,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "aventurine_fua",
+        "name": "天赋追击",
+        "type": "follow_up",
+        "description": "消耗7点【盲注】；7段弹射，每段 DEF×25% 虚数直伤。ParamList L10 [1,7,0.25,0.5,2]。",
+        "damage_instances": [
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          },
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          },
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          },
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          },
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          },
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          },
+          {
+            "multiplier": 0.25,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 3.3333333333333335,
+            "scaling_stat": "defense"
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {
+          "blind_bet": -7.0
+        },
+        "requires": [
+          "blind_bet>=7"
+        ],
+        "skill_level": {
+          "skill_id": 130404,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      }
+    ],
+    "effects": [
+      {
+        "id": "aventurine_chip",
+        "name": "坚垣筹码",
+        "name_en": "Fortified Wager",
+        "is_buff": true,
+        "target": "all_allies",
+        "duration_turns": 3,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [],
+        "conditions": []
+      },
+      {
+        "id": "aventurine_unnerved",
+        "name": "惊惶",
+        "name_en": "Unnerved",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 3,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "crit_dmg",
+            "operation": "add",
+            "value": 0.15
+          }
+        ],
+        "conditions": []
+      }
+    ],
+    "variables": [
+      {
+        "id": "blind_bet",
+        "name": "盲注",
+        "name_en": "Blind Bet",
+        "value": 0,
+        "min_value": 0,
+        "max_value": 10
+      },
+      {
+        "id": "blind_bet_extra_cd",
+        "name": "盲注额外充能冷却",
+        "value": 0,
+        "min_value": 0,
+        "max_value": 99
+      }
+    ]
+  },
+  "avatar_base_type": "Knight",
+  "avatar_id": 1304,
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "generated_at": "2026-09-20T02:49:38.100098+00:00",
+    "generation_eidolon": 0,
+    "enhanced": false,
+    "traces": "full",
+    "loadout": "promotion_plus_flat_traces_only",
+    "loadout_note": "BenchmarkLoadout 54× max 未应用；面板仅为晋升+无条件行迹。遗器/光锥待适配器。",
+    "skill_levels": {
+      "basic_attack": {
+        "skill_id": 130401,
+        "base": 6,
+        "eidolon_add": 0,
+        "final": 6,
+        "from_ranks": [],
+        "param_list_level": 6
+      },
+      "skill": {
+        "skill_id": 130402,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "ultimate": {
+        "skill_id": 130403,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "talent": {
+        "skill_id": 130404,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      }
+    },
+    "promotion_base": {
+      "hp": 1203.0479999999998,
+      "atk": 446.29200000000003,
+      "defense": 654.885,
+      "speed": 106.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {
+      "def_pct": 0.35,
+      "dmg_boost.imaginary": 0.14400000000000002,
+      "effect_res": 0.1
+    },
+    "trace_side_stats_not_in_Stats_model": {
+      "ehr": 0.0,
+      "effect_res": 0.1
+    },
+    "sources": {
+      "multipliers": "AvatarSkillConfig.ParamList",
+      "energy_max": "AvatarConfig.SPNeed",
+      "avatar_base_type": "AvatarConfig.AvatarBaseType",
+      "skill_add": "AvatarRankConfig.SkillAddLevelList",
+      "traces_flat": "AvatarSkillTreeConfig.StatusAddList",
+      "traces_conditional": "data/hsr/triggers/conditional_traces.json",
+      "promotion": "AvatarPromotionConfig"
+    },
+    "_source": {
+      "enhanced": false,
+      "skill_list_table": "AvatarConfig",
+      "skill_ids": {
+        "basic_attack": 130401,
+        "skill": 130402,
+        "ultimate": 130403,
+        "talent": 130404
+      },
+      "rank_list_table": "AvatarConfig",
+      "rank_ids": [
+        130401,
+        130402,
+        130403,
+        130404,
+        130405,
+        130406
+      ]
+    },
+    "schema_gaps": []
+  }
+}

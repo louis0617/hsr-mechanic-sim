@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "note": "Team SP max = base + sum of talent bonuses. Bonus ParamList index from TextMap placeholders (e.g. #3[i] → 1-based 3).",
+  "base": 5,
+  "talent_bonuses": [
+    {
+      "skill_id": 1130604,
+      "param_index_1based": 3,
+      "holder_hint": "sparkle",
+      "textmap_en": "additionally increases the max number of Skill Points by #3[i]"
+    }
+  ]
+}

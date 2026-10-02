@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+*.egg-info/
+dist/
+build/
+.DS_Store
+data/external/StarRailRes/
+data/external/turnbasedgamedata/ExcelOutput/AvatarSkillConfig.full.json

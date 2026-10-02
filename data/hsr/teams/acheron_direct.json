@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_direct",
+  "name": "黄泉直伤队（顶配）",
+  "description": "黄泉 E2 + 椒丘 + 花火 + 砂金；深渊行迹在 1 名虚无队友下取 1.60×（E2 减需求）",
+  "main_dps": "acheron",
+  "members": ["acheron", "jiaoqiu", "sparkle", "aventurine"],
+  "eidolons": {
+    "acheron": 2,
+    "jiaoqiu": 0,
+    "sparkle": 0,
+    "aventurine": 0
+  },
+  "max_rounds": 20
+}

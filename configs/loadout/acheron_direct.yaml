@@ -1,0 +1,76 @@
+# BenchmarkLoadout for acheron_direct (Fribbels 200% perfection)
+# D9: objective-solver allocation + LC S1 + set (a) panel bonuses.
+# 54× max roll substats, no diminishing returns, game-legal mains/subs.
+# Speeds: chaos-memory breakpoints (confirmed 2026-09-18).
+# LC/sets confirmed 2026-09-18 (first recommendations).
+
+ruleset: fribbels_perfection_200
+total_substat_rolls: 54
+roll_quality: max
+diminishing_returns: false
+datamine_commit: "4ce30f69b32dc259ab9a8da3ba57035485103221"
+
+characters:
+  sparkle:
+    role: pull_support
+    target_speed: 160
+    err: 1.0  # 无 ERR 主词条，取基础值
+    light_cone: { id: 23021, superimposition: 1 }  # Earthly Escapade
+    relic_sets:
+      cavern: sacerdos_121
+      planar: broken_keel_310
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: crit_dmg
+      feet: speed
+      sphere: hp_pct
+      rope: atk_pct   # ERR preferred in-game; Stats has no ERR — use ATK%
+
+  jiaoqiu:
+    role: amp_support
+    target_speed: 143
+    err: 1.0  # 无 ERR 主词条，取基础值
+    light_cone: { id: 23029, superimposition: 1 }  # Those Many Springs
+    relic_sets:
+      cavern: prisoner_116
+      planar: pan_cosmic_303
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: ehr
+      feet: speed
+      sphere: fire_dmg
+      rope: atk_pct
+
+  acheron:
+    role: main_dps
+    target_speed: 134
+    err: 1.0  # 无 ERR 主词条，取基础值
+    light_cone: { id: 23024, superimposition: 1 }  # Along the Passing Shore
+    relic_sets:
+      cavern: pioneer_117
+      planar: izumo_314
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: crit_rate
+      feet: speed
+      sphere: lightning_dmg
+      rope: atk_pct
+
+  aventurine:
+    role: shielder
+    target_speed: 134
+    err: 1.0  # 无 ERR 主词条，取基础值
+    light_cone: { id: 23023, superimposition: 1 }  # Inherently Unjust Destiny
+    relic_sets:
+      cavern: knight_103
+      planar: broken_keel_310
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: def_pct
+      feet: speed
+      sphere: imaginary_dmg
+      rope: def_pct

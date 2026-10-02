@@ -1,0 +1,99 @@
+{
+  "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+ "note": "Descriptors only; runtime after . No character-id engine specials.",
+  "trace_triggers": [
+    {
+      "id": "acheron_abyss",
+      "source": {
+        "table": "AvatarSkillTreeConfig",
+        "point_id": 1308102
+      },
+      "unlocked_default": true,
+      "hooks": [
+        "outgoing_damage"
+      ],
+      "applies_to_actions": [
+        "basic_attack",
+        "skill",
+        "ultimate"
+      ],
+      "condition": {
+        "query": "count_allies",
+        "filter": {
+          "avatar_base_type": "Warlock"
+        },
+        "exclude_self": true
+      },
+      "effect": {
+        "kind": "damage_multiplier",
+        "tiers": [
+          {
+            "min": 1,
+            "mult": 1.15
+          },
+          {
+            "min": 2,
+            "mult": 1.6
+          }
+        ],
+        "param_list": [
+          1.15,
+          1.6
+        ]
+      },
+      "eidolon_mods": [
+        {
+          "eidolon_min": 2,
+          "highest_tier_count_delta": -1,
+          "note": "E2: highest Abyss tier requires one fewer Nihility ally"
+        }
+      ]
+    }
+  ],
+  "rank_triggers": [
+    {
+      "id": "aventurine_e6_shield_allies",
+      "source": {
+        "table": "AvatarRankConfig",
+        "rank_id": 130406,
+        "rank": 6
+      },
+      "eidolon_min": 6,
+      "hooks": [
+        "outgoing_damage"
+      ],
+      "condition": {
+        "query": "count_allies",
+        "filter": {
+          "has_shield": true
+        },
+        "exclude_self": true
+      },
+      "effect": {
+        "kind": "damage_bonus_per_count",
+        "per": 0.5,
+        "cap": 1.5,
+        "param_list": [
+          0.5,
+          1.5
+        ]
+      }
+    },
+    {
+      "id": "acheron_e2_turn_start",
+      "source": {
+        "table": "AvatarRankConfig",
+        "rank_id": 130802,
+        "rank": 2
+      },
+      "eidolon_min": 2,
+      "hooks": [
+        "turn_start"
+      ],
+ "effects_note": "gain 1 Slashed Dream; +1 Crimson Knot on enemy with most stacks — +",
+      "also_modifies": [
+        "acheron_abyss.eidolon_mods"
+      ]
+    }
+  ]
+}

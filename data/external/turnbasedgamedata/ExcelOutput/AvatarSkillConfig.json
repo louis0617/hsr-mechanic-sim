@@ -1,0 +1,21 @@
+[
+  {
+    "SkillID": 1130604,
+    "Level": 10,
+    "ParamList": [
+      {
+        "Value": 2.0
+      },
+      {
+        "Value": 0.04
+      },
+      {
+        "Value": 2.0
+      },
+      {
+        "Value": 3.0
+      }
+    ],
+    "_note": "synthetic example: Sparkle talent 1130604 L10 ParamList from docs/shared_trigger_rules.md"
+  }
+]

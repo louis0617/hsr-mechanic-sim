@@ -1,0 +1,270 @@
+{
+  "id": "jiaoqiu",
+  "name": "椒丘",
+  "name_en": "Jiaoqiu",
+  "level": 80,
+  "path": "nihility",
+  "elements": [
+    "fire"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 1358.28,
+      "atk": 601.524,
+      "defense": 509.355,
+      "speed": 103.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "fire": 0.14400000000000002
+      },
+      "res_pen": {},
+      "energy_max": 100.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "jiaoqiu_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [
+          "ashen_roast"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Basic ATK",
+        "skill_level": {
+          "skill_id": 121801,
+          "base": 6,
+          "eidolon_add": 0,
+          "final": 6,
+          "from_ranks": [],
+          "param_list_level": 6
+        },
+ "description": "单体火伤；天赋：击中时基础概率施加 1 层【烬煨】（ Param 天赋#1）"
+      },
+      {
+        "id": "jiaoqiu_skill",
+        "name": "战技：摄邪",
+        "type": "skill",
+ "description": "主目标火伤×1.5；邻接×0.9 未分轨（KNOWN_GAP ）；天赋挂 1 层烬煨 + 战技额外主目标 1 层（applies_effects 双次 ashen_roast）",
+        "damage_instances": [
+          {
+            "multiplier": 1.5,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 40.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "ashen_roast",
+          "ashen_roast"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Soul Extraction",
+        "skill_level": {
+          "skill_id": 121802,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "jiaoqiu_ult",
+        "name": "终结技：火令咒",
+        "type": "ultimate",
+        "description": "统一烬煨最高层 → 开结界(3回合/60%敌方行动叠烬/全局6次/终结技易伤15%) → 全体火伤×1.0；天赋击中再挂烬煨。ParamList L10 [1.0,0.6,0.15,3,6]",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 100.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "ashen_roast"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Pyrograph Arcanum",
+        "skill_level": {
+          "skill_id": 121803,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      }
+    ],
+    "effects": [
+      {
+        "id": "ashen_roast",
+        "name": "烬煨",
+        "name_en": "Ashen Roast",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 2,
+        "max_stacks": 5,
+        "current_stacks": 1,
+        "base_chance": 1.0,
+        "tick_timing": "turn_start",
+        "dot_source_id": "jiaoqiu",
+        "dot_instance": {
+          "multiplier": 1.8,
+          "element": "fire",
+          "damage_type": "dot",
+          "target": "single",
+          "toughness_dmg": 0.0
+        },
+        "modifiers": [
+          {
+            "target_stat": "vuln",
+            "operation": "add",
+            "value": 0.15
+          }
+        ],
+        "conditions": [],
+        "vuln_at_one_stack": 0.15,
+        "vuln_per_extra_stack": 0.05
+      }
+    ],
+    "variables": []
+  },
+  "combat_profile": {
+    "role": "hybrid",
+    "damage_axes": [
+      "dot",
+      "skill",
+      "basic"
+    ],
+    "scaling": [
+      "atk_scaling"
+    ],
+    "support_axes": [
+      "generic_vuln",
+      "dot"
+    ],
+    "summary_zh": "易伤 / 持续伤害 / 攻击力缩放"
+  },
+  "avatar_base_type": "Warlock",
+  "avatar_id": 1218,
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "generated_at": "2026-10-01T04:13:25.474372+00:00",
+    "generation_eidolon": 0,
+    "enhanced": false,
+    "traces": "full",
+    "loadout": "promotion_plus_flat_traces_only",
+    "loadout_note": "BenchmarkLoadout 54× max 未应用；面板仅为晋升+无条件行迹。遗器/光锥待适配器。",
+    "skill_levels": {
+      "basic_attack": {
+        "skill_id": 121801,
+        "base": 6,
+        "eidolon_add": 0,
+        "final": 6,
+        "from_ranks": [],
+        "param_list_level": 6
+      },
+      "skill": {
+        "skill_id": 121802,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "ultimate": {
+        "skill_id": 121803,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      },
+      "talent": {
+        "skill_id": 121804,
+        "base": 10,
+        "eidolon_add": 0,
+        "final": 10,
+        "from_ranks": [],
+        "param_list_level": 10
+      }
+    },
+    "promotion_base": {
+      "hp": 1358.2800000000002,
+      "atk": 601.5239999999999,
+      "defense": 509.355,
+      "speed": 98.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {
+      "ehr": 0.28,
+      "dmg_boost.fire": 0.14400000000000002,
+      "speed_flat": 5.0
+    },
+    "trace_side_stats_not_in_Stats_model": {
+      "ehr": 0.28,
+      "effect_res": 0.0
+    },
+    "sources": {
+      "multipliers": "AvatarSkillConfig.ParamList",
+      "energy_max": "AvatarConfig.SPNeed",
+      "avatar_base_type": "AvatarConfig.AvatarBaseType",
+      "skill_add": "AvatarRankConfig.SkillAddLevelList",
+      "traces_flat": "AvatarSkillTreeConfig.StatusAddList",
+      "traces_conditional": "data/hsr/triggers/conditional_traces.json",
+      "promotion": "AvatarPromotionConfig"
+    },
+    "_source": {
+      "enhanced": false,
+      "skill_list_table": "AvatarConfig",
+      "skill_ids": {
+        "basic_attack": 121801,
+        "skill": 121802,
+        "ultimate": 121803,
+        "talent": 121804
+      },
+      "rank_list_table": "AvatarConfig",
+      "rank_ids": [
+        121801,
+        121802,
+        121803,
+        121804,
+        121805,
+        121806
+      ]
+    },
+    "schema_gaps": []
+  }
+}
