@@ -90,7 +90,7 @@ tests/                CI smoke tests for rules, rotation, graph, Fribbels freeze
 Planned follow-ups (not claimed as completed results):
 
 - Memory-team / Remembrance line formalization and L1–L2 checks
-- Cipher (晴歌) kit + rotation coverage
+- Robin: Summeretto (知更鸟•晴歌) kit + rotation coverage
 - A second game title using the same L1/L2 + graph formalization pattern
 
 ## Notes
