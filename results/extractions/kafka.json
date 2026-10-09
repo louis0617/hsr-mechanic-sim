@@ -1,0 +1,245 @@
+{
+  "id": "kafka",
+  "name": "卡芙卡",
+  "level": 80,
+  "path": "nihility",
+  "elements": [
+    "lightning"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 0.0,
+      "atk": 0.0,
+      "defense": 0.0,
+      "speed": 100.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {},
+      "res_pen": {
+        "lightning": 0.0
+      },
+      "energy_max": 120.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "kafka_basic_atk",
+        "name": "夜间喧嚣不止",
+        "type": "basic_attack",
+        "description": "对敌方单体造成少量雷属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "kafka_skill",
+        "name": "月光摩挲连绵",
+        "type": "skill",
+        "description": "对敌方单体造成雷属性伤害，对相邻目标造成少量雷属性伤害。若主目标或相邻目标处于持续伤害状态，使其当前承受的所有持续伤害立即产生部分伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "kafka_skill_dot_pop"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "kafka_ultimate",
+        "name": "悲剧尽头的颤音",
+        "type": "ultimate",
+        "description": "对敌方全体造成少量雷属性伤害，有概率施加触电状态，并使处于触电状态的敌人立即产生额外伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 120.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "kafka_ult_shock",
+          "kafka_ult_dot_pop",
+          "kafka_ult_pen_buff"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "kafka_follow_up",
+        "name": "温柔亦同残酷",
+        "type": "follow_up",
+        "description": "当队友对敌方目标施放攻击后，卡芙卡立即发动追加攻击，对主目标造成雷伤，并大概率施加触电状态。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "kafka_ult_shock"
+        ],
+        "effect_target": "enemy",
+        "variable_changes": {
+          "talent_charges": -1.0
+        },
+        "heal_tally_add": null,
+        "requires": [
+          "talent_charges>=1"
+        ]
+      },
+      {
+        "id": "kafka_technique",
+        "name": "攻击",
+        "type": "technique",
+        "description": "攻击敌人，进入战斗后削弱敌方目标对应属性韧性。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      }
+    ],
+    "effects": [
+      {
+        "id": "kafka_ult_shock",
+        "name": "触电",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "res_pen.lightning",
+            "operation": "add",
+            "value": 0.1
+          }
+        ],
+        "conditions": []
+      },
+      {
+        "id": "kafka_skill_dot_pop",
+        "name": "Dot Pop (Skill)",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 0,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [],
+        "conditions": []
+      },
+      {
+        "id": "kafka_ult_dot_pop",
+        "name": "Dot Pop (Ultimate)",
+        "is_buff": false,
+        "target": "all_enemies",
+        "duration_turns": 0,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [],
+        "conditions": []
+      },
+      {
+        "id": "kafka_ult_pen_buff",
+        "name": "雷穿透提升",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "res_pen.lightning",
+            "operation": "add",
+            "value": 0.2
+          }
+        ],
+        "conditions": []
+      }
+    ],
+    "variables": [
+      {
+        "id": "talent_charges",
+        "name": "天赋可用次数",
+        "value": 2.0,
+        "min_value": 0.0,
+        "max_value": 2.0
+      }
+    ]
+  }
+}

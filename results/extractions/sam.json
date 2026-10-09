@@ -1,0 +1,261 @@
+{
+  "id": "sam",
+  "name": "流萤（sam）",
+  "level": 80,
+  "path": "destruction",
+  "elements": [
+    "fire"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 1000.0,
+      "atk": 100.0,
+      "defense": 100.0,
+      "speed": 100.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "fire": 0.0
+      },
+      "res_pen": {},
+      "energy_max": 100.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "basic_attack",
+        "name": "指令-闪燃推进",
+        "type": "basic_attack",
+        "description": "对指定敌方单体造成等同于装甲「萨姆」#1[i]%攻击力的火属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "skill",
+        "name": "指令-天火轰击",
+        "type": "skill",
+        "description": "消耗等同于自身生命上限#2[i]%的生命值固定恢复等同于自身#3[i]%能量上限的能量，对指定敌方单体造成等同于装甲「萨姆」#1[i]%攻击力的火属性伤害。若当前生命值不足，施放战技时装甲「萨姆」的当前生命值降至1点。使自身下一次行动提前#4[i]%。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "ultimate",
+        "name": "火萤Ⅳ型-完全燃烧",
+        "type": "ultimate",
+        "description": "进入「完全燃烧」状态，自身行动提前100%并获得强化普攻和强化战技。「完全燃烧」状态下速度提高#3[i]点，且施放强化普攻、强化战技时自身弱点击破效率提高#2[i]%、使敌方目标受到装甲「萨姆」造成的击破伤害提高#1[f1]%，持续至本次攻击结束。行动序列上出现「完全燃烧」倒计时，倒计时回合开始时装甲「萨姆」解除「完全燃烧」状态，倒计时固定拥有#4[i]速度。「完全燃烧」状态下装甲「萨姆」无法施放终结技。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "complete_combustion"
+        ],
+        "effect_target": "self",
+        "variable_changes": {
+          "combustion_state": 1.0
+        },
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "talent",
+        "name": "茧式源火中枢",
+        "type": "talent",
+        "description": "生命值越低受到的伤害越低，生命值小于等于#3[i]%时减伤效果达到最大值，最多降低#1[i]%。「完全燃烧」状态下减伤效果维持最大值，效果抵抗提高#4[i]%。战斗开始时若能量不足#2[i]%则使其恢复至#2[i]%。当能量恢复至上限时解除自身所有负面效果。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "technique",
+        "name": "dev_连携：攻击",
+        "type": "technique",
+        "description": "攻击敌人，进入战斗后削弱敌方目标对应属性韧性。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "enhanced_basic_attack",
+        "name": "火萤Ⅳ型-底火斩击",
+        "type": "basic_attack",
+        "description": "回复等同于自身#2[i]%生命上限的生命值。对指定敌方单体造成等同于装甲「萨姆」#1[i]%攻击力的火属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": [
+          "combustion_state>=1"
+        ]
+      },
+      {
+        "id": "enhanced_skill",
+        "name": "火萤Ⅳ型-死星过载",
+        "type": "skill",
+        "description": "回复等同于自身#3[i]%生命上限的生命值。为指定敌方单体及其相邻目标添加火属性弱点，持续#4[i]回合。对该目标造成等同于装甲「萨姆」（#5[f1]*击破特攻+#1[f1]%）攻击力的火属性伤害。同时对其相邻目标造成等同于装甲「萨姆」（#6[f1]*击破特攻+#2[f1]%）攻击力的火属性伤害。最多计算#7[i]%击破特攻。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "fire_weakness"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": [
+          "combustion_state>=1"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "id": "complete_combustion",
+        "name": "完全燃烧",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": -1,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "speed",
+            "operation": "add",
+            "value": 30.0
+          },
+          {
+            "target_stat": "dmg_boost.fire",
+            "operation": "add",
+            "value": 0.2
+          }
+        ],
+        "conditions": [
+          "combustion_state>=1"
+        ]
+      },
+      {
+        "id": "fire_weakness",
+        "name": "火属性弱点附加",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [],
+        "conditions": []
+      },
+      {
+        "id": "talent_cocoon",
+        "name": "茧式源火中枢",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": -1,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [],
+        "conditions": []
+      }
+    ],
+    "variables": [
+      {
+        "id": "combustion_state",
+        "name": "完全燃烧状态",
+        "value": 0.0,
+        "min_value": 0.0,
+        "max_value": 1.0
+      }
+    ]
+  }
+}

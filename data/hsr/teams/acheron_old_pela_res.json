@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_old_pela_res",
+  "name": "黄泉老队（佩拉+决心）",
+  "description": "E1.5：黄泉 E2 + 佩拉 E6 + 花火 + 砂金；佩拉光锥 21015 决心 S5（黄泉队常用，≥2 来源）",
+  "main_dps": "acheron",
+  "members": ["acheron", "pela", "sparkle", "aventurine"],
+  "eidolons": {
+    "acheron": 2,
+    "pela": 6,
+    "sparkle": 0,
+    "aventurine": 0
+  },
+  "max_rounds": 20
+}

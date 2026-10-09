@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_mortenax",
+  "name": "黄泉+千冶·刃+花火+砂金",
+  "description": "C 队：千冶·刃替换椒丘。黄泉 E2；千冶·刃 E0 专武 S1。双虚无：原文 other Nihility aside from Mortenax，黄泉计入。",
+  "main_dps": "acheron",
+  "members": ["acheron", "mortenaxblade", "sparkle", "aventurine"],
+  "eidolons": {
+    "acheron": 2,
+    "mortenaxblade": 0,
+    "sparkle": 0,
+    "aventurine": 0
+  },
+  "max_rounds": 20
+}

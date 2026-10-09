@@ -1,0 +1,419 @@
+{
+  "id": "mortenaxblade",
+  "name": "千冶•刃",
+  "name_en": "Mortenax Blade",
+  "level": 80,
+  "path": "nihility",
+  "elements": [
+    "fire"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "avatar_id": 1507,
+  "avatar_base_type": "Warlock",
+  "build": {
+    "stats": {
+      "hp_max": 1494.1080000000004,
+      "atk": 543.312,
+      "defense": 485.1,
+      "speed": 107.0,
+      "crit_rate": 0.11699999900000001,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "fire": 0.16
+      },
+      "res_pen": {},
+      "energy_max": 160.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "mortenax_basic",
+        "name": "残锋仍斩",
+        "name_en": "A Broken Blade Still Slays",
+        "type": "basic_attack",
+        "damage_instances": [
+          {
+            "multiplier": 0.5,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "hp"
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "requires": [
+          "!mortenax_infinite_fury"
+        ],
+        "applies_effects": [
+          "mortenax_taunt"
+        ],
+        "effect_target": "enemy",
+        "skill_level": {
+          "skill_id": 150701,
+          "base": 6,
+          "eidolon_add": 0,
+          "final": 6,
+          "from_ranks": [],
+          "param_list_level": 6
+        }
+      },
+      {
+        "id": "mortenax_basic_fury",
+        "name": "淬锋断魂",
+        "name_en": "A Tempered Blade Severs Souls",
+        "type": "basic_attack",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "hp"
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "requires": [
+          "mortenax_infinite_fury"
+        ],
+        "applies_effects": [
+          "mortenax_taunt"
+        ],
+        "effect_target": "enemy",
+        "skill_level": {
+          "skill_id": 150708,
+          "base": 6,
+          "eidolon_add": 0,
+          "final": 6,
+          "from_ranks": [],
+          "param_list_level": 6
+        }
+      },
+      {
+        "id": "mortenax_skill",
+        "name": "刀雨封命",
+        "name_en": "A Rain of Blades Seals Fate",
+        "type": "skill",
+        "damage_instances": [
+          {
+            "multiplier": 0.72,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 60.0,
+            "scaling_stat": "hp"
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "hp_cost_pct": 0.1,
+        "requires": [
+          "mortenax_infinite_fury",
+          "hp_current>1"
+        ],
+        "applies_effects": [],
+        "skill_level": {
+          "skill_id": 150702,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "mortenax_skill_fua",
+        "name": "刀雨封命（额外战技）",
+        "name_en": "A Rain of Blades Seals Fate (Follow-Up)",
+        "type": "follow_up",
+        "damage_instances": [
+          {
+            "multiplier": 0.72,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 60.0,
+            "scaling_stat": "hp"
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          },
+          {
+            "multiplier": 0.24,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "hp",
+            "random_alive_enemy": true
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "hp_cost_pct": 0.1,
+        "requires": [
+          "mortenax_infinite_fury",
+          "hp_current>1"
+        ],
+        "applies_effects": [],
+        "skill_level": {
+          "skill_id": 150702,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "mortenax_ult_bind",
+        "name": "炉火自骨中来",
+        "name_en": "Fornax Ex Corpore",
+        "type": "ultimate",
+        "damage_instances": [],
+        "energy_cost": 160.0,
+        "sp_cost": 0,
+        "hp_cost_pct": 0.2,
+        "requires": [
+          "!mortenax_infinite_fury"
+        ],
+        "applies_effects": [],
+        "skill_level": {
+          "skill_id": 150703,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      },
+      {
+        "id": "mortenax_ult_tenax",
+        "name": "韧火不灭",
+        "name_en": "Tenax Per Ignem",
+        "type": "ultimate",
+        "damage_instances": [
+          {
+            "multiplier": 3.5,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 90.0,
+            "scaling_stat": "hp"
+          }
+        ],
+        "energy_cost": 160.0,
+        "sp_cost": 0,
+        "requires": [
+          "mortenax_infinite_fury"
+        ],
+        "applies_effects": [],
+        "skill_level": {
+          "skill_id": 150714,
+          "base": 10,
+          "eidolon_add": 0,
+          "final": 10,
+          "from_ranks": [],
+          "param_list_level": 10
+        }
+      }
+    ],
+    "effects": [
+      {
+        "id": "mortenax_infinite_fury",
+        "name": "Infinite Fury",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": 99,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "crit_rate",
+            "operation": "add",
+            "value": 0.2
+          },
+          {
+            "target_stat": "crit_dmg",
+            "operation": "add",
+            "value": 0.6
+          }
+        ]
+      },
+      {
+        "id": "mortenax_balefire_bind",
+        "name": "Balefire Bind",
+        "is_buff": false,
+        "target": "all_enemies",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "def_reduction",
+            "operation": "add",
+            "value": 0.3
+          },
+          {
+            "target_stat": "vuln",
+            "operation": "add",
+            "value": 0.5
+          }
+        ]
+      },
+      {
+        "id": "mortenax_taunt",
+        "name": "Taunt",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 1,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": []
+      }
+    ],
+    "variables": [
+      {
+        "id": "mortenax_charge",
+        "name": "Charge",
+        "value": 0,
+        "min_value": 0,
+        "max_value": 9
+      }
+    ]
+  },
+  "combat_profile": {
+    "role": "hybrid",
+    "damage_axes": [
+      "skill",
+      "follow_up",
+      "ultimate"
+    ],
+    "scaling": [
+      "hp_scaling"
+    ],
+    "support_axes": [
+      "def_shred",
+      "vuln"
+    ],
+    "summary_zh": "生命缩放 / 结界减防易伤 / 额外战技视为追击"
+  },
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "generation_eidolon": 0,
+    "enhanced": false,
+    "leave_out": "original TextMapEN + ParamList L6/L10; not Fribbels GT",
+    "dual_nihility_en": "If there are other Nihility characters aside from Mortenax Blade in the team, Ultimate DMG dealt by ally targets increases by #2. Acheron counts as other Nihility.",
+    "unknown_skipped": [
+      "trace_1507101_overflow_energy_80"
+    ],
+    "promotion_base": {
+      "hp": 1358.2800000000002,
+      "atk": 543.312,
+      "defense": 485.1,
+      "speed": 107.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {
+      "hp_pct": 0.1,
+      "crit_rate": 0.066999999,
+      "dmg_boost.fire": 0.16
+    },
+    "skill_levels": {
+      "basic_attack": {
+        "skill_id": 150701,
+        "final": 6,
+        "param_list_level": 6
+      },
+      "skill": {
+        "skill_id": 150702,
+        "final": 10,
+        "param_list_level": 10
+      },
+      "ultimate": {
+        "skill_id": 150703,
+        "final": 10,
+        "param_list_level": 10
+      },
+      "talent": {
+        "skill_id": 150704,
+        "final": 10,
+        "param_list_level": 10
+      }
+    },
+    "sources": {
+      "multipliers": "AvatarSkillConfig.ParamList",
+      "energy_max": "AvatarConfig.SPNeed",
+      "promotion": "AvatarPromotionConfig",
+      "traces_flat": "AvatarSkillTreeConfig.StatusAddList"
+    }
+  }
+}

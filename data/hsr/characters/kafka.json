@@ -1,0 +1,158 @@
+{
+  "id": "kafka",
+  "name": "卡芙卡",
+  "name_en": "Kafka",
+  "level": 80,
+  "path": "nihility",
+  "elements": [
+    "lightning"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 4200.0,
+      "atk": 2800.0,
+      "defense": 900.0,
+      "speed": 100.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "lightning": 0.32
+      },
+      "res_pen": {
+        "lightning": 0.2
+      },
+      "energy_max": 120.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "kafka_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "单体雷伤",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Midnight Tumult"
+      },
+      {
+        "id": "kafka_skill",
+        "name": "战技：月光摩挲连绵的长夜",
+        "type": "skill",
+        "description": "对敌方全体造成雷伤并施加触电",
+        "damage_instances": [
+          {
+            "multiplier": 1.2,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "shock"
+        ],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Caressing Moonlight"
+      },
+      {
+        "id": "kafka_ult",
+        "name": "终结技：只在孤翁身上啼",
+        "type": "ultimate",
+        "description": "对敌方全体造成雷属性直伤",
+        "damage_instances": [
+          {
+            "multiplier": 2.4,
+            "element": "lightning",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 90.0
+          }
+        ],
+        "energy_cost": 120.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Tragedy Trembles on the Strings"
+      },
+      {
+        "id": "kafka_talent",
+        "name": "天赋：温柔亦同残酷",
+        "type": "talent",
+        "description": "触电状态下追加雷属性持续伤害（不暴击）",
+        "damage_instances": [
+          {
+            "multiplier": 0.8,
+            "element": "lightning",
+            "damage_type": "dot",
+            "target": "single",
+            "toughness_dmg": 0.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [
+          "shock"
+        ],
+        "name_en": "Gentle Yet Cruel"
+      }
+    ],
+    "effects": [
+      {
+        "id": "shock",
+        "name": "触电",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "vuln_apply",
+            "operation": "add",
+            "value": 0.2
+          }
+        ],
+        "conditions": [],
+        "name_en": "Shock"
+      }
+    ],
+    "variables": []
+  },
+  "combat_profile": {
+    "role": "dps",
+    "damage_axes": [
+      "dot",
+      "ultimate",
+      "skill",
+      "basic"
+    ],
+    "scaling": [
+      "atk_scaling"
+    ],
+    "support_axes": [],
+    "summary_zh": "持续伤害 / 终结技出伤 / 战技出伤 / 普攻出伤 / 攻击力缩放"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "id": "himeko",
+  "name": "姬子",
+  "name_en": "Himeko",
+  "level": 80,
+  "path": "erudition",
+  "elements": [
+    "fire"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 4800.0,
+      "atk": 3100.0,
+      "defense": 880.0,
+      "speed": 96.0,
+      "crit_rate": 0.55,
+      "crit_dmg": 1.4,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "fire": 0.18
+      },
+      "res_pen": {},
+      "energy_max": 120.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "himeko_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "单体火伤",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": []
+      },
+      {
+        "id": "himeko_skill",
+        "name": "战技：盛华千景",
+        "type": "skill",
+        "description": "对敌方全体造成火伤并施加灼烧",
+        "damage_instances": [
+          {
+            "multiplier": 1.4,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "burn"
+        ],
+        "variable_changes": {},
+        "requires": []
+      },
+      {
+        "id": "himeko_ult",
+        "name": "终结技：天坠之火",
+        "type": "ultimate",
+        "description": "对敌方全体造成火属性直伤",
+        "damage_instances": [
+          {
+            "multiplier": 2.8,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 90.0
+          }
+        ],
+        "energy_cost": 120.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": []
+      },
+      {
+        "id": "himeko_follow_up",
+        "name": "天赋：乘胜追击",
+        "type": "follow_up",
+        "description": "敌方弱点被击破时追加火属性攻击",
+        "damage_instances": [
+          {
+            "multiplier": 2.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [
+          "burn"
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "id": "burn",
+        "name": "灼烧",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "dmg_boost.fire",
+            "operation": "add",
+            "value": 0.15
+          }
+        ],
+        "conditions": []
+      }
+    ],
+    "variables": []
+  }
+}

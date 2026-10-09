@@ -1,0 +1,161 @@
+{
+  "id": "firefly",
+  "name": "流萤",
+  "name_en": "Firefly",
+  "level": 80,
+  "path": "destruction",
+  "elements": [
+    "fire"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 12500.0,
+      "atk": 2650.0,
+      "defense": 720.0,
+      "speed": 104.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 1.6,
+      "dmg_boost": {
+        "fire": 0.2
+      },
+      "res_pen": {},
+      "energy_max": 120.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "firefly_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "单体火伤",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Order - Flash Combustion Advance"
+      },
+      {
+        "id": "firefly_skill",
+        "name": "战技：天坠燎原",
+        "type": "skill",
+        "description": "进入完全燃烧，提升击破与超击破增伤",
+        "damage_instances": [
+          {
+            "multiplier": 2.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "full_descent"
+        ],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Order - Skyfire Barrage"
+      },
+      {
+        "id": "firefly_enhanced_skill",
+        "name": "强化战技：坠火燎原",
+        "type": "skill",
+        "description": "完全燃烧状态下对单目标造成超击破伤害",
+        "damage_instances": [
+          {
+            "multiplier": 25.0,
+            "element": "fire",
+            "damage_type": "super_break",
+            "target": "single",
+            "toughness_dmg": 25.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [
+          "full_descent"
+        ],
+        "name_en": "FIE-04 - Dead Star Overload"
+      },
+      {
+        "id": "firefly_ult",
+        "name": "终结技：萤焰贯日",
+        "type": "ultimate",
+        "description": "对敌方全体造成火属性直伤",
+        "damage_instances": [
+          {
+            "multiplier": 3.6,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 90.0
+          }
+        ],
+        "energy_cost": 120.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "FIE-04 - Complete Combustion"
+      }
+    ],
+    "effects": [
+      {
+        "id": "full_descent",
+        "name": "完全燃烧",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": -1,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "break_effect",
+            "operation": "add",
+            "value": 2.0
+          },
+          {
+            "target_stat": "super_break_boost",
+            "operation": "add",
+            "value": 0.5
+          }
+        ],
+        "conditions": [],
+        "name_en": "Complete Combustion"
+      }
+    ],
+    "variables": []
+  },
+  "combat_profile": {
+    "role": "dps",
+    "damage_axes": [
+      "super_break",
+      "skill",
+      "ultimate",
+      "basic"
+    ],
+    "scaling": [
+      "atk_scaling"
+    ],
+    "support_axes": [],
+    "summary_zh": "超击破 / 战技出伤 / 终结技出伤 / 普攻出伤 / 攻击力缩放"
+  }
+}

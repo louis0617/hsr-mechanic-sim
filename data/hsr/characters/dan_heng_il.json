@@ -1,0 +1,178 @@
+{
+  "id": "dan_heng_il",
+  "name": "丹恒·饮月",
+  "name_en": "Dan Heng • Imbibitor Lunae",
+  "level": 80,
+  "path": "destruction",
+  "elements": [
+    "imaginary"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 5000.0,
+      "atk": 3400.0,
+      "defense": 950.0,
+      "speed": 102.0,
+      "crit_rate": 0.7,
+      "crit_dmg": 1.6,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "imaginary": 0.24
+      },
+      "res_pen": {},
+      "energy_max": 140.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "dhil_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "单体虚数伤",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Lotus Bud"
+      },
+      {
+        "id": "dhil_skill",
+        "name": "战技：盘虬卧壑",
+        "type": "skill",
+        "description": "强化自身并获得怒魄（虚数增伤）；饮月轴高度依赖战技点",
+        "damage_instances": [
+          {
+            "multiplier": 1.8,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "outrage"
+        ],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Dracore Libre"
+      },
+      {
+        "id": "dhil_enhanced_skill",
+        "name": "战技·强化：盘虬（二段）",
+        "type": "skill",
+        "description": "强化战技，继续消耗战技点",
+        "damage_instances": [
+          {
+            "multiplier": 2.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 60.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "outrage"
+        ],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Dracore Libre (Stage 2)"
+      },
+      {
+        "id": "dhil_enhanced_skill_2",
+        "name": "战技·强化：盘虬（三段）",
+        "type": "skill",
+        "description": "三段强化战技，继续消耗战技点",
+        "damage_instances": [
+          {
+            "multiplier": 3.8,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 90.0
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "outrage"
+        ],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Dracore Libre (Stage 3)"
+      },
+      {
+        "id": "dhil_ult",
+        "name": "终结技：天虹贯日",
+        "type": "ultimate",
+        "description": "对敌方全体造成高额虚数直伤",
+        "damage_instances": [
+          {
+            "multiplier": 3.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 90.0
+          }
+        ],
+        "energy_cost": 140.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Azure Dragon's Abundance"
+      }
+    ],
+    "effects": [
+      {
+        "id": "outrage",
+        "name": "怒魄",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": 2,
+        "max_stacks": 3,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "dmg_boost.imaginary",
+            "operation": "add",
+            "value": 0.4
+          }
+        ],
+        "conditions": [],
+        "name_en": "Outrage"
+      }
+    ],
+    "variables": []
+  },
+  "combat_profile": {
+    "role": "dps",
+    "damage_axes": [
+      "skill",
+      "ultimate",
+      "basic"
+    ],
+    "scaling": [
+      "atk_scaling"
+    ],
+    "support_axes": [],
+    "summary_zh": "战技出伤 / 终结技出伤 / 普攻出伤 / 攻击力缩放"
+  }
+}

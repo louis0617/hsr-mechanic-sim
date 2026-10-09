@@ -1,0 +1,74 @@
+# BenchmarkLoadout — E1.5 old team (Pela + Resolution 21015 S5)
+# Same generation rules as acheron_direct; Pela relics: Messenger 2 + Keel (惯例).
+# F 第三批：配装生成器应按队伍卡速度档位（攻略 161/160/101）；yaml 仍为敏感度基准。
+
+ruleset: fribbels_perfection_200
+total_substat_rolls: 54
+roll_quality: max
+diminishing_returns: false
+datamine_commit: "4ce30f69b32dc259ab9a8da3ba57035485103221"
+
+characters:
+  sparkle:
+    role: pull_support
+    target_speed: 160
+    err: 1.0
+    light_cone: { id: 23021, superimposition: 1 }
+    relic_sets:
+      cavern: sacerdos_121
+      planar: broken_keel_310
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: crit_dmg
+      feet: speed
+      sphere: hp_pct
+      rope: atk_pct
+
+  pela:
+    role: amp_support
+    target_speed: 143
+    err: 1.0
+    light_cone: { id: 21015, superimposition: 5 }
+    relic_sets:
+      cavern: messenger_114
+      planar: broken_keel_310
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: ehr
+      feet: speed
+      sphere: ice_dmg
+      rope: atk_pct
+
+  acheron:
+    role: main_dps
+    target_speed: 134
+    err: 1.0
+    light_cone: { id: 23024, superimposition: 1 }
+    relic_sets:
+      cavern: pioneer_117
+      planar: izumo_314
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: crit_rate
+      feet: speed
+      sphere: lightning_dmg
+      rope: atk_pct
+
+  aventurine:
+    role: shielder
+    target_speed: 134
+    err: 1.0
+    light_cone: { id: 23023, superimposition: 1 }
+    relic_sets:
+      cavern: knight_103
+      planar: broken_keel_310
+    mains:
+      head: hp_flat
+      hands: atk_flat
+      body: def_pct
+      feet: speed
+      sphere: imaginary_dmg
+      rope: def_pct

@@ -1,0 +1,271 @@
+{
+  "id": "pela",
+  "name": "佩拉",
+  "name_en": "Pela",
+  "level": 80,
+  "path": "nihility",
+  "elements": ["ice"],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "eidolon": 6,
+  "build": {
+    "stats": {
+      "hp_max": 987.84,
+      "atk": 546.84,
+      "defense": 463.05,
+      "speed": 105.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "ehr": 0.1,
+      "dmg_boost": {"ice": 0.224},
+      "res_pen": {},
+      "energy_max": 110.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "pela_basic",
+        "name": "普攻：冰点射击",
+        "type": "basic_attack",
+        "description": "单体冰伤。ParamList L7=#1 1.10（E3 SkillAdd basic+1；E6 预烘焙）。无减益。E6 额外伤×0.40 仅当目标已有减益（requires_defender_debuff）。",
+        "damage_instances": [
+          {
+            "multiplier": 1.1,
+            "element": "ice",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0
+          },
+          {
+            "multiplier": 0.4,
+            "element": "ice",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 0.0,
+            "requires_defender_debuff": true
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Frost Shot",
+        "skill_level": {
+          "skill_id": 110601,
+          "base": 6,
+          "eidolon_add": 1,
+          "final": 7,
+          "from_ranks": [3],
+          "param_list_level": 7
+        }
+      },
+      {
+        "id": "pela_skill",
+        "name": "战技：低温妨害",
+        "type": "skill",
+        "description": "单体冰伤×2.31 + 驱散 1 增益（ParamList L12）。战技本身无减防。E4：基础概率 100% 降低冰抗 12%，持续 2 回合（Rank 110604）。E6 额外×0.40（仅目标已有减益）。",
+        "damage_instances": [
+          {
+            "multiplier": 2.31,
+            "element": "ice",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 60.0
+          },
+          {
+            "multiplier": 0.4,
+            "element": "ice",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 0.0,
+            "requires_defender_debuff": true
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": ["pela_e4_ice_res_shred"],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Frostbite",
+        "skill_level": {
+          "skill_id": 110602,
+          "base": 10,
+          "eidolon_add": 2,
+          "final": 12,
+          "from_ranks": [3],
+          "param_list_level": 12
+        }
+      },
+      {
+        "id": "pela_ult",
+        "name": "终结技：领域压制",
+        "type": "ultimate",
+        "description": "全体冰伤×1.08；基础概率 100% 施加【通解】减防 42%，持续 2 回合（ParamList L12 #2/#3；E5 SkillAdd ult+2）。此减益经 R1 给黄泉残梦。E6 额外×0.40（仅目标已有减益；通解在本动伤害之后施加则本动额外伤不触发）。",
+        "damage_instances": [
+          {
+            "multiplier": 1.08,
+            "element": "ice",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 60.0
+          },
+          {
+            "multiplier": 0.4,
+            "element": "ice",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 0.0,
+            "requires_defender_debuff": true
+          }
+        ],
+        "energy_cost": 110.0,
+        "sp_cost": 0,
+        "applies_effects": ["pela_ult_def_shred"],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "requires": [],
+        "name_en": "Zone Suppression",
+        "skill_level": {
+          "skill_id": 110603,
+          "base": 10,
+          "eidolon_add": 2,
+          "final": 12,
+          "from_ranks": [5],
+          "param_list_level": 12
+        }
+      }
+    ],
+    "effects": [
+      {
+        "id": "pela_ult_def_shred",
+        "name": "通解",
+        "name_en": "Exposed",
+        "is_buff": false,
+        "target": "all_enemies",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "base_chance": 1.0,
+        "tick_timing": "turn_end",
+        "modifiers": [
+          {
+            "target_stat": "def_reduction",
+            "operation": "add",
+            "value": 0.42
+          }
+        ],
+        "conditions": [],
+        "description": "AvatarSkillConfig 110603 L12 Param#2=0.42 持续#3=2。敌方回合时钟。R1 计残梦。"
+      },
+      {
+        "id": "pela_e4_ice_res_shred",
+        "name": "完全剖析",
+        "name_en": "Full Analysis",
+        "is_buff": false,
+        "target": "single_enemy",
+        "duration_turns": 2,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "base_chance": 1.0,
+        "tick_timing": "turn_end",
+        "modifiers": [
+          {
+            "target_stat": "res",
+            "operation": "add",
+            "value": -0.12
+          }
+        ],
+        "conditions": [],
+        "description": "E4 Rank 110604 Param [1, 0.12, 2]：战技时降低目标冰抗 12%，2 回合。计入 R1 残梦。"
+      },
+      {
+        "id": "pela_trace_team_ehr",
+        "name": "行迹：效果命中",
+        "name_en": "Trace EHR",
+        "is_buff": true,
+        "target": "all_allies",
+        "duration_turns": 99,
+        "max_stacks": 1,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "ehr",
+            "operation": "add",
+            "value": 0.1
+          }
+        ],
+        "conditions": [],
+        "description": "SkillTree 1106102 Param 0.10 我方效果命中。开战由 triggers._apply_pela_team_ehr 挂载并写入 Stats.ehr。"
+      }
+    ],
+    "variables": []
+  },
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "avatar_id": 1106,
+    "generation_eidolon": 6,
+    "enhanced": false,
+    "skill_levels": {
+      "basic_attack": {
+        "skill_id": 110601,
+        "base": 6,
+        "eidolon_add": 1,
+        "final": 7,
+        "from_ranks": [3],
+        "param_list_level": 7
+      },
+      "skill": {
+        "skill_id": 110602,
+        "base": 10,
+        "eidolon_add": 2,
+        "final": 12,
+        "from_ranks": [3],
+        "param_list_level": 12
+      },
+      "ultimate": {
+        "skill_id": 110603,
+        "base": 10,
+        "eidolon_add": 2,
+        "final": 12,
+        "from_ranks": [5],
+        "param_list_level": 12
+      },
+      "talent": {
+        "skill_id": 110604,
+        "base": 10,
+        "eidolon_add": 2,
+        "final": 12,
+        "from_ranks": [5],
+        "param_list_level": 12
+      }
+    },
+    "promotion_base": {
+      "hp": 987.84,
+      "atk": 546.84,
+      "defense": 463.05,
+      "speed": 105.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {
+      "ehr": 0.1,
+      "dmg_boost.ice": 0.224,
+      "atk_pct": 0.18
+    },
+    "talent_energy_l12": 11,
+    "talent_note": "天赋 110604 L12 ParamList #1=11；pcgrllm_sv/rules/pela_talent.py ← data/hsr/tables/pela_talent_energy.json；缺键报错。",
+    "sources": [
+      "AvatarSkillConfig 110601-110604",
+      "AvatarRankConfig 110601-110606",
+      "AvatarSkillTreeConfig 1106*",
+      "AvatarPromotionConfig 1106"
+    ],
+    "stub_deviation": "legacy stub 误将减防挂在战技；解包减防在终结技【通解】"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "calibration": {
+    "label": "S1+S2 on (locked main calibration)",
+    "notes": "S1 = Jiaoqiu Hearth Kindle (skill tree 1218102); S2 = Sparkle Artificial Flower (skill tree 11306102). pre_S = both traces off. Numbers are frozen locked results, not regenerated in this repo.",
+    "speed_guide": "Sparkle 161 / support 160 / Acheron 101",
+    "horizon": "L2 100 cycles where applicable"
+  },
+  "pre_S": {
+    "e15_zone_on_lift": 0.0553,
+    "e15_zone_off_lift": -0.0053,
+    "e15_jq_zone_on_dpr": 720504.4,
+    "e15_pela_dpr": 682754.2,
+    "mort_lift_n1_dream": 0.38152506860685387,
+    "mort_lift_n3_dream": 0.34927540249151523,
+    "mort_lift_n1_nodream": 0.32206538976131194
+  },
+  "S_on": {
+    "e15_zone_on_lift": 0.07798626080702804,
+    "e15_zone_off_lift": 0.017330246713557936,
+    "e15_jq_zone_on_dpr": 735999.6580843528,
+    "e15_pela_dpr": 682754.2101820027,
+    "e15_jq_zone_off_dpr": 694586.5090891772,
+    "s1_only_zone_on_dpr": 735999.6580843528,
+    "s2_only_zone_on_dpr": 720504.3582591995,
+    "off_zone_on_dpr": 720504.3582591995
+  },
+  "f_close_best_axis_family": {
+    "jq_zone_on": {
+      "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+      "feasible": true,
+      "dpr": 735999.6580843528,
+      "community_exact": true,
+      "f6_key": [
+        [
+          "sparkle",
+          [
+            "adaptive",
+            1
+          ],
+          "—"
+        ],
+        [
+          "jiaoqiu",
+          [
+            "adaptive",
+            1
+          ],
+          "—"
+        ],
+        [
+          "acheron",
+          [
+            "adaptive",
+            1
+          ],
+          "immediate_when_full"
+        ]
+      ]
+    },
+    "pela_zone_on": {
+      "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+      "feasible": true,
+      "dpr": 682754.2101820027,
+      "community_exact": true,
+      "f6_key": [
+        [
+          "sparkle",
+          [
+            "adaptive",
+            1
+          ],
+          "—"
+        ],
+        [
+          "pela",
+          [
+            "adaptive",
+            1
+          ],
+          "—"
+        ],
+        [
+          "acheron",
+          [
+            "adaptive",
+            1
+          ],
+          "immediate_when_full"
+        ]
+      ]
+    }
+  }
+}

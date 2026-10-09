@@ -1,0 +1,1605 @@
+{
+  "ult_timing": "immediate_when_full",
+  "steady_cycles": 100,
+  "short_cycles": 5,
+  "short_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "steady_seed": 42,
+  "dummy_speed": 90.0,
+  "paper_runs": {
+    "old_res__zone_on": {
+      "team_id": "acheron_old_pela_res",
+      "zone_proc_counts_for_dream": true,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": null,
+      "ally_hit_force_id": null,
+      "av_clock": 10056.374420106888,
+      "cycles": 100,
+      "team_damage": 41658912.62524097,
+      "dpr_per_100av": 414253.7945081622,
+      "sources": {
+        "pela_direct": 1931076.872334402,
+        "acheron_skill": 9734694.054308238,
+        "acheron_ult": 26158551.852873553,
+        "other_members": 1689467.672155368,
+        "acheron_basic": 2145122.1735694064
+      },
+      "dream": {
+        "dream_count": 593,
+        "dream_per_100av": 5.896757372262767,
+        "dreams_per_acheron_turn": 4.328467153284672,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:pela:skill",
+            115
+          ],
+          [
+            "acheron_r3",
+            83
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            71
+          ],
+          [
+            "acheron_ult_quad_convert",
+            49
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            36
+          ],
+          [
+            "acheron_r2:aventurine:follow_up",
+            31
+          ],
+          [
+            "acheron_r2:aventurine:ultimate",
+            30
+          ],
+          [
+            "acheron_r2:pela:basic_attack",
+            20
+          ],
+          [
+            "acheron_r2:pela:ultimate",
+            16
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 0,
+        "trend_burns": 0,
+        "acheron_ults": 65,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": true,
+        "label": "配置完整",
+        "team_id": "acheron_old_pela_res",
+        "gaps": [],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "old_res__zone_off": {
+      "team_id": "acheron_old_pela_res",
+      "zone_proc_counts_for_dream": false,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": null,
+      "ally_hit_force_id": null,
+      "av_clock": 10056.374420106888,
+      "cycles": 100,
+      "team_damage": 41658912.62524097,
+      "dpr_per_100av": 414253.7945081622,
+      "sources": {
+        "pela_direct": 1931076.872334402,
+        "acheron_skill": 9734694.054308238,
+        "acheron_ult": 26158551.852873553,
+        "other_members": 1689467.672155368,
+        "acheron_basic": 2145122.1735694064
+      },
+      "dream": {
+        "dream_count": 593,
+        "dream_per_100av": 5.896757372262767,
+        "dreams_per_acheron_turn": 4.328467153284672,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:pela:skill",
+            115
+          ],
+          [
+            "acheron_r3",
+            83
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            71
+          ],
+          [
+            "acheron_ult_quad_convert",
+            49
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            36
+          ],
+          [
+            "acheron_r2:aventurine:follow_up",
+            31
+          ],
+          [
+            "acheron_r2:aventurine:ultimate",
+            30
+          ],
+          [
+            "acheron_r2:pela:basic_attack",
+            20
+          ],
+          [
+            "acheron_r2:pela:ultimate",
+            16
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 0,
+        "trend_burns": 0,
+        "acheron_ults": 65,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": true,
+        "label": "配置完整",
+        "team_id": "acheron_old_pela_res",
+        "gaps": [],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "old_tut__zone_on": {
+      "team_id": "acheron_old_pela_tut",
+      "zone_proc_counts_for_dream": true,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": null,
+      "ally_hit_force_id": null,
+      "av_clock": 10056.374420106888,
+      "cycles": 100,
+      "team_damage": 40809782.812159926,
+      "dpr_per_100av": 405810.09723110695,
+      "sources": {
+        "pela_direct": 1999939.714347334,
+        "acheron_skill": 9544739.505242446,
+        "acheron_ult": 25536081.74136139,
+        "other_members": 1633970.5170903008,
+        "acheron_basic": 2095051.3341184547
+      },
+      "dream": {
+        "dream_count": 583,
+        "dream_per_100av": 5.797317956204374,
+        "dreams_per_acheron_turn": 4.255474452554744,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:pela:skill",
+            115
+          ],
+          [
+            "acheron_r3",
+            91
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            76
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            36
+          ],
+          [
+            "acheron_ult_quad_convert",
+            35
+          ],
+          [
+            "acheron_r2:aventurine:follow_up",
+            31
+          ],
+          [
+            "acheron_r2:aventurine:ultimate",
+            30
+          ],
+          [
+            "acheron_r2:pela:ultimate",
+            27
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 0,
+        "trend_burns": 0,
+        "acheron_ults": 64,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": true,
+        "label": "配置完整",
+        "team_id": "acheron_old_pela_tut",
+        "gaps": [],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "old_tut__zone_off": {
+      "team_id": "acheron_old_pela_tut",
+      "zone_proc_counts_for_dream": false,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": null,
+      "ally_hit_force_id": null,
+      "av_clock": 10056.374420106888,
+      "cycles": 100,
+      "team_damage": 40809782.812159926,
+      "dpr_per_100av": 405810.09723110695,
+      "sources": {
+        "pela_direct": 1999939.714347334,
+        "acheron_skill": 9544739.505242446,
+        "acheron_ult": 25536081.74136139,
+        "other_members": 1633970.5170903008,
+        "acheron_basic": 2095051.3341184547
+      },
+      "dream": {
+        "dream_count": 583,
+        "dream_per_100av": 5.797317956204374,
+        "dreams_per_acheron_turn": 4.255474452554744,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:pela:skill",
+            115
+          ],
+          [
+            "acheron_r3",
+            91
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            76
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            36
+          ],
+          [
+            "acheron_ult_quad_convert",
+            35
+          ],
+          [
+            "acheron_r2:aventurine:follow_up",
+            31
+          ],
+          [
+            "acheron_r2:aventurine:ultimate",
+            30
+          ],
+          [
+            "acheron_r2:pela:ultimate",
+            27
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 0,
+        "trend_burns": 0,
+        "acheron_ults": 64,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": true,
+        "label": "配置完整",
+        "team_id": "acheron_old_pela_tut",
+        "gaps": [],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "new_b__zone_on": {
+      "team_id": "acheron_direct",
+      "zone_proc_counts_for_dream": true,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": null,
+      "ally_hit_force_id": null,
+      "av_clock": 10056.374420106877,
+      "cycles": 100,
+      "team_damage": 52399125.77458188,
+      "dpr_per_100av": 521053.8468994773,
+      "sources": {
+        "jiaoqiu_direct": 1543977.635673116,
+        "acheron_skill": 10511952.620863294,
+        "acheron_ult": 35412828.56125921,
+        "other_members": 1813728.6113736893,
+        "jiaoqiu_dot": 900707.5962065997,
+        "acheron_basic": 2215930.7492059735
+      },
+      "dream": {
+        "dream_count": 690,
+        "dream_per_100av": 6.861319708029197,
+        "dreams_per_acheron_turn": 5.036496350364963,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:jiaoqiu:skill",
+            103
+          ],
+          [
+            "acheron_r3",
+            90
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            78
+          ],
+          [
+            "acheron_r2:lv95_dummy:basic_attack",
+            67
+          ],
+          [
+            "acheron_r2:jiaoqiu:basic_attack",
+            41
+          ],
+          [
+            "acheron_ult_quad_convert",
+            40
+          ],
+          [
+            "acheron_r2:jiaoqiu:ultimate",
+            36
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            33
+          ],
+          [
+            "acheron_r2:aventurine:ultimate",
+            31
+          ],
+          [
+            "acheron_r2:aventurine:follow_up",
+            29
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 67,
+        "trend_burns": 0,
+        "acheron_ults": 76,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": true,
+        "label": "配置完整",
+        "team_id": "acheron_direct",
+        "gaps": [],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "new_b__zone_off": {
+      "team_id": "acheron_direct",
+      "zone_proc_counts_for_dream": false,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": null,
+      "ally_hit_force_id": null,
+      "av_clock": 10056.374420106877,
+      "cycles": 100,
+      "team_damage": 49061583.263102196,
+      "dpr_per_100av": 487865.5190583167,
+      "sources": {
+        "jiaoqiu_direct": 1539584.2298076665,
+        "acheron_skill": 10516494.629167592,
+        "acheron_ult": 32091650.275464613,
+        "other_members": 1810144.454318096,
+        "jiaoqiu_dot": 900707.5962065997,
+        "acheron_basic": 2203002.0781376315
+      },
+      "dream": {
+        "dream_count": 623,
+        "dream_per_100av": 6.195075620437956,
+        "dreams_per_acheron_turn": 4.547445255474453,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:jiaoqiu:skill",
+            103
+          ],
+          [
+            "acheron_r3",
+            95
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            82
+          ],
+          [
+            "acheron_r2:jiaoqiu:basic_attack",
+            41
+          ],
+          [
+            "acheron_r2:jiaoqiu:ultimate",
+            36
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            33
+          ],
+          [
+            "acheron_r2:aventurine:ultimate",
+            31
+          ],
+          [
+            "acheron_r2:aventurine:follow_up",
+            30
+          ],
+          [
+            "acheron_ult_quad_convert",
+            30
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 67,
+        "trend_burns": 0,
+        "acheron_ults": 69,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": true,
+        "label": "配置完整",
+        "team_id": "acheron_direct",
+        "gaps": [],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    }
+  },
+  "fx_runs": {
+    "old_fx__zone_on": {
+      "team_id": "acheron_old_pela_fx_res",
+      "zone_proc_counts_for_dream": true,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": 2,
+      "ally_hit_force_id": "fu_xuan",
+      "av_clock": 10060.22257375184,
+      "cycles": 100,
+      "team_damage": 44938958.26592662,
+      "dpr_per_100av": 446699.4436403127,
+      "sources": {
+        "pela_direct": 1952633.8300600813,
+        "acheron_skill": 12764001.52452362,
+        "acheron_ult": 29840840.47405303,
+        "acheron_basic": 345399.7979619438,
+        "other_members": 36082.639327944744
+      },
+      "dream": {
+        "dream_count": 659,
+        "dream_per_100av": 6.550550896551723,
+        "dreams_per_acheron_turn": 4.810218978102189,
+        "top_sources": [
+          [
+            "acheron_r2:pela:skill",
+            137
+          ],
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r3",
+            113
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            101
+          ],
+          [
+            "acheron_r2:lv95_dummy:basic_attack",
+            90
+          ],
+          [
+            "acheron_ult_quad_convert",
+            50
+          ],
+          [
+            "acheron_r2:pela:ultimate",
+            16
+          ],
+          [
+            "acheron_r2:pela:basic_attack",
+            6
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            4
+          ]
+        ],
+        "zone_proc": 0,
+        "trend_burns": 165,
+        "acheron_ults": 73,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": false,
+        "label": "配置不完整",
+        "team_id": "acheron_old_pela_fx_res",
+        "gaps": [
+          "符玄为生存位stub（无秘技/行迹/护盾数值）；第二次留出测完整实现"
+        ],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "old_fx__zone_off": {
+      "team_id": "acheron_old_pela_fx_res",
+      "zone_proc_counts_for_dream": false,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": 2,
+      "ally_hit_force_id": "fu_xuan",
+      "av_clock": 10060.22257375184,
+      "cycles": 100,
+      "team_damage": 44938958.26592662,
+      "dpr_per_100av": 446699.4436403127,
+      "sources": {
+        "pela_direct": 1952633.8300600813,
+        "acheron_skill": 12764001.52452362,
+        "acheron_ult": 29840840.47405303,
+        "acheron_basic": 345399.7979619438,
+        "other_members": 36082.639327944744
+      },
+      "dream": {
+        "dream_count": 659,
+        "dream_per_100av": 6.550550896551723,
+        "dreams_per_acheron_turn": 4.810218978102189,
+        "top_sources": [
+          [
+            "acheron_r2:pela:skill",
+            137
+          ],
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r3",
+            113
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            101
+          ],
+          [
+            "acheron_r2:lv95_dummy:basic_attack",
+            90
+          ],
+          [
+            "acheron_ult_quad_convert",
+            50
+          ],
+          [
+            "acheron_r2:pela:ultimate",
+            16
+          ],
+          [
+            "acheron_r2:pela:basic_attack",
+            6
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            4
+          ]
+        ],
+        "zone_proc": 0,
+        "trend_burns": 165,
+        "acheron_ults": 73,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": false,
+        "label": "配置不完整",
+        "team_id": "acheron_old_pela_fx_res",
+        "gaps": [
+          "符玄为生存位stub（无秘技/行迹/护盾数值）；第二次留出测完整实现"
+        ],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "new_fx__zone_on": {
+      "team_id": "acheron_jq_fx",
+      "zone_proc_counts_for_dream": true,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": 2,
+      "ally_hit_force_id": "fu_xuan",
+      "av_clock": 10081.397953849591,
+      "cycles": 100,
+      "team_damage": 51575316.14500513,
+      "dpr_per_100av": 511588.93222056614,
+      "sources": {
+        "jiaoqiu_direct": 1570808.9254750633,
+        "acheron_skill": 13476723.840927463,
+        "acheron_ult": 35234864.88437029,
+        "jiaoqiu_dot": 872439.5453635745,
+        "acheron_basic": 382996.2272896908,
+        "other_members": 37482.721579047065
+      },
+      "dream": {
+        "dream_count": 679,
+        "dream_per_100av": 6.735177037037043,
+        "dreams_per_acheron_turn": 4.956204379562044,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:jiaoqiu:skill",
+            136
+          ],
+          [
+            "acheron_r3",
+            115
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            102
+          ],
+          [
+            "acheron_r2:lv95_dummy:basic_attack",
+            89
+          ],
+          [
+            "acheron_ult_quad_convert",
+            45
+          ],
+          [
+            "acheron_r2:jiaoqiu:ultimate",
+            36
+          ],
+          [
+            "acheron_r2:jiaoqiu:basic_attack",
+            8
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            6
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 72,
+        "trend_burns": 153,
+        "acheron_ults": 75,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": false,
+        "label": "配置不完整",
+        "team_id": "acheron_jq_fx",
+        "gaps": [
+          "符玄为生存位stub（无秘技/行迹/护盾数值）；第二次留出测完整实现"
+        ],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    },
+    "new_fx__zone_off": {
+      "team_id": "acheron_jq_fx",
+      "zone_proc_counts_for_dream": false,
+      "max_cycles": 100,
+      "seed": 42,
+      "hits_per_enemy_action": 2,
+      "ally_hit_force_id": "fu_xuan",
+      "av_clock": 10081.397953849591,
+      "cycles": 100,
+      "team_damage": 51985488.60961439,
+      "dpr_per_100av": 515657.53923803475,
+      "sources": {
+        "jiaoqiu_direct": 1571111.8026416595,
+        "acheron_skill": 13551059.106972398,
+        "acheron_ult": 35577800.15134324,
+        "jiaoqiu_dot": 872439.5453635745,
+        "acheron_basic": 375595.28171446675,
+        "other_members": 37482.721579047065
+      },
+      "dream": {
+        "dream_count": 677,
+        "dream_per_100av": 6.715338518518525,
+        "dreams_per_acheron_turn": 4.9416058394160585,
+        "top_sources": [
+          [
+            "acheron_e2_turn_start",
+            137
+          ],
+          [
+            "acheron_r2:jiaoqiu:skill",
+            136
+          ],
+          [
+            "acheron_r3",
+            112
+          ],
+          [
+            "acheron_r2:acheron:skill",
+            99
+          ],
+          [
+            "acheron_r2:lv95_dummy:basic_attack",
+            87
+          ],
+          [
+            "acheron_ult_quad_convert",
+            51
+          ],
+          [
+            "acheron_r2:jiaoqiu:ultimate",
+            36
+          ],
+          [
+            "acheron_r2:jiaoqiu:basic_attack",
+            8
+          ],
+          [
+            "acheron_r2:acheron:basic_attack",
+            6
+          ],
+          [
+            "acheron_red_ghost_battle_start",
+            5
+          ]
+        ],
+        "zone_proc": 72,
+        "trend_burns": 153,
+        "acheron_ults": 75,
+        "acheron_turns": 137
+      },
+      "config": {
+        "complete": false,
+        "label": "配置不完整",
+        "team_id": "acheron_jq_fx",
+        "gaps": [
+          "符玄为生存位stub（无秘技/行迹/护盾数值）；第二次留出测完整实现"
+        ],
+        "wiring_notes": [],
+        "root_cause_enemy_attack": "",
+        "e1_1i": {
+          "enemy_ally_hit": true,
+          "aventurine_talent_fua": true,
+          "lc_23023_conditional": true,
+          "unnerved": true
+        }
+      }
+    }
+  },
+  "note": "砂金论文配置保留；17173 外部对齐用符玄+市场趋势+hits=2。单种子 max_cycles=5 结论已撤下。",
+  "uplift_steady": {
+    "paper_new_vs_old_res__zone_on": {
+      "new_dpr": 521053.8468994773,
+      "old_dpr": 414253.7945081622,
+      "delta": 106800.05239131511,
+      "rel": 0.2578130938260139
+    },
+    "paper_new_vs_old_res__zone_off": {
+      "new_dpr": 487865.5190583167,
+      "old_dpr": 414253.7945081622,
+      "delta": 73611.72455015453,
+      "rel": 0.17769716421681234
+    },
+    "paper_new_vs_old_tut__zone_on": {
+      "new_dpr": 521053.8468994773,
+      "old_dpr": 405810.09723110695,
+      "delta": 115243.74966837035,
+      "rel": 0.2839844312763356
+    },
+    "paper_new_vs_old_tut__zone_off": {
+      "new_dpr": 487865.5190583167,
+      "old_dpr": 405810.09723110695,
+      "delta": 82055.42182720976,
+      "rel": 0.20220152821993384
+    },
+    "fx_new_vs_old__zone_on": {
+      "new_dpr": 511588.93222056614,
+      "old_dpr": 446699.4436403127,
+      "delta": 64889.48858025344,
+      "rel": 0.1452643147514264
+    },
+    "fx_new_vs_old__zone_off": {
+      "new_dpr": 515657.53923803475,
+      "old_dpr": 446699.4436403127,
+      "delta": 68958.09559772204,
+      "rel": 0.1543724680643387
+    }
+  },
+  "uplift_short_multiseed": {
+    "paper_new_vs_old_res__zone_on": {
+      "n_seeds": 50,
+      "mean_rel": 0.32860039655809126,
+      "p05_rel": 0.29462339512730185,
+      "p95_rel": 0.3569875576921838,
+      "min_rel": 0.27514519231882284,
+      "max_rel": 0.3721032453952654,
+      "stdev_rel": 0.02265575045294481,
+      "zone_proc": true,
+      "max_cycles": 5,
+      "ally_hit_force_id": null,
+      "rng_note": "Engine(random_seed) → bus.rng：结界60%/Trend/攻陷等基础概率；嘲讽加权选目标亦走同一 _rng；FX 变体 ally_hit_force_id 旁路嘲讽随机",
+      "percentile_method": "linear_inclusive"
+    },
+    "paper_new_vs_old_res__zone_off": {
+      "n_seeds": 50,
+      "mean_rel": 0.27523011656471935,
+      "p05_rel": 0.059956159645937625,
+      "p95_rel": 0.3539700972354029,
+      "min_rel": 0.03205509226859379,
+      "max_rel": 0.3579609833925199,
+      "stdev_rel": 0.10865962449591798,
+      "zone_proc": false,
+      "max_cycles": 5,
+      "ally_hit_force_id": null,
+      "rng_note": "Engine(random_seed) → bus.rng：结界60%/Trend/攻陷等基础概率；嘲讽加权选目标亦走同一 _rng；FX 变体 ally_hit_force_id 旁路嘲讽随机",
+      "percentile_method": "linear_inclusive"
+    },
+    "fx_new_vs_old__zone_on": {
+      "n_seeds": 50,
+      "mean_rel": 0.0174361926780942,
+      "p05_rel": 0.01748172972199609,
+      "p95_rel": 0.01748172972199609,
+      "min_rel": 0.015204877526901535,
+      "max_rel": 0.01748172972199609,
+      "stdev_rel": 0.00031875930731323763,
+      "zone_proc": true,
+      "max_cycles": 5,
+      "ally_hit_force_id": "fu_xuan",
+      "rng_note": "Engine(random_seed) → bus.rng：结界60%/Trend/攻陷等基础概率；嘲讽加权选目标亦走同一 _rng；FX 变体 ally_hit_force_id 旁路嘲讽随机",
+      "percentile_method": "linear_inclusive"
+    },
+    "fx_new_vs_old__zone_off": {
+      "n_seeds": 50,
+      "mean_rel": 0.017162970414682854,
+      "p05_rel": 0.015204877526901535,
+      "p95_rel": 0.01748172972199609,
+      "min_rel": 0.015204877526901535,
+      "max_rel": 0.01748172972199609,
+      "stdev_rel": 0.0007900381842443755,
+      "zone_proc": false,
+      "max_cycles": 5,
+      "ally_hit_force_id": "fu_xuan",
+      "rng_note": "Engine(random_seed) → bus.rng：结界60%/Trend/攻陷等基础概率；嘲讽加权选目标亦走同一 _rng；FX 变体 ally_hit_force_id 旁路嘲讽随机",
+      "percentile_method": "linear_inclusive"
+    },
+    "pre_fix_short_not_for_conclusion": true
+  },
+  "fx_zone_inversion": {
+    "zone_on": {
+      "ult_count": 75,
+      "ult_hits": 975,
+      "ult_mean_dmg": 36138.32295832849,
+      "f_crit_mean": 5.8900512,
+      "f_crit_hi_share": 0.56,
+      "f_vuln_mean": 1.8379999999999999,
+      "f_dmgBoost_mean": 2.9578491538461535
+    },
+    "zone_off": {
+      "ult_count": 75,
+      "ult_hits": 975,
+      "ult_mean_dmg": 36490.0514372751,
+      "f_crit_mean": 5.93786816,
+      "f_crit_hi_share": 0.6133333333333333,
+      "f_vuln_mean": 1.8444,
+      "f_dmgBoost_mean": 2.950341461538461
+    },
+    "named_cause": "残梦相位差→终结技时刻花火暴伤覆盖下降",
+    "evidence": "同终结技次数=75；ZONE开 f_crit均=5.8901 高覆盖占比=0.560；ZONE关 f_crit均=5.9379 高覆盖占比=0.613；开单发均伤更低。"
+  },
+  "l1_l2_old_pela": {
+    "team_id": "acheron_old_pela_res",
+    "gates": {
+      "source_rel": 0.03,
+      "abs_sum_team": 0.03
+    },
+    "l1_team": 384959.87639638036,
+    "l2_team": 414253.7945081621,
+    "sources": {
+      "acheron_ult": {
+        "l1_rate": 0.6121857884638418,
+        "l1_mean": 399710.70199280465,
+        "l1_contrib": 244697.2112569008,
+        "l2_rate": 0.6463562043795614,
+        "l2_mean": 402439.25927497767,
+        "l2_contrib": 260119.1121182968,
+        "gap": -15421.900861395989,
+        "abs_gap": 15421.900861395989,
+        "rel_abs": 0.05928784215741297
+      },
+      "acheron_skill": {
+        "l1_rate": 0.9858954744525549,
+        "l1_mean": 90056.50339702339,
+        "l1_contrib": 88786.2991441465,
+        "l2_rate": 0.9844502189781011,
+        "l2_mean": 98330.24297281046,
+        "l2_contrib": 96801.22922675314,
+        "gap": -8014.9300826066465,
+        "abs_gap": 8014.9300826066465,
+        "rel_abs": 0.08279781307148468
+      },
+      "acheron_basic": {
+        "l1_rate": 0.3784245255474453,
+        "l1_mean": 56285.314623139646,
+        "l1_contrib": 21299.743481550307,
+        "l2_rate": 0.37786978102189744,
+        "l2_mean": 56450.58351498439,
+        "l2_contrib": 21330.969631365486,
+        "gap": -31.22614981517836,
+        "abs_gap": 31.22614981517836,
+        "rel_abs": 0.0014638879692211837
+      },
+      "other_members": {
+        "l1_contrib": 30176.622513782757,
+        "l2_contrib": 36002.483531746664,
+        "gap": -5825.861017963907,
+        "abs_gap": 5825.861017963907,
+        "rel_abs": 0.16181830936265038
+      }
+    },
+    "member_table": {
+      "pela": {
+        "basic": {
+          "l1_contrib": 2131.603531406479,
+          "l2_contrib": 2174.866454001009,
+          "rel_abs": 0.019892220285499026
+        },
+        "skill": {
+          "l1_contrib": 15555.703452972333,
+          "l2_contrib": 15586.233617452106,
+          "rel_abs": 0.0019587903806079087
+        },
+        "ult": {
+          "l1_contrib": 1869.9989876121008,
+          "l2_contrib": 1441.4155834271521,
+          "rel_abs": 0.29733507054636954
+        }
+      },
+      "sparkle": {
+        "basic": {
+          "l1_contrib": 897.3786760550423,
+          "l2_contrib": 1017.6646937931504,
+          "rel_abs": 0.11819808476381838
+        },
+        "skill": {
+          "l1_contrib": 0.0,
+          "l2_contrib": 0.0,
+          "rel_abs": null
+        },
+        "ult": {
+          "l1_contrib": 0.0,
+          "l2_contrib": 0.0,
+          "rel_abs": null
+        }
+      },
+      "aventurine": {
+        "basic": {
+          "l1_contrib": 3617.271679772944,
+          "l2_contrib": 4103.149860246112,
+          "rel_abs": 0.11841589925356145
+        },
+        "skill": {
+          "l1_contrib": 0.0,
+          "l2_contrib": 0.0,
+          "rel_abs": null
+        },
+        "ult": {
+          "l1_contrib": 6104.665781131636,
+          "l2_contrib": 11679.15332282712,
+          "rel_abs": 0.477302368383164
+        }
+      }
+    },
+    "acceptance": {
+      "per_source": {
+        "acheron_ult": {
+          "abs_gap": 15421.900861395989,
+          "l2_contrib": 260119.1121182968,
+          "rel_abs": 0.05928784215741297,
+          "gate": 0.03,
+          "pass": false,
+          "gap_signed": -15421.900861395989
+        },
+        "acheron_skill": {
+          "abs_gap": 8014.9300826066465,
+          "l2_contrib": 96801.22922675314,
+          "rel_abs": 0.08279781307148468,
+          "gate": 0.03,
+          "pass": false,
+          "gap_signed": -8014.9300826066465
+        },
+        "acheron_basic": {
+          "abs_gap": 31.22614981517836,
+          "l2_contrib": 21330.969631365486,
+          "rel_abs": 0.0014638879692211837,
+          "gate": 0.03,
+          "pass": true,
+          "gap_signed": -31.22614981517836
+        },
+        "other_members": {
+          "abs_gap": 5825.861017963907,
+          "l2_contrib": 36002.483531746664,
+          "rel_abs": 0.16181830936265038,
+          "gate": 0.03,
+          "pass": false,
+          "gap_signed": -5825.861017963907
+        }
+      },
+      "abs_gap_sum": 29293.91811178172,
+      "abs_gap_sum_over_l2_team": 0.0707149059348074,
+      "abs_sum_gate": 0.03,
+      "abs_sum_pass": false,
+      "all_sources_pass": false,
+      "source_keys": [
+        "acheron_ult",
+        "acheron_skill",
+        "acheron_basic",
+        "other_members"
+      ]
+    },
+    "config": {
+      "complete": true,
+      "label": "配置完整",
+      "team_id": "acheron_old_pela_res",
+      "gaps": [],
+      "wiring_notes": [],
+      "root_cause_enemy_attack": "",
+      "e1_1i": {
+        "enemy_ally_hit": true,
+        "aventurine_talent_fua": true,
+        "lc_23023_conditional": true,
+        "unnerved": true
+      }
+    },
+    "note": "留出测试：用锁定门槛记录 pass/fail，不调门槛"
+  },
+  "l1_leaveout_subst": {
+    "baseline": {
+      "acceptance": {
+        "per_source": {
+          "acheron_ult": {
+            "abs_gap": 15421.900861395989,
+            "l2_contrib": 260119.1121182968,
+            "rel_abs": 0.05928784215741297,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -15421.900861395989
+          },
+          "acheron_skill": {
+            "abs_gap": 8014.9300826066465,
+            "l2_contrib": 96801.22922675314,
+            "rel_abs": 0.08279781307148468,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -8014.9300826066465
+          },
+          "acheron_basic": {
+            "abs_gap": 31.22614981517836,
+            "l2_contrib": 21330.969631365486,
+            "rel_abs": 0.0014638879692211837,
+            "gate": 0.03,
+            "pass": true,
+            "gap_signed": -31.22614981517836
+          },
+          "other_members": {
+            "abs_gap": 5825.861017963907,
+            "l2_contrib": 36002.483531746664,
+            "rel_abs": 0.16181830936265038,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -5825.861017963907
+          }
+        },
+        "abs_gap_sum": 29293.91811178172,
+        "abs_gap_sum_over_l2_team": 0.0707149059348074,
+        "abs_sum_gate": 0.03,
+        "abs_sum_pass": false,
+        "all_sources_pass": false,
+        "source_keys": [
+          "acheron_ult",
+          "acheron_skill",
+          "acheron_basic",
+          "other_members"
+        ]
+      },
+      "acheron_ult_rel": 0.05928784215741297,
+      "acheron_skill_rel": 0.08279781307148468,
+      "other_rel": 0.16181830936265038,
+      "member_table": {
+        "pela": {
+          "basic": {
+            "l1_contrib": 2131.603531406479,
+            "l2_contrib": 2174.866454001009,
+            "rel_abs": 0.019892220285499026
+          },
+          "skill": {
+            "l1_contrib": 15555.703452972333,
+            "l2_contrib": 15586.233617452106,
+            "rel_abs": 0.0019587903806079087
+          },
+          "ult": {
+            "l1_contrib": 1869.9989876121008,
+            "l2_contrib": 1441.4155834271521,
+            "rel_abs": 0.29733507054636954
+          }
+        },
+        "sparkle": {
+          "basic": {
+            "l1_contrib": 897.3786760550423,
+            "l2_contrib": 1017.6646937931504,
+            "rel_abs": 0.11819808476381838
+          },
+          "skill": {
+            "l1_contrib": 0.0,
+            "l2_contrib": 0.0,
+            "rel_abs": null
+          },
+          "ult": {
+            "l1_contrib": 0.0,
+            "l2_contrib": 0.0,
+            "rel_abs": null
+          }
+        },
+        "aventurine": {
+          "basic": {
+            "l1_contrib": 3617.271679772944,
+            "l2_contrib": 4103.149860246112,
+            "rel_abs": 0.11841589925356145
+          },
+          "skill": {
+            "l1_contrib": 0.0,
+            "l2_contrib": 0.0,
+            "rel_abs": null
+          },
+          "ult": {
+            "l1_contrib": 6104.665781131636,
+            "l2_contrib": 11679.15332282712,
+            "rel_abs": 0.477302368383164
+          }
+        }
+      },
+      "buff_ids_sample": [
+        "pela_e4_ice_res_shred__pela",
+        "pela_ult_def_shred__acheron",
+        "pela_ult_def_shred__pela",
+        "pela_ult_def_shred__sparkle",
+        "pela_ult_def_shred__aventurine",
+        "aventurine_unnerved__pela",
+        "lc_mask__pela",
+        "lc_exposed__acheron",
+        "lc_exposed__pela",
+        "lc_exposed__sparkle",
+        "lc_exposed__aventurine",
+        "relic_keel_cd__team__pela"
+      ]
+    },
+    "ablate_tongjie": {
+      "acceptance": {
+        "per_source": {
+          "acheron_ult": {
+            "abs_gap": 47022.35122333153,
+            "l2_contrib": 260119.1121182968,
+            "rel_abs": 0.18077238093118947,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -47022.35122333153
+          },
+          "acheron_skill": {
+            "abs_gap": 19480.884371635882,
+            "l2_contrib": 96801.22922675314,
+            "rel_abs": 0.20124624994175086,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -19480.884371635882
+          },
+          "acheron_basic": {
+            "abs_gap": 2781.8970019812878,
+            "l2_contrib": 21330.969631365486,
+            "rel_abs": 0.1304158718547295,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -2781.8970019812878
+          },
+          "other_members": {
+            "abs_gap": 9587.27862864657,
+            "l2_contrib": 36002.483531746664,
+            "rel_abs": 0.26629492435411006,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -9587.27862864657
+          }
+        },
+        "abs_gap_sum": 78872.41122559526,
+        "abs_gap_sum_over_l2_team": 0.1903963518770888,
+        "abs_sum_gate": 0.03,
+        "abs_sum_pass": false,
+        "all_sources_pass": false,
+        "source_keys": [
+          "acheron_ult",
+          "acheron_skill",
+          "acheron_basic",
+          "other_members"
+        ]
+      },
+      "acheron_ult_rel": 0.18077238093118947,
+      "acheron_skill_rel": 0.20124624994175086,
+      "other_rel": 0.26629492435411006,
+      "removed": [
+        "pela_ult_def_shred__acheron",
+        "pela_ult_def_shred__pela",
+        "pela_ult_def_shred__sparkle",
+        "pela_ult_def_shred__aventurine"
+      ]
+    },
+    "ablate_21015": {
+      "acceptance": {
+        "per_source": {
+          "acheron_ult": {
+            "abs_gap": 21051.997239428456,
+            "l2_contrib": 260119.1121182968,
+            "rel_abs": 0.0809321432323452,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -21051.997239428456
+          },
+          "acheron_skill": {
+            "abs_gap": 10057.762604737669,
+            "l2_contrib": 96801.22922675314,
+            "rel_abs": 0.10390118684523879,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -10057.762604737669
+          },
+          "acheron_basic": {
+            "abs_gap": 521.2996084072183,
+            "l2_contrib": 21330.969631365486,
+            "rel_abs": 0.024438626908018703,
+            "gate": 0.03,
+            "pass": true,
+            "gap_signed": -521.2996084072183
+          },
+          "other_members": {
+            "abs_gap": 6490.5817392337485,
+            "l2_contrib": 36002.483531746664,
+            "rel_abs": 0.1802815001223572,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -6490.5817392337485
+          }
+        },
+        "abs_gap_sum": 38121.641191807095,
+        "abs_gap_sum_over_l2_team": 0.09202484490713816,
+        "abs_sum_gate": 0.03,
+        "abs_sum_pass": false,
+        "all_sources_pass": false,
+        "source_keys": [
+          "acheron_ult",
+          "acheron_skill",
+          "acheron_basic",
+          "other_members"
+        ]
+      },
+      "acheron_ult_rel": 0.0809321432323452,
+      "acheron_skill_rel": 0.10390118684523879,
+      "other_rel": 0.1802815001223572,
+      "removed": [
+        "lc_exposed__acheron",
+        "lc_exposed__pela",
+        "lc_exposed__sparkle",
+        "lc_exposed__aventurine"
+      ]
+    },
+    "ablate_e4": {
+      "acceptance": {
+        "per_source": {
+          "acheron_ult": {
+            "abs_gap": 15421.900861395989,
+            "l2_contrib": 260119.1121182968,
+            "rel_abs": 0.05928784215741297,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -15421.900861395989
+          },
+          "acheron_skill": {
+            "abs_gap": 8014.9300826066465,
+            "l2_contrib": 96801.22922675314,
+            "rel_abs": 0.08279781307148468,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -8014.9300826066465
+          },
+          "acheron_basic": {
+            "abs_gap": 31.22614981517836,
+            "l2_contrib": 21330.969631365486,
+            "rel_abs": 0.0014638879692211837,
+            "gate": 0.03,
+            "pass": true,
+            "gap_signed": -31.22614981517836
+          },
+          "other_members": {
+            "abs_gap": 7921.286659884325,
+            "l2_contrib": 36002.483531746664,
+            "rel_abs": 0.22002056199538028,
+            "gate": 0.03,
+            "pass": false,
+            "gap_signed": -7921.286659884325
+          }
+        },
+        "abs_gap_sum": 31389.34375370214,
+        "abs_gap_sum_over_l2_team": 0.07577321962969653,
+        "abs_sum_gate": 0.03,
+        "abs_sum_pass": false,
+        "all_sources_pass": false,
+        "source_keys": [
+          "acheron_ult",
+          "acheron_skill",
+          "acheron_basic",
+          "other_members"
+        ]
+      },
+      "acheron_ult_rel": 0.05928784215741297,
+      "acheron_skill_rel": 0.08279781307148468,
+      "other_rel": 0.22002056199538028,
+      "removed": [
+        "pela_e4_ice_res_shred__pela"
+      ]
+    },
+    "e6_consumption": {
+      "instances": [
+        {
+          "action": "pela_basic",
+          "mv": 0.4
+        },
+        {
+          "action": "pela_skill",
+          "mv": 0.4
+        },
+        {
+          "action": "pela_ult",
+          "mv": 0.4
+        }
+      ],
+      "consumes_in_l1": true,
+      "coverage_policy": {
+        "basic": 0.85,
+        "skill": 0.85,
+        "ult": 0.0
+      },
+      "ablate_probe": {
+        "note": "E6 已在 build_l1_input 按覆盖消费；本项对照 member_table 佩拉",
+        "pela_member": {
+          "basic": {
+            "l1_contrib": 2131.603531406479,
+            "l2_contrib": 2174.866454001009,
+            "rel_abs": 0.019892220285499026
+          },
+          "skill": {
+            "l1_contrib": 15555.703452972333,
+            "l2_contrib": 15586.233617452106,
+            "rel_abs": 0.0019587903806079087
+          },
+          "ult": {
+            "l1_contrib": 1869.9989876121008,
+            "l2_contrib": 1441.4155834271521,
+            "rel_abs": 0.29733507054636954
+          }
+        },
+        "acheron_ult_rel": 0.05928784215741297,
+        "acheron_skill_rel": 0.08279781307148468,
+        "other_rel": 0.16181830936265038
+      }
+    },
+    "e3e5_multipliers": {
+      "basic_mv": 1.1,
+      "skill_mv": 2.31,
+      "ult_mv": 1.08,
+      "expected": {
+        "basic_L7": 1.1,
+        "skill_L12": 2.31,
+        "ult_L12": 1.08
+      },
+      "matches_e3e5": true
+    },
+    "consumes": {
+      "pela_ult_def_shred": true,
+      "lc_21015_exposed": true,
+      "lc_21016_trend_dream": false,
+      "pela_e4_ice_res": true,
+      "pela_e6_extra": true,
+      "pela_e3e5_levels": true
+    },
+    "review_findings": [
+      "通解减防已进 L1 ActionBuff（pela_ult_def_shred→全体攻击者）",
+      "21015 攻陷已进 L1 ActionBuff",
+      "砂金老队无 21016；Trend→R1 残梦仅 FX 变体 L2 事件路径已接线",
+      "E4 冰抗减抗已进 L1 ActionBuff（res→res_pen）",
+      "E6 额外伤：L1 经 requires_defender_debuff + 预存减益覆盖消费（instances=3；战技/普攻 cov≈0.85，终结技同动≈0）",
+      "E3/E5 等级倍率已烘焙进 JSON 并由 L1 damage_instances 消费"
+    ],
+    "review_findings_count": 6,
+    "note": "留出：锁定门槛不调；单项替换定位消费缺口（含 E6/E4/E3E5）"
+  },
+  "source_uplift_paper_zone_on_per_100av": {
+    "acheron_skill": 7729.013798462038,
+    "acheron_basic": 704.1163413227114,
+    "jiaoqiu_direct": 15353.22344985547,
+    "other_members": 1235.6435234737655,
+    "acheron_ult": 92023.98719246709,
+    "jiaoqiu_dot": 8956.583740614416,
+    "pela_direct": -19202.51565488029
+  },
+  "external": {
+    "17173_claim": 0.16,
+    "primary_compare": "fx_variant_steady_zone_on",
+    "model_rel_fx_zone_on": 0.1452643147514264,
+    "delta_pp_vs_17173_fx": -1.4735685248573605,
+    "paper_sandgold_retained": true,
+    "paper_rel_zone_on": 0.2578130938260139,
+    "miyoushe_note": "米游社一图流 +17% 为 0 魂口径，非 2+1；不与本 2+1 直接比"
+  }
+}

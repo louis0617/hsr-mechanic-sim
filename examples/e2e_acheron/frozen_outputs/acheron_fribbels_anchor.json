@@ -1,0 +1,648 @@
+{
+  "gate": 0.03,
+  "solo": {
+    "mode": "solo",
+    "description": "L2 关闭全部队友效果；Fribbels 无队辅条件",
+    "gate": 0.03,
+    "actions": {
+      "skill": {
+        "action": "skill",
+        "mv": 1.6,
+        "l2_damage": 16293.25725957039,
+        "fribbels_damage": 16623.682269904402,
+        "rel_abs": 0.01987676406281031,
+        "pass_gate": true,
+        "fail_reasons": [],
+        "panel": {
+          "atk": 3372.034176,
+          "crit_rate": 0.9876,
+          "crit_dmg": 2.7848,
+          "lightning_dmg": 0.4688029999999999,
+          "level": 80
+        },
+        "conditionals": {
+          "mode": "solo",
+          "action": "skill",
+          "mv": 1.6,
+          "thunder_stacks": 0,
+          "nihility_others": 0,
+          "original_mult": 1.0,
+          "dmg_boost": 0.8288029999999998,
+          "crit_rate": 1.0,
+          "crit_dmg": 3.0248,
+          "res_pen": 0.0,
+          "vuln": 0.0,
+          "empty_bubbles": true,
+          "pioneer_debuffed": true,
+          "izumo_same_path": false,
+          "ashen_stacks": 0,
+          "zone_ult_vuln": false,
+          "sparkle_cd_buff": 0.0,
+          "unnerved_cd": 0.0,
+          "keel_cd": 0.0,
+          "sacerdos_cd": 0.0,
+          "lc_23023_shield_cd": 0.0,
+          "unarmored_vuln": 0.0,
+          "figment_vuln": 0.0,
+          "l2_hit_count": 1
+        },
+        "zones": [
+          {
+            "zone_id": "f_base",
+            "label": "基础",
+            "l2": 5395.2546816,
+            "fribbels": 5395.2546816,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_origMult",
+            "label": "其他·奈落(original_mult)",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_dmgBoost",
+            "label": "增伤",
+            "l2": 1.828803,
+            "fribbels": 1.8288029999999997,
+            "rel_abs": 1.2141526721305211e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_crit",
+            "label": "暴击",
+            "l2": 3.9448000000000003,
+            "fribbels": 4.0248,
+            "rel_abs": 0.01987676406281048,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_def",
+            "label": "防御",
+            "l2": 0.46511627906976744,
+            "fribbels": 0.46511627906976744,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_res",
+            "label": "抗性",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_vuln",
+            "label": "易伤",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_weaken",
+            "label": "其他·虚弱",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_mit",
+            "label": "其他·减伤层",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_broken",
+            "label": "其他·韧性未破",
+            "l2": 0.9,
+            "fribbels": 0.9,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          }
+        ]
+      },
+      "ult": {
+        "action": "ult",
+        "mv": 5.22,
+        "l2_damage": 104178.54749894093,
+        "fribbels_damage": 105650.96074496333,
+        "rel_abs": 0.013936581699211859,
+        "pass_gate": true,
+        "fail_reasons": [],
+        "panel": {
+          "atk": 3372.034176,
+          "crit_rate": 0.9876,
+          "crit_dmg": 2.7848,
+          "lightning_dmg": 0.4688029999999999,
+          "level": 80
+        },
+        "conditionals": {
+          "mode": "solo",
+          "action": "ult",
+          "mv": 5.22,
+          "thunder_stacks": 3,
+          "nihility_others": 0,
+          "original_mult": 1.0,
+          "dmg_boost": 1.9688029999999999,
+          "crit_rate": 1.0,
+          "crit_dmg": 3.0248,
+          "res_pen": 0.2,
+          "vuln": 0.0,
+          "empty_bubbles": true,
+          "pioneer_debuffed": true,
+          "izumo_same_path": false,
+          "ashen_stacks": 0,
+          "zone_ult_vuln": false,
+          "sparkle_cd_buff": 0.0,
+          "unnerved_cd": 0.0,
+          "keel_cd": 0.0,
+          "sacerdos_cd": 0.0,
+          "lc_23023_shield_cd": 0.0,
+          "unarmored_vuln": 0.0,
+          "figment_vuln": 0.0,
+          "l2_hit_count": 13
+        },
+        "zones": [
+          {
+            "zone_id": "f_base",
+            "label": "基础",
+            "l2": 1980.3106036766742,
+            "fribbels": 17602.01839872,
+            "rel_abs": 0.8874952543044335,
+            "fribbels_unmodeled": true,
+            "note": "L2 多段命中基础伤害加权均值 vs Fribbels 聚合 MV 单次基础；不计入乘区门槛（总伤已对照）"
+          },
+          {
+            "zone_id": "f_origMult",
+            "label": "其他·奈落(original_mult)",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_dmgBoost",
+            "label": "增伤",
+            "l2": 2.9688030000000003,
+            "fribbels": 2.968803,
+            "rel_abs": 1.495852738797632e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_crit",
+            "label": "暴击",
+            "l2": 3.969101559093321,
+            "fribbels": 4.0248,
+            "rel_abs": 0.013838809607105632,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_def",
+            "label": "防御",
+            "l2": 0.4651162790697676,
+            "fribbels": 0.46511627906976744,
+            "rel_abs": 3.58046925441613e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_res",
+            "label": "抗性",
+            "l2": 1.1999999999999997,
+            "fribbels": 1.2,
+            "rel_abs": 1.8503717077085943e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_vuln",
+            "label": "易伤",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_weaken",
+            "label": "其他·虚弱",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_mit",
+            "label": "其他·减伤层",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_broken",
+            "label": "其他·韧性未破",
+            "l2": 0.9000000000000001,
+            "fribbels": 0.9,
+            "rel_abs": 1.2335811384723962e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          }
+        ]
+      }
+    },
+    "all_pass": true,
+    "fribbels_unmodeled": [
+      {
+        "id": "zone_proc_dream",
+        "name": "结界叠烬→残梦",
+        "note": "Fribbels 无 AV/结界时序；单次伤害对照不涉及残梦流量"
+      },
+      {
+        "id": "quad_ascendance",
+        "name": "四相断我溢出缓冲",
+        "note": "Fribbels 无残梦溢出状态机"
+      },
+      {
+        "id": "mirage_hit_timing",
+        "name": "泡影同次命中时序",
+        "note": "Fribbels emptyBubblesDebuff 为静态开关；对照时 L2 预挂泡影对齐"
+      },
+      {
+        "id": "lc23029_fribbels_double_add",
+        "name": "23029 Fribbels UI 卸甲+穷寇双开可加总",
+        "note": "ThoseManySprings.ts 双开时 +0.10+0.14；原文为升级替换。本锚点按穷寇 ParamList[5]=0.14（与 L2/L1 一致），不跟 UI 双加"
+      }
+    ]
+  },
+  "team_full_coverage": {
+    "mode": "team_full_coverage",
+    "description": "Fribbels 填入椒丘/花火/砂金+光锥，条件全开（含幻相满层+谜诡、穷寇）；L2 同配装预挂全覆盖增益后测单次战技/终结技",
+    "gate": 0.03,
+    "actions": {
+      "skill": {
+        "action": "skill",
+        "mv": 1.6,
+        "l2_damage": 76983.77655790182,
+        "fribbels_damage": 76983.77655790179,
+        "rel_abs": 3.7805147731150665e-16,
+        "pass_gate": true,
+        "fail_reasons": [],
+        "panel": {
+          "atk": 3372.034176,
+          "crit_rate": 0.9876,
+          "crit_dmg": 2.7848,
+          "lightning_dmg": 0.4688029999999999,
+          "level": 80
+        },
+        "conditionals": {
+          "mode": "team_full",
+          "action": "skill",
+          "mv": 1.6,
+          "thunder_stacks": 0,
+          "nihility_others": 1,
+          "original_mult": 1.6,
+          "dmg_boost": 0.8288029999999998,
+          "crit_rate": 1.0,
+          "crit_dmg": 5.507936,
+          "res_pen": 0.0,
+          "vuln": 0.79,
+          "empty_bubbles": true,
+          "pioneer_debuffed": true,
+          "izumo_same_path": true,
+          "ashen_stacks": 5,
+          "zone_ult_vuln": false,
+          "sparkle_cd_buff": 1.3731360000000001,
+          "unnerved_cd": 0.15,
+          "keel_cd": 0.2,
+          "sacerdos_cd": 0.36,
+          "lc_23023_shield_cd": 0.4,
+          "unarmored_vuln": 0.14,
+          "figment_vuln": 0.30000000000000004,
+          "l2_hit_count": 1
+        },
+        "zones": [
+          {
+            "zone_id": "f_base",
+            "label": "基础",
+            "l2": 5395.2546816,
+            "fribbels": 5395.2546816,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_origMult",
+            "label": "其他·奈落(original_mult)",
+            "l2": 1.6,
+            "fribbels": 1.6,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_dmgBoost",
+            "label": "增伤",
+            "l2": 1.828803,
+            "fribbels": 1.8288029999999997,
+            "rel_abs": 1.2141526721305211e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_crit",
+            "label": "暴击",
+            "l2": 6.507936000000001,
+            "fribbels": 6.507936,
+            "rel_abs": 1.3647620684962564e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_def",
+            "label": "防御",
+            "l2": 0.4651162790697674,
+            "fribbels": 0.46511627906976744,
+            "rel_abs": 1.1934897514720432e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_res",
+            "label": "抗性",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_vuln",
+            "label": "易伤",
+            "l2": 1.79,
+            "fribbels": 1.79,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_weaken",
+            "label": "其他·虚弱",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_mit",
+            "label": "其他·减伤层",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_broken",
+            "label": "其他·韧性未破",
+            "l2": 0.9000000000000001,
+            "fribbels": 0.9,
+            "rel_abs": 1.2335811384723962e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          }
+        ]
+      },
+      "ult": {
+        "action": "ult",
+        "mv": 5.22,
+        "l2_damage": 529816.8835968337,
+        "fribbels_damage": 530266.4282573897,
+        "rel_abs": 0.0008477713025004217,
+        "pass_gate": true,
+        "fail_reasons": [],
+        "panel": {
+          "atk": 3372.034176,
+          "crit_rate": 0.9876,
+          "crit_dmg": 2.7848,
+          "lightning_dmg": 0.4688029999999999,
+          "level": 80
+        },
+        "conditionals": {
+          "mode": "team_full",
+          "action": "ult",
+          "mv": 5.22,
+          "thunder_stacks": 3,
+          "nihility_others": 1,
+          "original_mult": 1.6,
+          "dmg_boost": 1.9688029999999999,
+          "crit_rate": 1.0,
+          "crit_dmg": 5.507936,
+          "res_pen": 0.2,
+          "vuln": 0.9400000000000001,
+          "empty_bubbles": true,
+          "pioneer_debuffed": true,
+          "izumo_same_path": true,
+          "ashen_stacks": 5,
+          "zone_ult_vuln": true,
+          "sparkle_cd_buff": 1.3731360000000001,
+          "unnerved_cd": 0.15,
+          "keel_cd": 0.2,
+          "sacerdos_cd": 0.36,
+          "lc_23023_shield_cd": 0.4,
+          "unarmored_vuln": 0.14,
+          "figment_vuln": 0.30000000000000004,
+          "l2_hit_count": 13
+        },
+        "zones": [
+          {
+            "zone_id": "f_base",
+            "label": "基础",
+            "l2": 1982.7431825936712,
+            "fribbels": 17602.01839872,
+            "rel_abs": 0.8873570554421274,
+            "fribbels_unmodeled": true,
+            "note": "L2 多段命中基础伤害加权均值 vs Fribbels 聚合 MV 单次基础；不计入乘区门槛（总伤已对照）"
+          },
+          {
+            "zone_id": "f_origMult",
+            "label": "其他·奈落(original_mult)",
+            "l2": 1.5999999999999996,
+            "fribbels": 1.6,
+            "rel_abs": 2.7755575615628914e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_dmgBoost",
+            "label": "增伤",
+            "l2": 2.968803,
+            "fribbels": 2.968803,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_crit",
+            "label": "暴击",
+            "l2": 6.502515896168503,
+            "fribbels": 6.507936,
+            "rel_abs": 0.0008328452878911468,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_def",
+            "label": "防御",
+            "l2": 0.46511627906976744,
+            "fribbels": 0.46511627906976744,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_res",
+            "label": "抗性",
+            "l2": 1.1999999999999993,
+            "fribbels": 1.2,
+            "rel_abs": 5.551115123125783e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_vuln",
+            "label": "易伤",
+            "l2": 1.9399999999999997,
+            "fribbels": 1.94,
+            "rel_abs": 1.1445598192011924e-16,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_weaken",
+            "label": "其他·虚弱",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_mit",
+            "label": "其他·减伤层",
+            "l2": 1.0,
+            "fribbels": 1.0,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          },
+          {
+            "zone_id": "f_broken",
+            "label": "其他·韧性未破",
+            "l2": 0.9,
+            "fribbels": 0.9,
+            "rel_abs": 0.0,
+            "fribbels_unmodeled": false,
+            "note": ""
+          }
+        ]
+      }
+    },
+    "all_pass": true,
+    "vuln_composition": {
+      "skill": {
+        "ashen_roast": 0.35,
+        "lc_23029": 0.14,
+        "sparkle_figment_aura": 0.30000000000000004,
+        "jiaoqiu_zone_ult": 0.0,
+        "total": 0.79,
+        "f_vuln": 1.79
+      },
+      "ult": {
+        "ashen_roast": 0.35,
+        "lc_23029": 0.14,
+        "sparkle_figment_aura": 0.30000000000000004,
+        "jiaoqiu_zone_ult": 0.15,
+        "total": 0.9400000000000001,
+        "f_vuln": 1.94
+      }
+    },
+    "vuln_skill_vs_ult": {
+      "skill_f_vuln": 1.79,
+      "ult_f_vuln": 1.94,
+      "delta": 0.1499999999999999,
+      "expected_zone_ult": 0.15,
+      "delta_matches_zone": true,
+      "cause_named": "战技/终结技易伤差应=结界终结技专属 15%；旧差 0.11 因战技耗点叠 1 层幻相(+4%)而终结技未预挂。现两端均预挂幻相满层+谜诡，差=0.15。"
+    },
+    "fribbels_unmodeled": [
+      {
+        "id": "zone_proc_dream",
+        "name": "结界叠烬→残梦",
+        "note": "Fribbels 无 AV/结界时序；单次伤害对照不涉及残梦流量"
+      },
+      {
+        "id": "quad_ascendance",
+        "name": "四相断我溢出缓冲",
+        "note": "Fribbels 无残梦溢出状态机"
+      },
+      {
+        "id": "mirage_hit_timing",
+        "name": "泡影同次命中时序",
+        "note": "Fribbels emptyBubblesDebuff 为静态开关；对照时 L2 预挂泡影对齐"
+      },
+      {
+        "id": "lc23029_fribbels_double_add",
+        "name": "23029 Fribbels UI 卸甲+穷寇双开可加总",
+        "note": "ThoseManySprings.ts 双开时 +0.10+0.14；原文为升级替换。本锚点按穷寇 ParamList[5]=0.14（与 L2/L1 一致），不跟 UI 双加"
+      }
+    ]
+  },
+  "exit_pass": true,
+  "fribbels_unmodeled": [
+    {
+      "id": "zone_proc_dream",
+      "name": "结界叠烬→残梦",
+      "note": "Fribbels 无 AV/结界时序；单次伤害对照不涉及残梦流量"
+    },
+    {
+      "id": "quad_ascendance",
+      "name": "四相断我溢出缓冲",
+      "note": "Fribbels 无残梦溢出状态机"
+    },
+    {
+      "id": "mirage_hit_timing",
+      "name": "泡影同次命中时序",
+      "note": "Fribbels emptyBubblesDebuff 为静态开关；对照时 L2 预挂泡影对齐"
+    },
+    {
+      "id": "lc23029_fribbels_double_add",
+      "name": "23029 Fribbels UI 卸甲+穷寇双开可加总",
+      "note": "ThoseManySprings.ts 双开时 +0.10+0.14；原文为升级替换。本锚点按穷寇 ParamList[5]=0.14（与 L2/L1 一致），不跟 UI 双加"
+    }
+  ]
+}

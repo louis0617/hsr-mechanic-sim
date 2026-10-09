@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_old_pela_fx_res",
+  "name": "黄泉老队·17173变体（佩拉+决心+符玄市场）",
+  "description": "E1.5 外部对齐：黄泉 E2 + 佩拉 E6 + 花火 + 符玄/宇宙市场趋势；假人每轮受击×2（CombatRules）",
+  "main_dps": "acheron",
+  "members": ["acheron", "pela", "sparkle", "fu_xuan"],
+  "eidolons": {
+    "acheron": 2,
+    "pela": 6,
+    "sparkle": 0,
+    "fu_xuan": 0
+  },
+  "max_rounds": 20
+}

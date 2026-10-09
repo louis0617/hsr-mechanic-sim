@@ -1,0 +1,250 @@
+{
+  "id": "himeko",
+  "name": "姬子",
+  "level": 80,
+  "path": "erudition",
+  "elements": [
+    "fire"
+  ],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 0.0,
+      "atk": 0.0,
+      "defense": 0.0,
+      "speed": 100.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {
+        "fire": 0.0
+      },
+      "res_pen": {
+        "all": 0.0
+      },
+      "energy_max": 120.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "basic_attack",
+        "name": "武装调律",
+        "type": "basic_attack",
+        "description": "对敌方单体造成少量火属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "skill",
+        "name": "熔核爆裂",
+        "type": "skill",
+        "description": "对敌方单体造成火属性伤害，对相邻目标造成少量火属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 2.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 1,
+        "applies_effects": [
+          "fervor"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "ultimate",
+        "name": "天坠之火",
+        "type": "ultimate",
+        "description": "对敌方全体造成火属性伤害，消灭敌人时恢复能量。",
+        "damage_instances": [
+          {
+            "multiplier": 1.5,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 120.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {
+          "elation": 1.0
+        },
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "follow_up",
+        "name": "乘胜追击_追加攻击",
+        "type": "follow_up",
+        "description": "对敌方全体造成火属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "fire",
+            "damage_type": "direct",
+            "target": "aoe",
+            "toughness_dmg": 30.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "talent_buff"
+        ],
+        "effect_target": "self",
+        "variable_changes": {
+          "charge": -3.0
+        },
+        "heal_tally_add": null,
+        "requires": [
+          "charge>=3"
+        ]
+      },
+      {
+        "id": "talent",
+        "name": "乘胜追击",
+        "type": "talent",
+        "description": "战斗开始及敌人弱点被击破时，获得充能。我方目标攻击后，若充能达到上限则发动追加攻击，消耗全部充能。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "talent_buff"
+        ],
+        "effect_target": "self",
+        "variable_changes": {
+          "charge": 1.0
+        },
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "technique",
+        "name": "dev_连携",
+        "type": "technique",
+        "description": "攻击敌人，进入战斗后削弱敌方目标对应属性韧性。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "enemy",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      }
+    ],
+    "effects": [
+      {
+        "id": "talent_buff",
+        "name": "乘胜追击",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": -1,
+        "max_stacks": 10,
+        "current_stacks": 0,
+        "modifiers": [
+          {
+            "target_stat": "atk",
+            "operation": "add",
+            "value": 0.1
+          }
+        ],
+        "conditions": []
+      },
+      {
+        "id": "fervor",
+        "name": "灼热追击",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": -1,
+        "max_stacks": 1,
+        "current_stacks": 0,
+        "modifiers": [
+          {
+            "target_stat": "dmg_boost.fire",
+            "operation": "add",
+            "value": 0.2
+          }
+        ],
+        "conditions": [
+          "elation >= 1"
+        ]
+      }
+    ],
+    "variables": [
+      {
+        "id": "charge",
+        "name": "充能",
+        "value": 0.0,
+        "min_value": 0.0,
+        "max_value": 3.0
+      },
+      {
+        "id": "elation",
+        "name": "兴高采烈",
+        "value": 0.0,
+        "min_value": 0.0,
+        "max_value": 10.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_mortenax_jq",
+  "name": "黄泉+千冶·刃+椒丘+砂金",
+  "description": "B 队：无花火，第二虚无椒丘。检验 E2 下花火 vs 第二虚无。",
+  "main_dps": "acheron",
+  "members": ["acheron", "mortenaxblade", "jiaoqiu", "aventurine"],
+  "eidolons": {
+    "acheron": 2,
+    "mortenaxblade": 0,
+    "jiaoqiu": 0,
+    "aventurine": 0
+  },
+  "max_rounds": 20
+}

@@ -1,0 +1,102 @@
+{
+  "chars": {
+    "acheron": {
+      "status": "ok",
+      "char_id": "acheron",
+      "name": "黄泉",
+      "node_f1": 0.823529411764706,
+      "edge_f1": 0.9066666666666667,
+      "raw_edge_f1": 0.5599999999999999,
+      "alignment_stats": {
+        "skill_aligned": 3,
+        "effect_aligned": 0,
+        "variable_aligned": 1,
+        "unmatched_ext": 4,
+        "unmatched_gt": 1
+      },
+      "extraction_path": "results/extractions/acheron.json",
+      "completed_at": "2026-06-08T03:52:44.162384+00:00"
+    },
+    "sam": {
+      "status": "ok",
+      "char_id": "firefly",
+      "name": "流萤",
+      "node_f1": 0.7142857142857142,
+      "edge_f1": 0.5777777777777778,
+      "raw_edge_f1": 0.0,
+      "alignment_stats": {
+        "skill_aligned": 4,
+        "effect_aligned": 0,
+        "variable_aligned": 0,
+        "unmatched_ext": 7,
+        "unmatched_gt": 1
+      },
+      "extraction_path": "results/extractions/sam.json",
+      "completed_at": "2026-06-08T04:02:12.100035+00:00"
+    },
+    "kafka": {
+      "status": "ok",
+      "char_id": "kafka",
+      "name": "卡芙卡",
+      "node_f1": 0.7636363636363636,
+      "edge_f1": 0.6956521739130435,
+      "raw_edge_f1": 0.2391304347826087,
+      "alignment_stats": {
+        "skill_aligned": 3,
+        "effect_aligned": 0,
+        "variable_aligned": 0,
+        "unmatched_ext": 7,
+        "unmatched_gt": 2
+      },
+      "extraction_path": "results/extractions/kafka.json",
+      "completed_at": "2026-06-08T04:05:42.304529+00:00"
+    },
+    "danhengil": {
+      "status": "ok",
+      "char_id": "dan_heng_il",
+      "name": "丹恒·饮月",
+      "node_f1": 0.7142857142857143,
+      "edge_f1": 0.4107142857142857,
+      "raw_edge_f1": 0.0,
+      "alignment_stats": {
+        "skill_aligned": 3,
+        "effect_aligned": 1,
+        "variable_aligned": 0,
+        "unmatched_ext": 8,
+        "unmatched_gt": 0
+      },
+      "extraction_path": "results/extractions/danhengil.json",
+      "completed_at": "2026-06-08T04:08:26.215357+00:00"
+    },
+    "himeko": {
+      "status": "ok",
+      "char_id": "himeko",
+      "name": "姬子",
+      "node_f1": 0.7272727272727272,
+      "edge_f1": 0.9361702127659575,
+      "raw_edge_f1": 0.0,
+      "alignment_stats": {
+        "skill_aligned": 4,
+        "effect_aligned": 1,
+        "variable_aligned": 0,
+        "unmatched_ext": 5,
+        "unmatched_gt": 0
+      },
+      "extraction_path": "results/extractions/himeko.json",
+      "completed_at": "2026-06-08T04:22:37.855650+00:00"
+    }
+  },
+  "meta": {
+    "chars_requested": 5,
+    "mock": false,
+    "provider": "deepseek",
+    "thinking": true,
+    "updated_at": "2026-06-08T03:50:14.129859+00:00"
+  },
+  "summary": {
+    "n_chars": 5,
+    "mean_node_f1": 0.7486019862490451,
+    "mean_aligned_edge_f1": 0.7053962233675463,
+    "metric": "aligned edge F1 (node-id matching after alignment fix)"
+  }
+}

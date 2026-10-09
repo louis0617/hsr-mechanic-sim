@@ -1,0 +1,1219 @@
+{
+  "horizon": 100,
+  "boards": {
+    "jq_zone_on": {
+      "n_total": 109,
+      "n_feasible": 109,
+      "n_infeasible": 0,
+      "best": {
+        "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+        "l2_dpr": 720504.3582591995,
+        "labels": {
+          "sparkle": "ad k=1",
+          "jiaoqiu": "ad k=1",
+          "acheron": "ad k=1",
+          "aventurine": "ad k=1",
+          "acheron_ult": "immediate_when_full",
+          "priority": [
+            "sparkle",
+            "acheron",
+            "jiaoqiu",
+            "aventurine"
+          ]
+        },
+        "axis": {
+          "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+          "team_id": "acheron_direct",
+          "notes": "adaptive community",
+          "sources": [],
+          "members": {
+            "sparkle": {
+              "actor_id": "sparkle",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": "acheron",
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "jiaoqiu": {
+              "actor_id": "jiaoqiu",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "acheron": {
+              "actor_id": "acheron",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "aventurine": {
+              "actor_id": "aventurine",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            }
+          },
+          "sp_priority": [
+            "sparkle",
+            "acheron",
+            "jiaoqiu",
+            "aventurine"
+          ]
+        },
+        "family": "adaptive"
+      },
+      "top10": [
+        {
+          "rank": 1,
+          "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "axis_id": "jq|ad|su1|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 3,
+          "axis_id": "jq|ad|su1|ac1|av2|community|immediate_when_full",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 4,
+          "axis_id": "jq|ad|su1|ac1|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 5,
+          "axis_id": "jq|ad|su1|ac2|av1|community|immediate_when_full",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 6,
+          "axis_id": "jq|ad|su1|ac2|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 7,
+          "axis_id": "jq|ad|su1|ac2|av2|community|immediate_when_full",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 8,
+          "axis_id": "jq|ad|su1|ac2|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 9,
+          "axis_id": "jq|ad|su2|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 10,
+          "axis_id": "jq|ad|su2|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 720504.3582591995,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        }
+      ],
+      "community_exact": {
+        "axis_id": "community_jq_adaptive",
+        "rank": 3,
+        "l2_dpr": 720504.3582591995,
+        "gap_vs_best": 0.0,
+        "note": "精确社区编码（含砂金循环）"
+      },
+      "community_f6": {
+        "rank_of_best_matching_f6": 1,
+        "n_matching": 7,
+        "best_l2_dpr": 720504.3582591995,
+        "gap_vs_best": 0.0,
+        "best_aven_label": "ad k=1",
+        "note": "F6：只比花火/椒丘或佩拉/黄泉循环与黄泉开大。砂金差异 = 纸面最大值 vs 实战生存，不计入社区轴是否『附近』的循环判定。"
+      }
+    },
+    "jq_zone_off": {
+      "n_total": 109,
+      "n_feasible": 109,
+      "n_infeasible": 0,
+      "best": {
+        "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+        "l2_dpr": 679106.4717408491,
+        "labels": {
+          "sparkle": "ad k=1",
+          "jiaoqiu": "ad k=1",
+          "acheron": "ad k=1",
+          "aventurine": "ad k=1",
+          "acheron_ult": "immediate_when_full",
+          "priority": [
+            "sparkle",
+            "acheron",
+            "jiaoqiu",
+            "aventurine"
+          ]
+        },
+        "axis": {
+          "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+          "team_id": "acheron_direct",
+          "notes": "adaptive community",
+          "sources": [],
+          "members": {
+            "sparkle": {
+              "actor_id": "sparkle",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": "acheron",
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "jiaoqiu": {
+              "actor_id": "jiaoqiu",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "acheron": {
+              "actor_id": "acheron",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "aventurine": {
+              "actor_id": "aventurine",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            }
+          },
+          "sp_priority": [
+            "sparkle",
+            "acheron",
+            "jiaoqiu",
+            "aventurine"
+          ]
+        },
+        "family": "adaptive"
+      },
+      "top10": [
+        {
+          "rank": 1,
+          "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "axis_id": "jq|ad|su1|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 3,
+          "axis_id": "jq|ad|su1|ac1|av2|community|immediate_when_full",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 4,
+          "axis_id": "jq|ad|su1|ac1|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 5,
+          "axis_id": "jq|ad|su1|ac2|av1|community|immediate_when_full",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 6,
+          "axis_id": "jq|ad|su1|ac2|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 7,
+          "axis_id": "jq|ad|su1|ac2|av2|community|immediate_when_full",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 8,
+          "axis_id": "jq|ad|su1|ac2|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 9,
+          "axis_id": "jq|ad|su2|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 10,
+          "axis_id": "jq|ad|su2|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 679106.4717408491,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "jiaoqiu": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "jiaoqiu",
+              "aventurine"
+            ]
+          }
+        }
+      ],
+      "community_exact": {
+        "axis_id": "community_jq_adaptive",
+        "rank": 3,
+        "l2_dpr": 679106.4717408491,
+        "gap_vs_best": 0.0,
+        "note": "精确社区编码（含砂金循环）"
+      },
+      "community_f6": {
+        "rank_of_best_matching_f6": 1,
+        "n_matching": 7,
+        "best_l2_dpr": 679106.4717408491,
+        "gap_vs_best": 0.0,
+        "best_aven_label": "ad k=1",
+        "note": "F6：只比花火/椒丘或佩拉/黄泉循环与黄泉开大。砂金差异 = 纸面最大值 vs 实战生存，不计入社区轴是否『附近』的循环判定。"
+      }
+    },
+    "pela_zone_on": {
+      "n_total": 109,
+      "n_feasible": 109,
+      "n_infeasible": 0,
+      "best": {
+        "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+        "l2_dpr": 682754.2101820027,
+        "labels": {
+          "sparkle": "ad k=1",
+          "pela": "ad k=1",
+          "acheron": "ad k=1",
+          "aventurine": "ad k=1",
+          "acheron_ult": "immediate_when_full",
+          "priority": [
+            "sparkle",
+            "acheron",
+            "pela",
+            "aventurine"
+          ]
+        },
+        "axis": {
+          "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+          "team_id": "acheron_old_pela_res",
+          "notes": "adaptive community",
+          "sources": [],
+          "members": {
+            "sparkle": {
+              "actor_id": "sparkle",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": "acheron",
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "pela": {
+              "actor_id": "pela",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "acheron": {
+              "actor_id": "acheron",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "aventurine": {
+              "actor_id": "aventurine",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            }
+          },
+          "sp_priority": [
+            "sparkle",
+            "acheron",
+            "pela",
+            "aventurine"
+          ]
+        },
+        "family": "adaptive"
+      },
+      "top10": [
+        {
+          "rank": 1,
+          "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "axis_id": "pela|ad|su1|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 3,
+          "axis_id": "pela|ad|su1|ac1|av2|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 4,
+          "axis_id": "pela|ad|su1|ac1|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 5,
+          "axis_id": "pela|ad|su1|ac2|av1|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 6,
+          "axis_id": "pela|ad|su1|ac2|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 7,
+          "axis_id": "pela|ad|su1|ac2|av2|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 8,
+          "axis_id": "pela|ad|su1|ac2|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 9,
+          "axis_id": "pela|ad|su2|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 10,
+          "axis_id": "pela|ad|su2|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        }
+      ],
+      "community_exact": {
+        "axis_id": "community_pela_adaptive",
+        "rank": 3,
+        "l2_dpr": 682754.2101820027,
+        "gap_vs_best": 0.0,
+        "note": "精确社区编码（含砂金循环）"
+      },
+      "community_f6": {
+        "rank_of_best_matching_f6": 1,
+        "n_matching": 7,
+        "best_l2_dpr": 682754.2101820027,
+        "gap_vs_best": 0.0,
+        "best_aven_label": "ad k=1",
+        "note": "F6：只比花火/椒丘或佩拉/黄泉循环与黄泉开大。砂金差异 = 纸面最大值 vs 实战生存，不计入社区轴是否『附近』的循环判定。"
+      }
+    },
+    "pela_zone_off": {
+      "n_total": 109,
+      "n_feasible": 109,
+      "n_infeasible": 0,
+      "best": {
+        "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+        "l2_dpr": 682754.2101820027,
+        "labels": {
+          "sparkle": "ad k=1",
+          "pela": "ad k=1",
+          "acheron": "ad k=1",
+          "aventurine": "ad k=1",
+          "acheron_ult": "immediate_when_full",
+          "priority": [
+            "sparkle",
+            "acheron",
+            "pela",
+            "aventurine"
+          ]
+        },
+        "axis": {
+          "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+          "team_id": "acheron_old_pela_res",
+          "notes": "adaptive community",
+          "sources": [],
+          "members": {
+            "sparkle": {
+              "actor_id": "sparkle",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": "acheron",
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "pela": {
+              "actor_id": "pela",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "acheron": {
+              "actor_id": "acheron",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            },
+            "aventurine": {
+              "actor_id": "aventurine",
+              "normal_cycle": [
+                "skill"
+              ],
+              "ult": "immediate_when_full",
+              "default_target": null,
+              "mode": "adaptive",
+              "sp_min": 1,
+              "skill_share": 1.0
+            }
+          },
+          "sp_priority": [
+            "sparkle",
+            "acheron",
+            "pela",
+            "aventurine"
+          ]
+        },
+        "family": "adaptive"
+      },
+      "top10": [
+        {
+          "rank": 1,
+          "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "axis_id": "pela|ad|su1|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 3,
+          "axis_id": "pela|ad|su1|ac1|av2|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 4,
+          "axis_id": "pela|ad|su1|ac1|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 5,
+          "axis_id": "pela|ad|su1|ac2|av1|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 6,
+          "axis_id": "pela|ad|su1|ac2|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 7,
+          "axis_id": "pela|ad|su1|ac2|av2|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 8,
+          "axis_id": "pela|ad|su1|ac2|av2|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=1",
+            "acheron": "ad k=2",
+            "aventurine": "ad k=2",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 9,
+          "axis_id": "pela|ad|su2|ac1|av1|community|immediate_when_full",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "immediate_when_full",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        },
+        {
+          "rank": 10,
+          "axis_id": "pela|ad|su2|ac1|av1|community|wait_sparkle_skill_buff",
+          "l2_dpr": 682754.2101820027,
+          "gap_vs_best": 0.0,
+          "labels": {
+            "sparkle": "ad k=1",
+            "pela": "ad k=2",
+            "acheron": "ad k=1",
+            "aventurine": "ad k=1",
+            "acheron_ult": "wait_sparkle_skill_buff",
+            "priority": [
+              "sparkle",
+              "acheron",
+              "pela",
+              "aventurine"
+            ]
+          }
+        }
+      ],
+      "community_exact": {
+        "axis_id": "community_pela_adaptive",
+        "rank": 3,
+        "l2_dpr": 682754.2101820027,
+        "gap_vs_best": 0.0,
+        "note": "精确社区编码（含砂金循环）"
+      },
+      "community_f6": {
+        "rank_of_best_matching_f6": 1,
+        "n_matching": 7,
+        "best_l2_dpr": 682754.2101820027,
+        "gap_vs_best": 0.0,
+        "best_aven_label": "ad k=1",
+        "note": "F6：只比花火/椒丘或佩拉/黄泉循环与黄泉开大。砂金差异 = 纸面最大值 vs 实战生存，不计入社区轴是否『附近』的循环判定。"
+      }
+    }
+  },
+  "coverage": {
+    "jq": {
+      "best_as_played": {
+        "feasible": true,
+        "ult_sparkle_skill": 1.0,
+        "n_ult": 1196.0,
+        "axis_id": "jq|ad|su1|ac1|av1|community|immediate_when_full",
+        "ult_policy": "immediate_when_full",
+        "verdict": "速度档位消除开大时机问题"
+      },
+      "immediate_when_full": {
+        "feasible": true,
+        "ult_sparkle_skill": 1.0,
+        "n_ult": 1196.0,
+        "axis_id": "community_jq_adaptive|immediate_when_full",
+        "ult_policy": "immediate_when_full",
+        "verdict": "速度档位消除开大时机问题"
+      },
+      "wait_sparkle_skill_buff": {
+        "feasible": true,
+        "ult_sparkle_skill": 1.0,
+        "n_ult": 1196.0,
+        "axis_id": "community_jq_adaptive|wait_sparkle_skill_buff",
+        "ult_policy": "wait_sparkle_skill_buff",
+        "verdict": "速度档位消除开大时机问题"
+      }
+    },
+    "pela": {
+      "best_as_played": {
+        "feasible": true,
+        "ult_sparkle_skill": 1.0,
+        "n_ult": 1066.0,
+        "axis_id": "pela|ad|su1|ac1|av1|community|immediate_when_full",
+        "ult_policy": "immediate_when_full",
+        "verdict": "速度档位消除开大时机问题"
+      },
+      "immediate_when_full": {
+        "feasible": true,
+        "ult_sparkle_skill": 1.0,
+        "n_ult": 1066.0,
+        "axis_id": "community_pela_adaptive|immediate_when_full",
+        "ult_policy": "immediate_when_full",
+        "verdict": "速度档位消除开大时机问题"
+      },
+      "wait_sparkle_skill_buff": {
+        "feasible": true,
+        "ult_sparkle_skill": 1.0,
+        "n_ult": 1066.0,
+        "axis_id": "community_pela_adaptive|wait_sparkle_skill_buff",
+        "ult_policy": "wait_sparkle_skill_buff",
+        "verdict": "速度档位消除开大时机问题"
+      }
+    }
+  },
+  "e15_enum_best": {
+    "enum_jq_vs_pela_on": 0.05529097809171134,
+    "enum_jq_vs_pela_off": -0.005342681724630126,
+    "jq_on": 720504.3582591995,
+    "jq_off": 679106.4717408491,
+    "pela_on": 682754.2101820027,
+    "pela_off": 682754.2101820027
+  }
+}

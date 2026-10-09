@@ -1,0 +1,611 @@
+{
+  "id": "danheng_il",
+  "name": "丹恒•饮月",
+  "level": 80,
+  "path": "destruction",
+  "elements": [],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "build": {
+    "stats": {
+      "hp_max": 1200.0,
+      "atk": 600.0,
+      "defense": 300.0,
+      "speed": 102.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "dmg_boost": {},
+      "res_pen": {},
+      "energy_max": 100.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "danheng_il_basic_atk_0",
+        "name": "泽芝",
+        "type": "basic_attack",
+        "description": "对敌方单体造成少量虚数属性伤害。施放2段攻击对指定敌方单体造成等同于丹恒•饮月#1[i]%攻击力的虚数属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 15.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [
+          "danheng_il_kangxin",
+          "danheng_il_kangxin"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": [
+          "enhance_level>=0",
+          "enhance_level<=0"
+        ]
+      },
+      {
+        "id": "danheng_il_basic_atk_1",
+        "name": "瞬华",
+        "type": "basic_attack",
+        "description": "施放3段攻击对敌方单体造成虚数属性伤害。施放3段攻击对指定敌方单体造成等同于丹恒•饮月#1[i]%攻击力的虚数属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.6,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 10.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.6,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 10.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.6,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 10.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [
+          "danheng_il_kangxin",
+          "danheng_il_kangxin",
+          "danheng_il_kangxin"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": [
+          "enhance_level>=1",
+          "enhance_level<=1"
+        ]
+      },
+      {
+        "id": "danheng_il_basic_atk_2",
+        "name": "天矢阴",
+        "type": "basic_attack",
+        "description": "施放5段攻击对敌方单体造成大量虚数属性伤害，对相邻目标造成少量虚数属性伤害。后2段每段攻击前获得1层【叱咤】：提高暴击伤害。施放5段攻击对指定敌方单体造成等同于丹恒•饮月#1[i]%攻击力的虚数属性伤害。从第4段攻击开始同时对其相邻目标造成等同于丹恒•饮月#2[i]%攻击力的虚数属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 6.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 6.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 6.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 6.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.3,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 3.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 6.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.3,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 3.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [
+          "danheng_il_kangxin",
+          "danheng_il_kangxin",
+          "danheng_il_kangxin",
+          "danheng_il_chizha",
+          "danheng_il_kangxin",
+          "danheng_il_chizha",
+          "danheng_il_kangxin"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": [
+          "enhance_level>=2",
+          "enhance_level<=2"
+        ]
+      },
+      {
+        "id": "danheng_il_basic_atk_3",
+        "name": "盘拏耀跃",
+        "type": "basic_attack",
+        "description": "施放7段攻击对敌方单体造成大量虚数属性伤害，对相邻目标造成虚数属性伤害。后4段每段攻击前获得1层【叱咤】：提高暴击伤害。施放7段攻击对指定敌方单体造成等同于丹恒•饮月#1[i]%攻击力的虚数属性伤害。从第4段攻击开始同时对其相邻目标造成等同于丹恒•饮月#2[i]%攻击力的虚数属性伤害。",
+        "damage_instances": [
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.3,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 2.142857,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.3,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 2.142857,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.3,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 2.142857,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 4.285714,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.3,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 2.142857,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": -1,
+        "applies_effects": [
+          "danheng_il_kangxin",
+          "danheng_il_kangxin",
+          "danheng_il_kangxin",
+          "danheng_il_chizha",
+          "danheng_il_kangxin",
+          "danheng_il_chizha",
+          "danheng_il_kangxin",
+          "danheng_il_chizha",
+          "danheng_il_kangxin",
+          "danheng_il_chizha",
+          "danheng_il_kangxin"
+        ],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": [
+          "enhance_level>=3",
+          "enhance_level<=3"
+        ]
+      },
+      {
+        "id": "danheng_il_ultimate",
+        "name": "苍龙傲睨，劫水濯世",
+        "type": "ultimate",
+        "description": "对敌方单体造成大量虚数属性伤害，对相邻目标造成虚数属性伤害。获得2个【逆鳞】：可抵扣丹恒•饮月的战技点消耗且视为消耗战技点。施放3段攻击对指定敌方单体造成等同于丹恒•饮月#1[i]%攻击力的虚数属性伤害，同时对其相邻目标造成等同于丹恒•饮月#2[i]%攻击力的虚数属性伤害。并使自身获得#3[i]个【逆鳞】。",
+        "damage_instances": [
+          {
+            "multiplier": 1.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 10.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 5.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 1.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 10.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 5.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 1.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 10.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          },
+          {
+            "multiplier": 0.5,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "blast",
+            "toughness_dmg": 5.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 100.0,
+        "sp_cost": 0,
+        "applies_effects": [
+          "danheng_il_kangxin",
+          "danheng_il_kangxin",
+          "danheng_il_kangxin"
+        ],
+        "effect_target": "self",
+        "variable_changes": {
+          "reverse_scale": 2.0
+        },
+        "heal_tally_add": null,
+        "requires": []
+      },
+      {
+        "id": "danheng_il_skill",
+        "name": "龙力自在",
+        "type": "skill",
+        "description": "使普攻【泽芝】分别强化为【瞬华】、【天矢阴】或【盘拏耀跃】。使普攻的效果得到强化，最多可连续强化3次，施放本技能不消耗战技点且不视为使用战技。强化1次，【泽芝】变为【瞬华】。强化2次，【泽芝】变为【天矢阴】。强化3次，【泽芝】变为【盘拏耀跃】。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {
+          "enhance_level": 1.0
+        },
+        "heal_tally_add": null,
+        "requires": [
+          "enhance_level<3"
+        ]
+      },
+      {
+        "id": "danheng_il_skill_cancel",
+        "name": "取消",
+        "type": "skill",
+        "description": "取消强化。",
+        "damage_instances": [],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {
+          "enhance_level": -3.0
+        },
+        "heal_tally_add": null,
+        "requires": [
+          "enhance_level>0"
+        ]
+      },
+      {
+        "id": "danheng_il_technique",
+        "name": "攻击",
+        "type": "technique",
+        "description": "攻击敌人，进入战斗后削弱敌方目标对应属性韧性。",
+        "damage_instances": [
+          {
+            "multiplier": 0.0,
+            "element": "imaginary",
+            "damage_type": "direct",
+            "target": "single",
+            "toughness_dmg": 60.0,
+            "scaling_stat": "atk",
+            "memoria_base": null,
+            "memoria_per_four": null,
+            "memoria_enhanced_threshold": 16,
+            "memoria_enhanced_per_stack": null
+          }
+        ],
+        "energy_cost": 0.0,
+        "sp_cost": 0,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "heal_tally_add": null,
+        "requires": []
+      }
+    ],
+    "effects": [
+      {
+        "id": "danheng_il_kangxin",
+        "name": "亢心",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": 1,
+        "max_stacks": 10,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "dmg_boost",
+            "operation": "add",
+            "value": 0.05
+          }
+        ],
+        "conditions": []
+      },
+      {
+        "id": "danheng_il_chizha",
+        "name": "叱咤",
+        "is_buff": true,
+        "target": "self",
+        "duration_turns": 1,
+        "max_stacks": 4,
+        "current_stacks": 1,
+        "modifiers": [
+          {
+            "target_stat": "crit_dmg",
+            "operation": "add",
+            "value": 0.1
+          }
+        ],
+        "conditions": []
+      }
+    ],
+    "variables": [
+      {
+        "id": "reverse_scale",
+        "name": "逆鳞",
+        "value": 0.0,
+        "min_value": 0.0,
+        "max_value": 3.0
+      },
+      {
+        "id": "enhance_level",
+        "name": "强化等级",
+        "value": 0.0,
+        "min_value": 0.0,
+        "max_value": 3.0
+      }
+    ]
+  }
+}

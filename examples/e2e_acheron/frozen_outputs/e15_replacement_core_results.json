@@ -1,0 +1,531 @@
+{
+  "cycles": 40,
+  "seed": 42,
+  "oracle_depth": 4,
+  "oracle_beam": 3,
+  "time_budget_s": 45.0,
+  "min_shield_coverage": 0.5,
+  "paper": {
+    "old_res__zone_on": {
+      "team_id": "acheron_old_pela_res",
+      "zone": true,
+      "best_ult": "immediate_when_full",
+      "ult_scores": {
+        "immediate_when_full": 408315.2150250346,
+        "wait_sparkle_skill_buff": 388115.70621488726
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 425546.3336251484,
+        "elapsed_s": 0.12143430020660162,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..11 长度=138.76 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 138.76 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    220.2  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    277.5  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    333.3  aventurine    aventurine_fua         → lv95_dummy    (inserted) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=1.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 345 步，已截断"
+      },
+      "oracle": {
+        "policy": "search_fallback_greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 425546.3336251484,
+        "elapsed_s": 0.12143430020660162,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..11 长度=138.76 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 138.76 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    220.2  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    277.5  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    333.3  aventurine    aventurine_fua         → lv95_dummy    (inserted) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=1.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 345 步，已截断",
+        "oracle_raw_dpr": 403503.0353656596,
+        "exact_cycle": true,
+        "cycle_av": 138.76169067243916,
+        "fallback_reason": "oracle_dpr_below_greedy"
+      },
+      "oracle_raw": {
+        "policy": "oracle_search",
+        "ult_timing": "immediate_when_full",
+        "dpr": 403503.0353656596,
+        "elapsed_s": 0.49572989996522665,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..13 长度=138.76 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 138.76 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n     73.4  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    138.8  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    146.8  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=3\n    146.8  aventurine    aventurine_fua         → lv95_dummy    (inserted) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    277.5  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n    367.0  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    416.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 342 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 138.76169067243916
+      },
+      "search_vs_greedy_rel": 0.0,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    },
+    "old_res__zone_off": {
+      "team_id": "acheron_old_pela_res",
+      "zone": false,
+      "best_ult": "immediate_when_full",
+      "ult_scores": {
+        "immediate_when_full": 408315.2150250346,
+        "wait_sparkle_skill_buff": 388115.70621488726
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 425546.3336251484,
+        "elapsed_s": 0.11136159999296069,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..11 长度=138.76 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 138.76 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    220.2  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    277.5  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    333.3  aventurine    aventurine_fua         → lv95_dummy    (inserted) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=1.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 345 步，已截断"
+      },
+      "oracle": {
+        "policy": "search_fallback_greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 425546.3336251484,
+        "elapsed_s": 0.11136159999296069,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..11 长度=138.76 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 138.76 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    220.2  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    277.5  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    333.3  aventurine    aventurine_fua         → lv95_dummy    (inserted) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=1.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 345 步，已截断",
+        "oracle_raw_dpr": 414471.0172638146,
+        "exact_cycle": true,
+        "cycle_av": 138.76169067243916,
+        "fallback_reason": "oracle_dpr_below_greedy"
+      },
+      "oracle_raw": {
+        "policy": "oracle_search",
+        "ult_timing": "immediate_when_full",
+        "dpr": 414471.0172638146,
+        "elapsed_s": 0.49579659989103675,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..13 长度=138.76 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 138.76 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n     73.4  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    138.8  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    146.8  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=3\n    146.8  aventurine    aventurine_fua         → lv95_dummy    (inserted) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    277.5  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n    367.0  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    416.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 343 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 138.76169067243916
+      },
+      "search_vs_greedy_rel": 0.0,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    },
+    "new_b__zone_on": {
+      "team_id": "acheron_direct",
+      "zone": true,
+      "best_ult": "immediate_when_full",
+      "ult_scores": {
+        "immediate_when_full": 472999.52237018594,
+        "wait_sparkle_skill_buff": 470688.119173207
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 525283.9349284292,
+        "elapsed_s": 0.12025739997625351,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..12 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n  …共 354 步，已截断"
+      },
+      "oracle": {
+        "policy": "search_fallback_greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 525283.9349284292,
+        "elapsed_s": 0.12025739997625351,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..12 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n  …共 354 步，已截断",
+        "oracle_raw_dpr": 525082.885368435,
+        "exact_cycle": true,
+        "cycle_av": 139.24473654895849,
+        "fallback_reason": "oracle_dpr_below_greedy"
+      },
+      "oracle_raw": {
+        "policy": "oracle_search",
+        "ult_timing": "immediate_when_full",
+        "dpr": 525082.885368435,
+        "elapsed_s": 0.621375699993223,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..13 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n     73.4  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    146.8  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=0.0\n    367.0  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 355 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 139.24473654895849
+      },
+      "search_vs_greedy_rel": 0.0,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    },
+    "new_b__zone_off": {
+      "team_id": "acheron_direct",
+      "zone": false,
+      "best_ult": "wait_sparkle_skill_buff",
+      "ult_scores": {
+        "immediate_when_full": 465217.3860537927,
+        "wait_sparkle_skill_buff": 486484.80146219104
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 490351.2789443816,
+        "elapsed_s": 0.11535159987397492,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..12 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 351 步，已截断"
+      },
+      "oracle": {
+        "policy": "search_fallback_greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 490351.2789443816,
+        "elapsed_s": 0.11535159987397492,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..12 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 351 步，已截断",
+        "oracle_raw_dpr": 484352.1475832269,
+        "exact_cycle": true,
+        "cycle_av": 139.24473654895849,
+        "fallback_reason": "oracle_dpr_below_greedy"
+      },
+      "oracle_raw": {
+        "policy": "oracle_search",
+        "ult_timing": "wait_sparkle_skill_buff",
+        "dpr": 484352.1475832269,
+        "elapsed_s": 0.510420500067994,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..13 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n     73.4  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    146.8  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_basic          → lv95_dummy    (normal) SP=2\n    367.0  aventurine    aventurine_skill       → aventurine    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    417.7  acheron       acheron_ult            → lv95_dummy    (inserted) SP=5 ← 残梦=0.0\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    513.1  acheron       acheron_basic          → lv95_dummy    (normal) SP=1\n  …共 349 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 139.24473654895849
+      },
+      "search_vs_greedy_rel": 0.0,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    }
+  },
+  "fx": {
+    "old_fx__zone_on": {
+      "team_id": "acheron_old_pela_fx_res",
+      "zone": true,
+      "best_ult": "wait_sparkle_skill_buff",
+      "ult_scores": {
+        "immediate_when_full": 445277.2364121373,
+        "wait_sparkle_skill_buff": 452462.224242368
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 440878.62204264186,
+        "elapsed_s": 0.09758810000494123,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..17 长度=208.14 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.14 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=0.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    277.5  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n    513.1  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=2.0\n    516.9  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=2\n  …共 320 步，已截断"
+      },
+      "oracle": {
+        "policy": "oracle_search",
+        "ult_timing": "wait_sparkle_skill_buff",
+        "dpr": 445167.18349829555,
+        "elapsed_s": 0.4331381998490542,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..17 长度=208.14 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.14 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=0.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    277.5  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n    513.1  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=2.0\n    516.9  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=2\n  …共 320 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 208.14253600865874
+      },
+      "oracle_raw": null,
+      "search_vs_greedy_rel": 0.009727306431380787,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    },
+    "old_fx__zone_off": {
+      "team_id": "acheron_old_pela_fx_res",
+      "zone": false,
+      "best_ult": "wait_sparkle_skill_buff",
+      "ult_scores": {
+        "immediate_when_full": 445277.2364121373,
+        "wait_sparkle_skill_buff": 452462.224242368
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 440878.62204264186,
+        "elapsed_s": 0.10829739994369447,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..17 长度=208.14 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.14 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=0.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    277.5  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n    513.1  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=2.0\n    516.9  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=2\n  …共 320 步，已截断"
+      },
+      "oracle": {
+        "policy": "oracle_search",
+        "ult_timing": "wait_sparkle_skill_buff",
+        "dpr": 445167.18349829555,
+        "elapsed_s": 0.5073508999776095,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..17 长度=208.14 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.14 AV]\n     69.4  pela          pela_skill             → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    138.8  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.1  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=0.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    277.5  pela          pela_skill             → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    346.9  pela          pela_basic             → lv95_dummy    (normal) SP=1\n    346.9  pela          pela_ult               → lv95_dummy    (inserted) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    416.3  pela          pela_skill             → lv95_dummy    (normal) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    485.7  pela          pela_skill             → lv95_dummy    (normal) SP=3\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n    513.1  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=2.0\n    516.9  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=2\n  …共 320 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 208.14253600865874
+      },
+      "oracle_raw": null,
+      "search_vs_greedy_rel": 0.009727306431380787,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    },
+    "new_fx__zone_on": {
+      "team_id": "acheron_jq_fx",
+      "zone": true,
+      "best_ult": "wait_sparkle_skill_buff",
+      "ult_scores": {
+        "immediate_when_full": 488139.45241281285,
+        "wait_sparkle_skill_buff": 497067.2249154908
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 516237.87808324123,
+        "elapsed_s": 0.1213536998257041,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..18 长度=208.87 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.87 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=1.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    278.5  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=3 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n  …共 330 步，已截断"
+      },
+      "oracle": {
+        "policy": "oracle_search",
+        "ult_timing": "wait_sparkle_skill_buff",
+        "dpr": 522178.4474165791,
+        "elapsed_s": 0.5355301999952644,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..18 长度=208.87 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.87 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=1.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    278.5  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=3 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n  …共 330 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 208.86710482343767
+      },
+      "oracle_raw": null,
+      "search_vs_greedy_rel": 0.011507426296177351,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    },
+    "new_fx__zone_off": {
+      "team_id": "acheron_jq_fx",
+      "zone": false,
+      "best_ult": "wait_sparkle_skill_buff",
+      "ult_scores": {
+        "immediate_when_full": 488139.45241281285,
+        "wait_sparkle_skill_buff": 497067.2249154908
+      },
+      "greedy_immediate": {
+        "policy": "greedy",
+        "ult_timing": "immediate_when_full",
+        "dpr": 520266.85497254983,
+        "elapsed_s": 0.11358430003747344,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..18 长度=208.87 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.87 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=1.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    278.5  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=3 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n  …共 330 步，已截断"
+      },
+      "oracle": {
+        "policy": "oracle_search",
+        "ult_timing": "wait_sparkle_skill_buff",
+        "dpr": 523061.6353277324,
+        "elapsed_s": 0.48289650003425777,
+        "cycles": 40,
+        "depth": 4,
+        "beam": 3,
+        "time_budget_s": 45.0,
+        "chip_coverage": 0.0,
+        "sparkle_cov": {
+          "basic": 0.0,
+          "skill": 0.0,
+          "ult": 0.0
+        },
+        "axis_text": "[循环检测] 精确循环 idx=1..18 长度=208.87 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 208.87 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.8  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    147.7  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=5\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=2\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=2 ← 残梦=1.0\n    221.5  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=3\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=3\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    278.5  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    295.4  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    369.2  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    443.0  fu_xuan       fu_xuan_basic          → acheron       (normal) SP=4\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=4\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=3\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=3 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n    513.1  acheron       acheron_skill          → lv95_dummy    (normal) SP=1\n  …共 330 步，已截断",
+        "exact_cycle": true,
+        "cycle_av": 208.86710482343767
+      },
+      "oracle_raw": null,
+      "search_vs_greedy_rel": 0.005371820880901687,
+      "f5_search_coverage": {
+        "basic": 0.0,
+        "skill": 0.0,
+        "ult": 0.0
+      }
+    }
+  },
+  "f6_community": [
+    {
+      "platform": "17173",
+      "title": "做个好梦dr｜黄泉配队与提升估算（2+1 佩拉→椒丘约 +16%）",
+      "author": "做个好梦dr",
+      "date": "2024-08-14",
+      "url": "https://news.17173.com/z/xqtd/",
+      "nature": "社区理论估算/配队文；非逐帧轴录像",
+      "axis_claim": "黄泉/椒丘/花火/生存；结界叠烬可叠残梦"
+    },
+    {
+      "platform": "米游社",
+      "title": "【V2.4攻略】角色攻略 椒丘｜机制/养成/就业解析",
+      "author": "米游社攻略作者（帖文）",
+      "date": "2024-08（V2.4）",
+      "url": "https://www.miyoushe.com/sr/article/56831356",
+      "nature": "社区机制解析；速度序与配队建议",
+      "axis_claim": "速度序：椒丘＞佩拉＞生存＞黄泉；花火拉条多动"
+    },
+    {
+      "platform": "米游社",
+      "title": "【V2.6攻略】黄泉砂金复刻｜配队建议",
+      "author": "米游社攻略作者（帖文）",
+      "date": "2024-11-13",
+      "url": "https://www.miyoushe.com/sr/article/59351764",
+      "nature": "社区抽卡/配队建议",
+      "axis_claim": "2魂黄泉+椒丘+花火/同谐+砂金/符玄"
+    }
+  ],
+  "uplift": {
+    "paper_zone_on": {
+      "oracle_rel": 0.23437542148145213,
+      "greedy_rel": 0.23437542148145213,
+      "oracle_new": 525283.9349284292,
+      "oracle_old": 425546.3336251484,
+      "zone_value_oracle": 0.07124006295904836,
+      "zone_value_greedy": 0.07124006295904836
+    },
+    "paper_zone_off": {
+      "oracle_rel": 0.15228646142283062,
+      "greedy_rel": 0.15228646142283062,
+      "oracle_new": 490351.2789443816,
+      "oracle_old": 425546.3336251484,
+      "zone_value_oracle": null,
+      "zone_value_greedy": null
+    },
+    "fx_zone_on": {
+      "oracle_rel": 0.17299402735192504,
+      "greedy_rel": 0.1709297123354523,
+      "oracle_new": 522178.4474165791,
+      "oracle_old": 445167.18349829555,
+      "zone_value_oracle": -0.0016884968261912962,
+      "zone_value_greedy": -0.007744058363128237
+    },
+    "fx_zone_off": {
+      "oracle_rel": 0.1749779739317535,
+      "greedy_rel": 0.18006822957777602,
+      "oracle_new": 523061.6353277324,
+      "oracle_old": 445167.18349829555,
+      "zone_value_oracle": null,
+      "zone_value_greedy": null
+    }
+  },
+  "f6_compare": {
+    "model_axis_sample": "[循环检测] 精确循环 idx=1..12 长度=139.24 AV\n     62.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环开始，长度 139.24 AV]\n     69.6  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n     73.3  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n     73.3  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n     73.4  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    111.1  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    124.5  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    124.5  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    139.2  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    139.2  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    146.6  acheron       acheron_skill          → lv95_dummy    (normal) SP=4\n    146.8  aventurine    aventurine_skill       → aventurine    (normal) SP=3\n    186.7  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=2\n[循环结束]\n    208.9  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    219.9  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    219.9  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=0.0\n    220.2  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    220.2  aventurine    aventurine_ult         → lv95_dummy    (inserted) SP=1\n    222.2  lv95_dummy    dummy_pass             → acheron       (normal) SP=1\n    248.9  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    278.5  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    293.2  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    293.6  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    311.2  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    333.3  lv95_dummy    dummy_pass             → acheron       (normal) SP=0\n    348.1  jiaoqiu       jiaoqiu_basic          → lv95_dummy    (normal) SP=1\n    366.5  acheron       acheron_skill          → lv95_dummy    (normal) SP=0\n    366.5  acheron       acheron_ult            → lv95_dummy    (inserted) SP=0 ← 残梦=2.0\n    367.0  aventurine    aventurine_basic       → lv95_dummy    (normal) SP=1\n    373.4  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n    373.4  sparkle       sparkle_ult            → lv95_dummy    (inserted) SP=6\n    417.7  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=5\n    417.7  jiaoqiu       jiaoqiu_ult            → lv95_dummy    (inserted) SP=5\n    435.6  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=4\n    439.8  acheron       acheron_skill          → lv95_dummy    (normal) SP=3\n    440.4  aventurine    aventurine_skill       → aventurine    (normal) SP=2\n    444.4  lv95_dummy    dummy_pass             → acheron       (normal) SP=2\n    487.4  jiaoqiu       jiaoqiu_skill          → lv95_dummy    (normal) SP=1\n    487.4  acheron       acheron_ult            → lv95_dummy    (inserted) SP=1 ← 残梦=0.0\n    497.8  sparkle       sparkle_skill          → lv95_dummy    (normal) SP=0\n  …共 354 步，已截断",
+    "alignment_notes": [
+      "搜索轴保留花火战技→黄泉行动窗（拉条/增益）与残梦满插入终结技，与社区「花火拉条 + 黄泉终结技输出」一致。",
+      "开大时机搜索保证不劣于 immediate_when_full；若 wait_sparkle 更优则选用。",
+      "社区来源多为配队/速度序/理论提升，非逐帧标准轴；对照性质为方向一致，非逐招复现。"
+    ]
+  }
+}

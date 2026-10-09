@@ -1,0 +1,210 @@
+{
+ "principle": "终结技组件为 L1/L2 共有缺口，不改变二者差距；不得把剩余残差交给 （与 −38% 同一错误）。",
+  "control_a": {
+    "seed": 42,
+    "av_clock": 10056.374420106877,
+    "l1_team": 143010.1104956638,
+    "l2_team": 178518.63880939776,
+    "residual": -0.19890655984468936,
+    "l1_acheron_ult_rate": 0.34667695499954587,
+    "l2_acheron_ult_rate": 0.6463562043795621,
+    "sp_other": 2.98318248175093,
+    "skill_shares_pinned": {
+      "sparkle": 0.6273291925465838,
+      "jiaoqiu": 0.7152777777777778,
+      "acheron": 0.7445255474452555,
+      "aventurine": 0.6788321167883212
+    }
+  },
+  "sources": {
+    "acheron_ult": {
+      "l1_rate_per_100_av": 0.34667695499954587,
+      "l1_n_segments": 4,
+      "l1_mean_damage_per_exec": 93291.54174419648,
+      "l1_contrib_per_100_av": 32342.02761909106,
+      "l2_rate_per_100_av": 0.6463562043795621,
+      "l2_n_executions": 65,
+      "l2_mean_damage_per_exec": 91256.60825917381,
+      "l2_contrib_per_100_av": 58984.27493895218,
+      "gap_l1_minus_l2": -26642.24731986112,
+      "gap_share_of_team_gap": 0.7503055909404291
+    },
+    "acheron_skill": {
+      "l1_rate_per_100_av": 1.015771094890511,
+      "l1_n_segments": 1,
+      "l1_mean_damage_per_exec": 68168.71108705712,
+      "l1_contrib_per_100_av": 69243.80629817492,
+      "l2_rate_per_100_av": 1.0142820437956204,
+      "l2_n_executions": 102,
+      "l2_mean_damage_per_exec": 64000.931948865684,
+      "l2_contrib_per_100_av": 64914.996061919905,
+      "gap_l1_minus_l2": 4328.81023625502,
+      "gap_share_of_team_gap": -0.1219090297972368
+    },
+    "acheron_basic": {
+      "l1_rate_per_100_av": 0.3485489051094891,
+      "l1_n_segments": 1,
+      "l1_mean_damage_per_exec": 42605.44442941069,
+      "l1_contrib_per_100_av": 14850.081007574277,
+      "l2_rate_per_100_av": 0.34803795620437955,
+      "l2_n_executions": 35,
+      "l2_mean_damage_per_exec": 38754.59230994167,
+      "l2_contrib_per_100_av": 13488.069101086063,
+      "gap_l1_minus_l2": 1362.0119064882147,
+      "gap_share_of_team_gap": -0.03835731783796336
+    },
+    "jiaoqiu_dot": {
+      "l1_rate_per_100_av": 0.0,
+      "l1_mean_damage_per_exec": 0.0,
+      "l1_contrib_per_100_av": 0.0,
+      "note": "L1 FlowCharacter/DoT 未建模 → 贡献 0",
+      "l2_rate_per_100_av": null,
+      "l2_n_ticks": 90,
+      "l2_mean_damage_per_tick": 11298.291222737062,
+      "l2_contrib_per_100_av": 10111.459334819881,
+      "gap_l1_minus_l2": -10111.459334819881,
+      "gap_share_of_team_gap": 0.2847614309858339
+    },
+    "other_members": {
+      "l1_contrib_per_100_av": 26574.195570823525,
+      "note": "team − acheron(ult+skill+basic) − jiaoqiu_dot",
+      "l2_rate_per_100_av": null,
+      "l2_contrib_per_100_av": 31019.83937261974,
+      "gap_l1_minus_l2": -4445.643801796214,
+      "gap_share_of_team_gap": 0.1251993257089377
+    }
+  },
+  "empirics": {
+    "mirage": {
+      "acheron_damage_hits": 397,
+      "hits_with_mirage_already_on_target": 306,
+      "empirical_coverage": 0.7707808564231738,
+      "l1_assumed_coverage": 1.0,
+      "measurement": "live hook on _resolve_damage (effect_applied not in eng.events)",
+      "note": "伤害先于泡影施加；跨行动残留使实测覆盖约 77%，非 0 也非 1。L1 假设≈1 高估泡影乘区。"
+    },
+    "mask": {
+      "acheron_acts": 202,
+      "acts_with_mask": 196,
+      "empirical_coverage": 0.9702970297029703,
+      "l1_solved_coverage": 1.0,
+      "measurement": "live hook on _execute_action",
+      "l1_assumed": "ActionBuff source=basic duration=8 → 覆盖封顶 1",
+      "note": "实测约 97%；basic×8 人为抬升。SP 流量推导见 mask_sp_flow_estimate（约 0.44，偏低因 pin 下花火 u=0）。"
+    },
+    "overflow": {
+      "l2_hard_waste_events": 0,
+      "l2_ults": 65,
+      "l2_emp_excess_per_ult": 0.0,
+      "l2_avg_dream_gain_delta_per_ult_window": 9.107692307692307,
+      "l1_formula": "excess_D17 − 0.5×overflow_buffer(3) = excess_D17 − 1.5",
+      "l1_half_buffer_coeff_source": "NONE — 注释写 unit-packet mean，无推导",
+      "quad_gain_events": 47,
+      "dream_overflow_wasted": 0,
+      "dream_knot_capped_events": 0,
+      "red_ghost_dream_grants": 5,
+      "acheron_skill_turns": 102,
+      "overflow_per_skill_turn": 0.0,
+      "capped_per_skill_turn": 0.0,
+ "note_pre_g2_waste": " 前满层整包取消≈9% 战技回合（dream≠3）；g-2 后满层仍挂集真赤，硬浪费仅四相已满时溢出。"
+    }
+  },
+  "replace_tests": {
+    "baseline_l1": 143010.11049566377,
+    "l2_team": 178518.63880939776,
+    "baseline_residual": -0.19890655984468952,
+    "mirage_emp_coverage": {
+      "emp_coverage": 0.0,
+      "l1_team": 123233.18761077832,
+      "delta_vs_baseline": -19776.922884885455,
+      "residual_vs_l2": -0.3096900781192213
+    },
+    "mask_emp_coverage": {
+      "emp_coverage_heuristic": 0.0,
+      "l1_coverages_before": {
+        "lc_mask__acheron": 1.0,
+        "lc_mask__jiaoqiu": 1.0,
+        "lc_mask__aventurine": 1.0
+      },
+      "l1_team": 134961.94576241515,
+      "delta_vs_baseline": -8048.164733248617,
+      "residual_vs_l2": -0.24398960992239904,
+      "note": "启发式；正式应以 SP 流量推彩焰"
+    },
+    "overflow_coeff": {
+      "d17_unit_packet_excess": 0.5,
+      "l1_after_half_buffer": 0.0,
+      "l2_emp_excess_per_ult": 0.0,
+      "verdict": "0.5×buffer 无来源；本对照 L2 硬浪费≈0，L1 把 excess 压到 0 方向正确但系数未推导。应以 L2 实测浪费/回流校准，而非固定 0.5。"
+    },
+    "dot_gap": {
+      "l2_jiaoqiu_dot": 10111.459334819881,
+      "l1_dot": 0.0,
+      "note": "L1 无 DoT → 队伤系统性偏低至少约 L2 DoT 贡献"
+    },
+    "pin_l2_acheron_ult_rate": {
+      "l1_ult_rate": 0.34667695499954587,
+      "l2_ult_rate": 0.6463562043795621,
+      "l1_team_with_l2_ult_rate": 170967.64969906906,
+      "delta_vs_baseline": 27957.539203405293,
+      "residual_vs_l2": -0.04229804327821923,
+      "note": "隔离「L1 终结技速率偏低」vs「次均伤害」"
+    }
+  },
+  "mask_sp_flow_estimate": {
+    "sparkle_nb": 0.5988521739130436,
+    "sparkle_u": 0.0,
+    "sparkle_sp_ult_row": 6.0,
+    "blaze_points_per_100_av": 0.5988521739130436,
+    "mask_refresh_per_100_av": 0.1497130434782609,
+    "acheron_normal_turns": 1.3643200000000002,
+    "implied_mask_coverage": 0.4389382065153655,
+    "l1_solved_mask_coverages": {
+      "lc_mask__acheron": 1.0,
+      "lc_mask__jiaoqiu": 1.0,
+      "lc_mask__aventurine": 1.0
+    },
+    "note": "L1 现用 basic×8 人为抬覆盖；应由战技点恢复流量 /4 × 持续4 / 消费时钟 推导。"
+  },
+  "quadrivalent_status_text": {
+    "source": "StarRailRes cn/en character_skills.json skill_id=130807（技法内嵌状态说明）",
+    "cn": "【四相断我】：施放终结技后黄泉获得#2[i]点【残梦】，并为敌方随机单体附上#2[i]层【集真赤】。",
+    "en": "Quadrivalent Ascendance: After using the Ultimate, Acheron gains #2[i] point(s) of Slashed Dream and inflicts #2[i] stack(s) of Crimson Knot on a single random enemy.",
+    "param_list_technique": [
+      2.0,
+      1.0
+    ],
+    "stacking_note": "赤鬼使四相最多 3 层；终结技后按层数回流等量残梦与集真赤（层数 N → N×#2，#2=1）。",
+    "red_oni_still": "战斗开始时…当【残梦】达到上限时，每溢出1点【残梦】获得1层【四相断我】，使【四相断我】最多可以叠加至#2[i]层。"
+  },
+  "replace_tests_live": {
+    "mirage_emp_0_771": {
+      "l1_team": 138476.86,
+      "residual_vs_l2": -0.2243,
+      "delta_vs_baseline": -4533.25
+    },
+    "mask_emp_0_970": {
+      "l1_team": 142771.06,
+      "residual_vs_l2": -0.2002,
+      "delta_vs_baseline": -239.05
+    },
+    "both_emp": {
+      "l1_team": 138244.68,
+      "residual_vs_l2": -0.2256
+    },
+    "pin_l2_ult_rate_only": {
+      "l1_team": 170967.65,
+      "residual_vs_l2": -0.0423
+    },
+    "pin_ult_plus_both_emp": {
+      "l1_team": 164583.8,
+      "residual_vs_l2": -0.0781
+    },
+    "baseline_plus_l2_dot_accounting": {
+      "residual_vs_l2": -0.1423
+    },
+    "pin_ult_both_emp_plus_dot": {
+      "residual_vs_l2": -0.0214
+    }
+  }
+}

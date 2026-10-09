@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_old_pela_tut",
+  "name": "黄泉老队（佩拉+新手）",
+  "description": "E1.5：黄泉 E2 + 佩拉 E6 + 花火 + 砂金；佩拉光锥 22000 新手 S5（通用佩拉首选，≥2 来源；与决心分歧故双跑）",
+  "main_dps": "acheron",
+  "members": ["acheron", "pela", "sparkle", "aventurine"],
+  "eidolons": {
+    "acheron": 2,
+    "pela": 6,
+    "sparkle": 0,
+    "aventurine": 0
+  },
+  "max_rounds": 20
+}
