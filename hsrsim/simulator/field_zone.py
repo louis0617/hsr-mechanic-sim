@@ -29,6 +29,8 @@ class FieldZone:
     ult_vuln: float = 0.0
     # enemy_id → round_number of last successful proc (per-enemy-per-round).
     per_enemy_proc_round: dict[str, int] = field(default_factory=dict)
+    # Action-order countdown: expire when av_clock >= this (SPD 70 → 10000/70 AV).
+    expire_at_av: float | None = None
 
     def is_active(self) -> bool:
         return self.remaining_turns > 0

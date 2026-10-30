@@ -1,10 +1,10 @@
-"""Shared-gap (S-class) traces present in both L1 and L2 when enabled.
+"""Shared-gap (S-class) traces: both sides missing; toggled for Phase-2 parity.
 
-S1 = Jiaoqiu skill-tree 1218102 Hearth Kindle (EHR → ATK%)
-S2 = Sparkle skill-tree 11306102 Artificial Flower (3 SP / turn → next Skill free)
+S1 = Jiaoqiu 1218102 Hearth Kindle (EHR → ATK%)
+S2 = Sparkle 11306102 Artificial Flower (3 SP / turn → next Skill free)
 
-Evidence: StarRailRes skill-tree text + AvatarSkillTreeConfig ParamList.
-Simulator self-measurements are not evidence for the formulas.
+Evidence: StarRailRes index_new cn/en character_skill_trees + AvatarSkillTreeConfig
+ParamList. Engine L2 measurements are not evidence.
 """
 from __future__ import annotations
 

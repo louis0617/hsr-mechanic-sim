@@ -1,0 +1,14 @@
+# 千冶·刃：战技 0 SP（自适应穷举中 mort 固定 sp_min=1）
+character_id: "1220"
+slug: mortenaxblade
+decision_dims:
+  - name: sp_min
+    values: [1]
+    default: 1
+  - name: ult_timing
+    values: [immediate_when_full]
+    default: immediate_when_full
+cycle_signature_fields:
+  - {kind: energy, on: self}
+  - {kind: skill_points, on: team}
+  - {kind: av_phase, on: self}

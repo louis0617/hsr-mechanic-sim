@@ -58,13 +58,13 @@
           "from_ranks": [],
           "param_list_level": 6
         },
- "description": "单体火伤；天赋：击中时基础概率施加 1 层【烬煨】（ Param 天赋#1）"
+        "description": "单体火伤；天赋：击中时基础概率施加 1 层【烬煨】（E1.0 Param 天赋#1）"
       },
       {
         "id": "jiaoqiu_skill",
         "name": "战技：摄邪",
         "type": "skill",
- "description": "主目标火伤×1.5；邻接×0.9 未分轨（KNOWN_GAP ）；天赋挂 1 层烬煨 + 战技额外主目标 1 层（applies_effects 双次 ashen_roast）",
+        "description": "主目标火伤×1.5；邻接×0.9 未分轨（KNOWN_GAP E1.1）；天赋挂 1 层烬煨 + 战技额外主目标 1 层（applies_effects 双次 ashen_roast）",
         "damage_instances": [
           {
             "multiplier": 1.5,

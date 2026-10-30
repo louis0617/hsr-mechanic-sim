@@ -46,9 +46,20 @@ class CharacterState:
     # Back-reference for apply-time skip_next_end_tick (set by BattleState).
     battle: BattleState | None = field(default=None, repr=False, compare=False)
 
+    summoned: bool = True
+
     @property
     def is_alive(self) -> bool:
+        if self.char.is_memosprite and not self.summoned:
+            return False
         return self.hp_current > 0
+
+    @property
+    def on_action_bar(self) -> bool:
+        """Speed-0 units never occupy the AV bar; they act only via extra turns."""
+        if not self.is_alive:
+            return False
+        return float(self.char.build.stats.speed) > 0.0
 
     @property
     def toughness_broken(self) -> bool:
@@ -168,26 +179,34 @@ class CharacterState:
             return source_id == self.char.id
         return False
 
-    def tick_effects(self, timing: Literal["turn_start", "turn_end"]) -> None:
+    def tick_effects(self, timing: Literal["turn_start", "turn_end"]) -> list[str]:
         """Decrement effects whose ``tick_timing`` matches; remove expired.
 
         Speed changes from expiry rescale ``av_remaining`` via
-        ``apply_effect_mutation``.
+        ``apply_effect_mutation``. Returns expired effect ids (F-a).
         """
+        expired: list[str] = []
+
         def _mutate() -> None:
+            kept = []
             for e in self.active_effects:
                 if e.tick_timing != timing:
+                    kept.append(e)
                     continue
                 if timing == "turn_end" and e.skip_next_end_tick:
                     e.skip_next_end_tick = False
+                    kept.append(e)
                     continue
                 if e.duration_turns > 0:
                     e.duration_turns -= 1
-            self.active_effects = [
-                e for e in self.active_effects if e.duration_turns != 0
-            ]
+                if e.duration_turns == 0:
+                    expired.append(e.id)
+                else:
+                    kept.append(e)
+            self.active_effects = kept
 
         apply_effect_mutation(self, _mutate)
+        return expired
 
     def tick_durations(self) -> None:
         """Deprecated global tick. Prefer ``tick_effects`` on the holder's turn."""
@@ -216,6 +235,8 @@ class CharacterState:
             ],
             "variables": dict(self.variables),
             "immortal": bool(self.char.immortal),
+            "summoned": self.summoned,
+            "is_memosprite": bool(self.char.is_memosprite),
         }
 
 
@@ -238,35 +259,61 @@ class BattleState:
 
     current_turn: TurnContext | None = None
     skip_tick_condition: SkipTickCondition = "timing"
-    #mirrors Scenario.toughness_mode (engine copies on construct).
+    # D1.10: mirrors Scenario.toughness_mode (engine copies on construct).
     toughness_mode: ToughnessMode = "realistic"
     # E1.2: active battlefield zones (generic).
     active_zones: list = field(default_factory=list)
-    #sync trigger bus hook (event_name, payload).
+    # C3b: sync trigger bus hook (event_name, payload).
     event_emit: Callable[[str, dict[str, Any]], None] | None = field(
         default=None, repr=False, compare=False
     )
-    #settle turn_start DoTs (damage) before duration decrement.
+    # C8: settle turn_start DoTs (damage) before duration decrement.
     settle_turn_start_dots: Callable[[CharacterState], None] | None = field(
         default=None, repr=False, compare=False
     )
+    extra_turn_queue: list[str] = field(default_factory=list)
 
     @classmethod
     def from_characters(cls, allies: list[Character], enemies: list[Character]) -> "BattleState":
         """Initialize battle state from character definitions."""
         from hsrsim.rules.sp_caps import team_sp_max_from_allies
 
+        def flatten(chars: list[Character]) -> list[Character]:
+            out: list[Character] = []
+            for c in chars:
+                nested = list(c.summons)
+                out.append(c.model_copy(update={"summons": []}))
+                for s in nested:
+                    out.append(
+                        s.model_copy(
+                            update={
+                                "is_memosprite": True,
+                                "owner_id": s.owner_id or c.id,
+                                "summons": [],
+                            }
+                        )
+                    )
+            return out
+
+        allies = flatten(allies)
+        enemies = flatten(enemies)
+
         def init_char(char: Character) -> CharacterState:
+            summoned = (not char.is_memosprite) or bool(char.starts_summoned)
             cs = CharacterState(
                 char=char,
-                hp_current=char.build.stats.hp_max,
+                hp_current=char.build.stats.hp_max if summoned else 0.0,
                 energy_current=char.build.stats.energy_max * 0.5,  # start at 50% energy
                 sp_team_share=3,
                 toughness_current=char.toughness_max,
                 av_remaining=0.0,
                 variables={v.id: v.value for v in char.build.variables},
+                summoned=summoned,
             )
-            cs.av_remaining = av_for_turn(cs)
+            if cs.on_action_bar:
+                cs.av_remaining = av_for_turn(cs)
+            else:
+                cs.av_remaining = float("inf")
             return cs
         state = cls(
             allies=[init_char(c) for c in allies],
@@ -289,10 +336,10 @@ class BattleState:
 
     def peek_next_actor(self) -> CharacterState | None:
         """Who would act next, without advancing AV or opening a turn (C7)."""
-        all_alive = [c for c in self.allies + self.enemies if c.is_alive]
-        if not all_alive:
+        on_bar = [c for c in self.allies + self.enemies if c.on_action_bar]
+        if not on_bar:
             return None
-        return min(all_alive, key=lambda c: c.av_remaining)
+        return min(on_bar, key=lambda c: c.av_remaining)
 
     def next_actor(self) -> CharacterState | None:
         """Return the character with the lowest AV, advance clock, begin NORMAL turn."""
@@ -302,10 +349,10 @@ class BattleState:
         actor = self.peek_next_actor()
         if actor is None:
             return None
-        all_alive = [c for c in self.allies + self.enemies if c.is_alive]
+        on_bar = [c for c in self.allies + self.enemies if c.on_action_bar]
         elapsed = actor.av_remaining
         self.av_clock += elapsed
-        for c in all_alive:
+        for c in on_bar:
             c.av_remaining -= elapsed
         actor.av_remaining = av_for_turn(actor)
         self.begin_normal_turn(actor)
@@ -314,8 +361,8 @@ class BattleState:
     def begin_normal_turn(self, actor: CharacterState) -> None:
         """Turn-start phase then leave context in action phase.
 
-        Order (): toughness recover () → emit turn_start → DoT →
-        duration −1 → action. Inserted actions never call this ().
+        Order (C8): toughness recover (D1.10) → emit turn_start → DoT →
+        duration −1 → action. Inserted actions never call this (C6).
         """
         self.current_turn = TurnContext(
             owner_id=actor.char.id, kind="NORMAL", phase="turn_start"
@@ -331,8 +378,17 @@ class BattleState:
             )
         if self.settle_turn_start_dots is not None:
             self.settle_turn_start_dots(actor)
-        actor.tick_effects("turn_start")
+        self._emit_effect_expired(actor, actor.tick_effects("turn_start"))
         self.current_turn.phase = "action"
+
+    def _emit_effect_expired(self, actor: CharacterState, expired_ids: list[str]) -> None:
+        if self.event_emit is None or not expired_ids:
+            return
+        for eid in expired_ids:
+            self.event_emit(
+                "effect_expired",
+                {"effect_id": eid, "target_id": actor.char.id},
+            )
 
     def _maybe_recover_toughness(self, actor: CharacterState) -> None:
         """On enemy NORMAL turn start: restore full toughness if broken (realistic)."""
@@ -370,13 +426,65 @@ class BattleState:
                         "turn_kind": "NORMAL",
                     },
                 )
-            actor.tick_effects("turn_end")
+            self._emit_effect_expired(actor, actor.tick_effects("turn_end"))
         self.current_turn = None
 
+    def summon_unit(self, unit_id: str) -> CharacterState | None:
+        unit = self.find_char(unit_id)
+        if unit is None:
+            raise ValueError(f"summon_unit_id not on field: {unit_id!r}")
+        unit.summoned = True
+        if unit.hp_current <= 0:
+            unit.hp_current = float(unit.char.build.stats.hp_max)
+        if unit.on_action_bar:
+            unit.av_remaining = av_for_turn(unit)
+        else:
+            unit.av_remaining = float("inf")
+        if self.event_emit is not None:
+            self.event_emit(
+                "unit_summoned",
+                {"unit_id": unit.char.id, "owner_id": unit.char.owner_id},
+            )
+        return unit
+
+    def dismiss_unit(self, unit_id: str) -> CharacterState | None:
+        unit = self.find_char(unit_id)
+        if unit is None:
+            raise ValueError(f"dismiss_unit_id not on field: {unit_id!r}")
+        unit.summoned = False
+        unit.hp_current = 0.0
+        unit.av_remaining = float("inf")
+        if self.event_emit is not None:
+            self.event_emit(
+                "unit_dismissed",
+                {"unit_id": unit.char.id, "owner_id": unit.char.owner_id},
+            )
+        return unit
+
+    def queue_extra_turn(self, unit_id: str) -> None:
+        self.extra_turn_queue.append(unit_id)
+
+    def apply_immediate_action(self, unit_id: str) -> None:
+        """Speed>0: AV remaining → 0 (acts next). Speed 0: extra turn instead."""
+        unit = self.find_char(unit_id)
+        if unit is None:
+            raise ValueError(f"immediate_action_unit_id not on field: {unit_id!r}")
+        if not unit.is_alive:
+            return
+        if float(unit.char.build.stats.speed) > 0.0:
+            unit.av_remaining = 0.0
+        else:
+            self.queue_extra_turn(unit_id)
+
     def is_terminal(self) -> bool:
-        """All allies dead or all enemies dead."""
-        return (not any(c.is_alive for c in self.allies) or
-                not any(c.is_alive for c in self.enemies))
+        """All player characters dead (memosprites do not keep the fight) or all enemies dead."""
+        player = [c for c in self.allies if not c.char.is_memosprite]
+        ally_alive = (
+            any(c.is_alive for c in player)
+            if player
+            else any(c.is_alive for c in self.allies)
+        )
+        return (not ally_alive) or (not any(c.is_alive for c in self.enemies))
 
     def snapshot(self) -> dict[str, Any]:
         return {
@@ -414,6 +522,7 @@ class BattleState:
                 phase=self.current_turn.phase,
             ),
             skip_tick_condition=self.skip_tick_condition,
+            extra_turn_queue=list(self.extra_turn_queue),
         )
         cloned._bind_characters()
         return cloned
@@ -429,4 +538,5 @@ class BattleState:
             av_remaining=cs.av_remaining,
             active_effects=[e.model_copy(deep=True) for e in cs.active_effects],
             variables=dict(cs.variables),
+            summoned=cs.summoned,
         )

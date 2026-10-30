@@ -74,4 +74,11 @@ def talent_sp_max_bonus_from_datamine(char: Character) -> int:
 def team_sp_max_from_allies(allies: list[Character], *, base: int | None = None) -> int:
     if base is None:
         base = int(_sp_max_rules().get("base", 5))
-    return int(base + sum(talent_sp_max_bonus_from_datamine(c) for c in allies))
+    return int(
+        base
+        + sum(
+            talent_sp_max_bonus_from_datamine(c)
+            for c in allies
+            if not getattr(c, "is_memosprite", False)
+        )
+    )

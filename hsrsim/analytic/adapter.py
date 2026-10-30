@@ -23,7 +23,7 @@ from hsrsim.analytic.flow_model import (
     GainRule,
 )
 from hsrsim.enemies.benchmark_dummy import element_resistance
-from hsrsim.catalog.loader import CHARACTERS_DIR, load_character
+from hsrsim.graph.loader import CHARACTERS_DIR, load_character
 from hsrsim.loadout.benchmark import apply_team_benchmark, load_loadout_config
 from hsrsim.simulator.damage_zones import DamageContext, compute_damage
 from hsrsim.simulator.types import (
@@ -36,23 +36,16 @@ from hsrsim.simulator.types import (
     Stats,
 )
 
-#removed fictional weakness RES PEN (+0.20). Weakness → RES=0 via
+# E1.1h-2: removed fictional weakness RES PEN (+0.20). Weakness → RES=0 via
 # element_res table only. Additive RES zone must not invent constants.
 
 
 def _elem_key(value: object) -> str:
     return value.value if isinstance(value, Element) else str(value)
 
-#  (DATAMINE_ENERGY_SP.md): skills with no SPBase. Acheron is the one
-# in this team. Others are not in the exception tables, so the verified
-# mode is basic 20 / skill 30 / ult 5. The character JSON does not store
-# SPBase; AvatarSkillConfig.json is not in the repo.
+# D3: Acheron skill rows have no SPBase (残梦). Per-skill values live in
+# data/hsr/tables/avatar_skill_spbase.json (AvatarSkillConfig @ 4ce30f69).
 _SPBASE_ABSENT = frozenset({130801, 130802, 130803, 130804})
-_SPBASE_MODE = {
-    ActionType.BASIC_ATTACK: 20.0,
-    ActionType.SKILL: 30.0,
-    ActionType.ULTIMATE: 5.0,
-}
 
 _ACTION_KEY = {
     ActionType.BASIC_ATTACK: "basic",
@@ -104,7 +97,7 @@ class L1Input:
     enemy: Character | None = None
     stack_vulns: list[EnemyStackVuln] = field(default_factory=list)
     action_contexts: dict[str, dict[str, list[DamageContext]]] = field(default_factory=dict)
-    model_notes: list[str] = field(default_factory=list)
+    pending_fixes: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
     dot_streams: list[DotStream] = field(default_factory=list)
 
@@ -122,25 +115,26 @@ def build_l1_input(
     acheron_ult_e11h: bool = True,
     acheron_ult_s_hist: Mapping[int, float] | None = None,
     acheron_thunder_mean_stacks: float | None = None,
+    speed_override: dict[str, float] | None = None,
 ) -> L1Input:
     """Build the L1 input for one team.
 
     ``energy_hit`` and ``hits_per_100_av`` have no default: the datamine
-    has no ally hit-energy field (). Pass them, including zeros.
+    has no ally hit-energy field (D3). Pass them, including zeros.
 
     Enemy defense / speed / toughness / weaknesses / ``element_res`` come from
     the same scenario enemy L2 uses (``load_team_spec`` → benchmark dummy).
     Do not pass separate defender_* floats.
 
     ``broken_uptime`` is the L2-measured fraction of AV spent with the enemy
-    toughness-broken under the same scenario (); enters ``f_broken`` as
+    toughness-broken under the same scenario (D1.10); enters ``f_broken`` as
     ``0.9 + 0.1 × uptime``. Default 0 = always unbroken.
 
     ERR is read from the loadout yaml field ``err``. A missing key raises;
     this function does not substitute a value. ``err_by_id`` may override
     the yaml, but every member must be present in that mapping.
 
-    ``figment_counts_for_dream`` is ignored ( archived); kept for call-site
+    ``figment_counts_for_dream`` is ignored (E1.1d archived); kept for call-site
     compatibility with pre-holder-fix scripts.
 
     ``acheron_ult_s_hist``: L2-measured P(S) at ult open (crimson knot stacks).
@@ -183,9 +177,9 @@ def build_l1_input(
         raw_actions[cid] = list(raw["build"]["actions"])
 
     panel_chars, _reports = apply_team_benchmark(
-        loaded, team_id, raw_metas=raw_metas
+        loaded, team_id, raw_metas=raw_metas, speed_override=speed_override
     )
-    #stamp eidolon + assert wiring (LC stamped in apply_benchmark).
+    # E1.1g: stamp eidolon + assert wiring (LC stamped in apply_benchmark).
     stamped: list[Character] = []
     for c in panel_chars:
         stamped.append(c.model_copy(update={"eidolon": int(eidolons[c.id])}))
@@ -214,7 +208,7 @@ def build_l1_input(
             if note:
                 gaps.append(str(note))
     inconsistencies: list[str] = []
-    model_notes: list[str] = []
+    pending_fixes: list[str] = []
     notes: list[str] = [
         f"【{completeness['label']}】complete={completeness['complete']}；"
         f"gaps={len(completeness['gaps'])}。",
@@ -240,9 +234,9 @@ def build_l1_input(
     flow: list[FlowCharacter] | None = []
     thunder_mean_stacks = 3.0
     s_hist_for_notes: dict[int, float] | None = None
-    model_notes.append(
+    pending_fixes.append(
         "descriptions manifest 的 elation 桶混入了 silverwolflv999 等角色，"
-        "与期望名单不一致，ignored for this team."
+        "与期望名单不一致。列入待修，本阶段不改。"
     )
 
     for cid in members:
@@ -375,7 +369,7 @@ def build_l1_input(
                 enemy=enemy,
                 inconsistencies=inconsistencies,
                 gaps=gaps,
-                model_notes=model_notes,
+                pending_fixes=pending_fixes,
                 skip_effect_ids=_STACK_VULN_EFFECT_IDS,
                 ashen_steady_stacks=(
                     _prior_ashen_stacks(char, float(enemy_speed))
@@ -402,7 +396,7 @@ def build_l1_input(
             )
         )
 
-    # /g-4: LC(b) ActionBuffs (23024 mirage / 23029 vuln / 23021 mask SP-flow).
+    # E1.1g-2/g-4: LC(b) ActionBuffs (23024 mirage / 23029 vuln / 23021 mask SP-flow).
     buffs.extend(
         _paper_lc_b_action_buffs(
             panel_chars,
@@ -420,7 +414,7 @@ def build_l1_input(
 
     relic_buffs, _relic_notes = paper_relic_action_buffs(panel_chars, notes=notes)
     buffs.extend(relic_buffs)
-    #zone ult vuln — coverage refined after rates known (force prior = 1).
+    # E1.3: zone ult vuln — coverage refined after rates known (force prior = 1).
     from hsrsim.simulator.field_zone import JIAOQIU_ZONE_ULT_VULN
 
     if any(c.id == "jiaoqiu" for c in panel_chars):
@@ -438,7 +432,7 @@ def build_l1_input(
             )
         notes.append(
             f"L1_CONSUMES:jiaoqiu_zone_ult_vuln={JIAOQIU_ZONE_ULT_VULN} "
-            "applies_to=ult；覆盖由椒丘终结技×3 回合； refine 可 force_coverage"
+            "applies_to=ult；覆盖由椒丘终结技×3 回合；E1.3 refine 可 force_coverage"
         )
     if acheron_ult_e11h and any(c.id == "acheron" for c in panel_chars):
         thunder_boost = 0.30 * float(thunder_mean_stacks)
@@ -456,7 +450,7 @@ def build_l1_input(
             f"s_hist={dict(sorted((s_hist_for_notes or {9: 1.0}).items()))}"
         )
         notes.append(
-            f"L1_CONSUMES: 雷心 ActionBuff dmg_boost={thunder_boost:.4f} "
+            f"L1_CONSUMES:E1.1h 雷心 ActionBuff dmg_boost={thunder_boost:.4f} "
             f"(mean_stacks={thunder_mean_stacks:.3f}×0.30) duration=3 source=ult；"
             f"{hist_note}；天赋减抗只写在 ult 上下文。"
         )
@@ -488,7 +482,7 @@ def build_l1_input(
         stack_vulns=stack_vulns,
         action_contexts=action_contexts,
         notes=notes,
-        model_notes=model_notes,
+        pending_fixes=pending_fixes,
         dot_streams=dot_streams,
     )
     if team_id == "acheron_direct":
@@ -559,8 +553,8 @@ def _base_gaps(eidolons: dict[str, int]) -> list[str]:
     gaps = [
         f"【{completeness['label']}】论文队结果不得当作完整配置出数；缺口见下。",
         *list(PAPER_CONFIG_GAPS),
-        "受击回能在解包中不存在（：UNKNOWN）。只使用调用方传入的 energy_hit 与 hits_per_100_av。"
-        "：敌方行动按命途 BaseAggro 加权打 1 个我方目标（0 伤事件）；L1 取期望命中份额。",
+        "受击回能在解包中不存在（D3：UNKNOWN）。只使用调用方传入的 energy_hit 与 hits_per_100_av。"
+        "E1.1i：敌方行动按命途 BaseAggro 加权打 1 个我方目标（0 伤事件）；L1 取期望命中份额。",
         "DoT 未建模。持续伤害乘区不进本次直伤。",
         "角色 JSON 尚未按解包的 BPNeed / BPAdd 拆分，战技点仍由单一 sp_cost 按符号约定转换。",
         COVERAGE_INDEPENDENCE_GAP,
@@ -568,7 +562,7 @@ def _base_gaps(eidolons: dict[str, int]) -> list[str]:
         "未来接入这些角色时必须显式指定 _meta.enhanced。"
         "工具面向新角色上线，老角色加强属同类事件，版本标识是必需字段，代码不默认。",
         "花火大行迹的全队攻击 45%、战技穿透 10%，以及 E1 的攻击 40% 与速度 15%，是条件效果；"
-        "等事件触发层（）后再接。",
+        "等事件触发层（C3b）后再接。",
         "同乘区多条增益（含椒丘易伤与花火幻相期望易伤）经 expected_combo_damage："
         "期望层数作连续加项并入易伤乘区，二值增益按同乘区连通分量枚举；跨乘区连乘。"
         "覆盖率独立假设见上条。",
@@ -576,20 +570,20 @@ def _base_gaps(eidolons: dict[str, int]) -> list[str]:
         "`sp_other = 初始战技点 / (战斗 AV / 100)`（非求解器松弛）。"
         "脉冲式回点（如花火大招一次回 6 点）在池满时的溢出浪费仍不建模，"
         "L1 会略高估可用战技点。",
-        " 溢出修正（能量/残梦）：有效消耗 = 名义消耗 + E[X²]/(2·E[X])，"
+        "D1.7 溢出修正（能量/残梦）：有效消耗 = 名义消耗 + E[X²]/(2·E[X])，"
         "X 为单次获取量、分布由行动速率加权。假设获取事件相互独立、攒满后立即消耗；"
         "战技点不适用（非攒满即消耗）。",
         "覆盖率仍用 min(1, λ)。min(1,λ) 与 1−exp(−λ) 分别对应施加间隔完全规律与完全随机两极端；"
         "花火暴伤（战技占比高、间隔近随机）更吻合指数形式，敌方减益（多源频繁）更吻合 min。"
-        "覆盖误差依赖 bot 策略。",
-        "击破伤害与属性击破特效不在这两个模型里。击破后行动推迟比例在 L2/解包中无来源（UNKNOWN），"
-        "realistic 模式不推迟。击破乘区由 L2 同场景测得的 broken_uptime 显式传入 L1。",
-        "幻相经 sp_consumed→敌方 effect_applied 曾被 R1 计入；现用 apply_source 门闩排除。"
-        "FIGMENT_COUNTS_FOR_DREAM 工作定义为不计入。"
-        "幻相层数挂花火、光环易伤、不发敌方 effect_applied；R1 自然不计。"
-        "黄泉终结技 Rainblade 消去集真赤 / 雷心 / 天赋减抗（`CombatRules.acheron_ult_e11h`）。",
+        "覆盖误差依赖 bot 策略，待 bot 改造后重评；本阶段不替换公式。",
+        "击破伤害与属性击破特效未实现。击破后行动推迟比例在 L2/解包中无来源（UNKNOWN），"
+        "realistic 模式暂不推迟。击破乘区由 L2 同场景测得的 broken_uptime 显式传入 L1。",
+        "D1.12：幻相经 sp_consumed→敌方 effect_applied 曾被 R1 计入；D1.13 用 apply_source 门闩排除；"
+        "E1.1c 曾默认 FIGMENT_COUNTS_FOR_DREAM=true。"
+        "E1.1d：幻相层数挂花火、光环易伤、不发敌方 effect_applied；R1 自然不计；FIGMENT 开关归档。",
+        "黄泉终结技 Rainblade 消去集真赤 / 雷心 / 天赋减抗：E1.1h–h-3 已实现（`CombatRules.acheron_ult_e11h`）。",
         "黄泉 E3–E6 / 椒丘·花火·砂金 E1+ 星魂未接通；声明超过已接通上限时 wiring 门闩拒绝出数。",
-        "：砂金追击速率 L1 取期望（敌方行动×命中份额×坚垣筹码覆盖 / 7）；"
+        "E1.1i：砂金追击速率 L1 取期望（敌方行动×命中份额×坚垣筹码覆盖 / 7）；"
         "追击不进 LP 动作空间，残梦外部增益见 CounterResource.external_gain。",
     ]
     _ = eidolons
@@ -666,20 +660,24 @@ def _energy_gains(
 ) -> dict[str, float]:
     if uses_counter:
         return {"basic": 0.0, "skill": 0.0, "ult": 0.0}
+    from hsrsim.simulator.energy import spbase_for_skill_id
+
     gains: dict[str, float] = {}
     for key, action in actions.items():
         sid = _skill_id(raw_actions, action.id)
-        if sid in _SPBASE_ABSENT:
+        if sid is None:
+            sid = action.skill_id
+        if sid is None:
+            raise ValueError(f"{cid} {action.id} skill_id missing; SPBase lookup refused")
+        raw = spbase_for_skill_id(sid)
+        if raw is None:
             raise ValueError(
-                f"{cid} {action.id} skill_id {sid} has no SPBase but the character uses energy"
+                f"{cid} {action.id} skill_id {sid} 无 AvatarSkillConfig.SPBase；"
+                "能量角色不得回退 20/30/5 众数"
             )
-        atype = action.type
-        if atype not in _SPBASE_MODE:
-            raise ValueError(f"{cid} {action.id} has no  SPBase mode")
-        gains[key] = _SPBASE_MODE[atype]
+        gains[key] = float(raw)
     notes.append(
-        f"{cid} 回能取  众数（普攻 20、战技 30、终结技 5）。"
-        "JSON 无 SPBase；AvatarSkillConfig 不在仓库内。该角色不在  例外表。"
+        f"{cid} 回能取 data/hsr/tables/avatar_skill_spbase.json（AvatarSkillConfig.SPBase，提交 4ce30f69）。"
     )
     return gains
 
@@ -734,7 +732,7 @@ def _counter_resource(
         inconsistencies.append(
             f"{char.id} 计数器消耗 {consume_amount} 与上限 {variable.max_value} 不一致。"
         )
-    #gains from shared trigger specs (same source as L2 EventBus), not JSON variable_changes.
+    # D1.1: gains from shared trigger specs (same source as L2 EventBus), not JSON variable_changes.
     from hsrsim.rules.counter_gains import specs_for_resource, specs_to_l1_gain_rules
 
     specs = specs_for_resource(variable.id)
@@ -749,7 +747,7 @@ def _counter_resource(
         f"（{len(holder_specs)} 条），与 L2 EventBus 共用；不再从 Action.variable_changes 推断。"
     )
     notes.append(
-        f"{char.id} 无 SPBase（skill_id 在  缺失表 {_skill_ids(char.id, raw_actions)}），走计数器。"
+        f"{char.id} 无 SPBase（skill_id 在 D3 缺失表 {_skill_ids(char.id, raw_actions)}），走计数器。"
         f"上限取变量 {variable.id} 的 max_value={variable.max_value}，对应 AvatarConfig.SPNeed。"
     )
     return True, CounterResource(
@@ -758,7 +756,7 @@ def _counter_resource(
         cap=float(variable.max_value),
         consume={consume_key: consume_amount},
         rules=tuple(rules),
-        #四相断我 soft buffer (max 3) after dream hard cap 9.
+        # E1.1g-2: 四相断我 soft buffer (max 3) after dream hard cap 9.
         overflow_buffer=3.0 if char.id == "acheron" else 0.0,
     )
 
@@ -908,7 +906,7 @@ def _action_contexts(
 
 
 def _erase_mvs_for_s(s: int) -> list[float]:
-    """Per-Rainblade erase AoE MVs for opening knot stacks S ()."""
+    """Per-Rainblade erase AoE MVs for opening knot stacks S (E1.1h-2)."""
     left = max(0, int(s))
     out: list[float] = []
     for _ in range(3):
@@ -986,7 +984,7 @@ def _acheron_ult_e11h_extras(
         )
     fb = "（fallback S=9；请传入 L2 实测 s_hist）" if s_hist_is_fallback else ""
     notes = [
-        "L1_CONSUMES: 终结技附加段："
+        "L1_CONSUMES:E1.1h 终结技附加段："
         f"期望消去 MV={ [round(m, 4) for m in erase_mvs] } +6×0.25 雷心；"
         f"s_hist={dict(sorted((int(k), float(v)) for k, v in s_hist.items()))}{fb}；"
         "ult 上下文 +0.20 res_pen（天赋减抗）。"
@@ -1029,7 +1027,7 @@ def _instance_context(
     defender_res = element_resistance(enemy, element)
     crit_rate = float(stats.crit_rate)
     original_mult = 1.0
-    #Acheron E1 CR under expected enemy debuffs; Abyss original_mult.
+    # E1.1g: Acheron E1 CR under expected enemy debuffs; Abyss original_mult.
     if char.id == "acheron":
         from hsrsim.rules.wiring import ACHERON_E1_CRIT_RATE, abyss_multiplier
 
@@ -1044,7 +1042,7 @@ def _instance_context(
             if path_s == "nihility":
                 nihility += 1
         original_mult = abyss_multiplier(nihility, int(char.eidolon))
-    #LC 23024 泡影 dmg is an ActionBuff with derived coverage (not baked here).
+    # E1.1g-4: LC 23024 泡影 dmg is an ActionBuff with derived coverage (not baked here).
     return DamageContext(
         attacker_level=int(char.level),
         attacker_atk=scaling,
@@ -1122,7 +1120,7 @@ def _paper_lc_b_action_buffs(
     if recipient not in by_id:
         recipient = next(iter(by_id), "acheron")
 
-    # 23024 Mirage: duration 1 enemy turn; per-action hit-weighted coverage .
+    # 23024 Mirage: duration 1 enemy turn; per-action hit-weighted coverage (E1.1g-5).
     ach = by_id.get("acheron")
     if ach is not None and ach.light_cone_id == 23024:
         params = lc_param_list(23024, int(ach.light_cone_superimposition or 1))
@@ -1264,7 +1262,7 @@ def _jiaoqiu_ashen_dot_streams(
     broken_uptime: float,
     notes: list[str],
 ) -> list[DotStream]:
-    """Ashen Roast DoT: ticks = enemy_turn_rate × coverage (, from )."""
+    """Ashen Roast DoT: ticks = enemy_turn_rate × coverage (E1.1g-4, from E1.3)."""
     jq = next((c for c in panel_chars if c.id == "jiaoqiu"), None)
     if jq is None:
         return []
@@ -1331,7 +1329,7 @@ def _buffs_for(
     enemy: Character,
     inconsistencies: list[str],
     gaps: list[str],
-    model_notes: list[str],
+    pending_fixes: list[str],
     skip_effect_ids: frozenset[str] = frozenset(),
     ashen_steady_stacks: float | None = None,
 ) -> list[ActionBuff]:
@@ -1339,7 +1337,7 @@ def _buffs_for(
     out: list[ActionBuff] = []
     applied: set[str] = set()
     # One ActionBuff per (effect, recipient); multi-action applies (e.g. Ashen on
-    # basic/skill/ult) share that buff — steady stacks via ashen_steady_stacks.
+    # basic/skill/ult) share that buff — E1.3 steady stacks via ashen_steady_stacks.
     emitted: set[tuple[str, str]] = set()
     for key in ("skill", "ult", "basic"):
         action = actions[key]
@@ -1417,7 +1415,7 @@ def _buffs_for(
             continue
         if effect.id not in applied:
             inconsistencies.append(f"{char.id} 效果 {effect.id} 没有任何行动引用，未转成增益。")
-            model_notes.append(
+            pending_fixes.append(
                 f"{char.id} 的效果 {effect.id} 没有任何行动的 applies_effects 引用。"
                 "效果写在 JSON 里，触发没有接上，未转成增益。"
             )
@@ -1547,7 +1545,7 @@ def _zone_buff_kwargs(
         if stat == "atk":
             return {}, False
         if stat == "vuln":
-            #Ashen Roast uses steady expected stacks when provided.
+            # E1.3: Ashen Roast uses steady expected stacks when provided.
             if (
                 effect.vuln_at_one_stack is not None
                 and effect.vuln_per_extra_stack is not None
@@ -1846,7 +1844,7 @@ def refine_l1_e13(
             meta["sparkle_at_basic_cov"] = cov_by_act["basic"]
             meta["sparkle_at_skill_cov"] = cov_by_act["skill"]
             meta["sparkle_lambda_cov"] = lam
-            #per-action strategy coverage (basic/skill/ult), not λ-only.
+            # E1.1h-3: per-action strategy coverage (basic/skill/ult), not λ-only.
             for act in ("basic", "skill", "ult"):
                 new_buffs.append(
                     replace(
@@ -1869,7 +1867,7 @@ def refine_l1_e13(
     meta["dream_external"] = ext
     notes = list(inp.notes or [])
     notes.append(
-        f"L1_CONSUMES: refine ashen_stacks={ash['stacks']:.3f} "
+        f"L1_CONSUMES:E1.3 refine ashen_stacks={ash['stacks']:.3f} "
         f"vuln={ash['vuln']:.4f} zone_cov={zcov:.4f} "
         f"zone_dream={zd['rate']:.4f} ext={ext:.4f}"
     )

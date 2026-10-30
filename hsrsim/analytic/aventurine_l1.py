@@ -1,4 +1,4 @@
-""" L1 expectation helpers: hit shares + Aventurine Blind Bet / FUA rate."""
+"""E1.1i L1 expectation helpers: hit shares + Aventurine Blind Bet / FUA rate."""
 from __future__ import annotations
 
 from typing import Sequence

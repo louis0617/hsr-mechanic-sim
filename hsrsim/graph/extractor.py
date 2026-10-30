@@ -122,7 +122,7 @@ class GraphExtractor:
     def __init__(
         self,
         llm_client: LLMClient | None = None,
-        model: str = "deepseek-v4-pro",
+        model: str = "deepseek-flash",
         llm_fn: Callable[[str], str] | None = None,
     ):
         self.llm = llm_client
@@ -167,9 +167,15 @@ class GraphExtractor:
 
     @staticmethod
     def _ensure_combat_profile(char: Character) -> Character:
-        """Fill combat_profile from kit inference when LLM omitted axes."""
-        from hsrsim.app.profiles import infer_main_profile, infer_support_profile
-        from hsrsim.app.tiers import looks_like_support_kit
+        """Fill combat_profile from kit inference when LLM omitted axes.
+
+        Profile inference lives in the private CHI app; public builds skip it.
+        """
+        try:
+            from hsrsim.app.profiles import infer_main_profile, infer_support_profile
+            from hsrsim.app.tiers import looks_like_support_kit
+        except ImportError:
+            return char
         from hsrsim.simulator.types import CombatProfileData
 
         existing = char.combat_profile

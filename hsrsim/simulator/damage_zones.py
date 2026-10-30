@@ -63,8 +63,10 @@ class DamageContext:
     weaken_pct: float = 0.0
     super_break_boost_pct: float = 0.0
     attacker_dot_boost_pct: float = 0.0  # DoT DMG% only (Eyes of the Prey etc.)
-    #when set, BrokenZone uses 0.9 + 0.1 * uptime (L1 steady-state).
+    # D1.10: when set, BrokenZone uses 0.9 + 0.1 * uptime (L1 steady-state).
     defender_broken_uptime: float | None = None
+    # Fribbels trueDmgMulti = 1 + TRUE_DMG_MODIFIER. Original: extra instance = pct of original DMG.
+    true_dmg_pct: float = 0.0
 
 
 class DamageZone(ABC):
@@ -286,7 +288,7 @@ class BrokenZone(DamageZone):
 
 
 # ============================================================
-# BREAK / SUPER-BREAK ZONES
+# BREAK / SUPER-BREAK ZONES (the v2.x partial-coupled subgraph)
 # ============================================================
 
 class BreakBaseZone(DamageZone):
@@ -389,6 +391,24 @@ class PunchlineZone(DamageZone):
         return dmg_type == DamageType.ELATION
 
 
+class TrueDmgZone(DamageZone):
+    """f_trueDmg = 1 + TRUE_DMG%. Fribbels trueDmgMulti.
+
+    原文（昔涟战技结界）：每次伤害额外造成等同于原伤害比例的真实伤害。
+    对最终伤害等价于乘 (1+比例)；独立乘区便于同条件逐区对照。
+    """
+    id = "f_trueDmg"
+    name_zh = "真伤区"
+    name_en = "TrueDmg"
+
+    def compute(self, ctx: DamageContext) -> float:
+        return 1.0 + ctx.true_dmg_pct
+
+    def applies_to(self, dmg_type: DamageType) -> bool:
+        # 141502: extra True DMG equal to 24% of each DMG instance (not DIRECT-only).
+        return dmg_type != DamageType.TRUE
+
+
 class MerrymakeZone(DamageZone):
     """f_merrymake = 1 + Merrymake. Independent terminal multiplier (Yao Guang E6 etc)."""
     id = "f_merrymake"
@@ -424,6 +444,7 @@ ZONE_REGISTRY: list[DamageZone] = [
     VulnZone(),
     MitZone(),
     BrokenZone(),
+    TrueDmgZone(),
 ]
 
 
@@ -437,17 +458,17 @@ ZONE_REGISTRY: list[DamageZone] = [
 
 DAMAGE_PATHWAY_MATRIX: dict[DamageType, list[str]] = {
     DamageType.DIRECT:      ["f_base", "f_origMult", "f_crit", "f_dmgBoost", "f_weaken",
-                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken"],
+                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken", "f_trueDmg"],
     # DoT: no crit / no original mult (HoYoLAB + Fandom). f_dotBoost = DoT DMG% only.
     DamageType.DOT:         ["f_base", "f_dotBoost", "f_dmgBoost",
-                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken"],
+                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken", "f_trueDmg"],
     DamageType.BREAK:       ["f_breakBase", "f_be",
-                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken"],
+                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken", "f_trueDmg"],
     DamageType.SUPER_BREAK: ["f_breakBase", "f_be", "f_sbBoost",
-                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken"],
+                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken", "f_trueDmg"],
     DamageType.ELATION:     ["f_base", "f_origMult", "f_crit",
                              "f_elation", "f_punchline", "f_merrymake",
-                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken"],
+                             "f_def", "f_res", "f_vuln", "f_mit", "f_broken", "f_trueDmg"],
     DamageType.TRUE:        [],  # bypasses all zones
 }
 

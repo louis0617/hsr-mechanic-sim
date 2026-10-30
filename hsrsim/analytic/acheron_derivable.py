@@ -13,7 +13,7 @@
 
 终结技/战技次均伤害比
 --------------------
- §3.2 **R-MV-plus-thunder-hits**（原文 ParamList 推导，非战斗阈值）：
+E1.1e §3.2 **R-MV-plus-thunder-hits**（原文 ParamList 推导，非战斗阈值）：
 主目标满层消去路径 MV 合计 5.22 / 战技主目标 1.6 = **3.2625**（下限断言 ≥3.26）。
 """
 from __future__ import annotations
@@ -22,7 +22,7 @@ from __future__ import annotations
 DREAMS_PER_ACHERON_SKILL_TURN = 3.0
 DREAMS_PER_ACHERON_BASIC_TURN = 2.0
 
-# R-MV-plus-thunder-hits: (3.72 + 1.50) / 1.60
+# E1.1e R-MV-plus-thunder-hits: (3.72 + 1.50) / 1.60
 ULT_OVER_SKILL_MEAN_MV_RATIO_MIN = 3.26
 
 
@@ -42,7 +42,7 @@ def derive_dreams_per_turn_note(skill_share: float) -> str:
 
 def derive_ult_skill_mv_ratio_note() -> str:
     return (
-        "推导： R-MV-plus-thunder-hits — 开大前集真赤 S=9 消去路径主目标 MV "
+        "推导：E1.1e R-MV-plus-thunder-hits — 开大前集真赤 S=9 消去路径主目标 MV "
         "3.72（啼泽正文最大）+ 雷心 6×0.25=1.50 → 5.22；战技主目标 1.60；"
         f"比 5.22/1.60={ULT_OVER_SKILL_MEAN_MV_RATIO_MIN}"
     )

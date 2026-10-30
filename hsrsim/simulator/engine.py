@@ -223,7 +223,8 @@ class Engine:
         self.state.settle_turn_start_dots = self._settle_turn_start_dots
         self.state.toughness_mode = scenario.toughness_mode
         self._insert_polling = False
-        #AV-time while any living enemy is toughness-broken (realistic only).
+        self._extra_turn_polling = False
+        # D1.10: AV-time while any living enemy is toughness-broken (realistic only).
         self.broken_av_total: float = 0.0
         self._broken_clock_prev: float = 0.0
 
@@ -274,6 +275,10 @@ class Engine:
         peeked = self.state.peek_next_actor()
         if peeked is None:
             return None
+        self._expire_av_zones(peeked)
+        peeked = self.state.peek_next_actor()
+        if peeked is None:
+            return None
         is_ally = peeked in self.state.allies
         bot = self._resolve_ally_bot(peeked) if is_ally else self.enemy_bot
         legal = self.legal_actions(peeked)
@@ -292,6 +297,7 @@ class Engine:
         self._execute_action(actor, action, target_id, turn_kind="NORMAL")
         self.state.end_normal_turn(actor)
         self._maybe_advance_round(actor)
+        self._drain_extra_turns()
         self._poll_ready_ultimates()
         return actor, action
 
@@ -328,7 +334,7 @@ class Engine:
         return self.ally_bot
 
     def legal_actions(self, actor: CharacterState) -> list[Action]:
-        """Normal-turn legal actions. Ultimates / follow-ups are insert-only ( / )."""
+        """Normal-turn legal actions. Ultimates / follow-ups are insert-only (C6 / E1.1i)."""
         return [
             a
             for a in actor.char.build.actions
@@ -349,7 +355,7 @@ class Engine:
 
         Runs the action body then the NORMAL turn-end duration tick.
         ``next_actor`` already opened turn_start → action phase.
-        After the normal turn, polls ally bots for ready ultimates ().
+        After the normal turn, polls ally bots for ready ultimates (C6).
         """
         if action.type == ActionType.ULTIMATE:
             # Ultimates must use the insert channel.
@@ -361,6 +367,7 @@ class Engine:
         self._execute_action(actor, action, target_id, turn_kind="NORMAL")
         self.state.end_normal_turn(actor)
         self._maybe_advance_round(actor)
+        self._drain_extra_turns()
         self._poll_ready_ultimates()
 
     def execute_inserted_action(
@@ -369,7 +376,7 @@ class Engine:
         action: Action,
         target_id: str | None,
     ) -> None:
-        """ insert channel: no next_actor, no AV reset, no turn_start/end ticks."""
+        """C6 insert channel: no next_actor, no AV reset, no turn_start/end ticks."""
         self.state.skip_tick_condition = self.skip_tick_condition  # type: ignore[assignment]
         # Do not open/close NORMAL turn context — inserts have no duration ticks.
         saved_turn = self.state.current_turn
@@ -378,6 +385,7 @@ class Engine:
             self._execute_action(actor, action, target_id, turn_kind="INSERTED")
         finally:
             self.state.current_turn = saved_turn
+        self._drain_extra_turns()
 
     def insert_action(
         self,
@@ -479,10 +487,26 @@ class Engine:
             return bot.select_action(actor, self.state, legal, rng=self._rng)
         return bot.select_action(actor, self.state, legal)
 
+    def _effective_sp_cost(self, actor: CharacterState, action: Action) -> int:
+        """SP cost after S2 11306102 free-Skill charge (Sparkle only)."""
+        cost = int(action.sp_cost)
+        if cost <= 0:
+            return cost
+        if not bool(self.combat_rules.sparkle_trace_11306102):
+            return cost
+        if actor.char.id != "sparkle" or action.type != ActionType.SKILL:
+            return cost
+        from hsrsim.rules.shared_gaps import SPARKLE_11306102_FREE_VAR
+
+        if float(actor.variables.get(SPARKLE_11306102_FREE_VAR, 0.0) or 0.0) >= 1.0:
+            return 0
+        return cost
+
     def _is_legal(self, actor: CharacterState, action: Action) -> bool:
         """Check if an action is currently executable."""
-        # SP cost check
-        if action.sp_cost > 0 and self.state.sp_team_pool < action.sp_cost:
+        # SP cost check (S2 may zero Sparkle Skill cost)
+        sp_cost = self._effective_sp_cost(actor, action)
+        if sp_cost > 0 and self.state.sp_team_pool < sp_cost:
             return False
         # Ultimate resource gate (C5)
         if action.type == ActionType.ULTIMATE:
@@ -491,15 +515,17 @@ class Engine:
                 actor.energy_current, actor.variables, res
             ):
                 return False
-        # Custom requirements (TODO: full DSL parser)
+        # Custom requirements (TODO M5: full DSL parser)
         for req in action.requires:
             if not self._evaluate_requirement(actor, req):
                 return False
         return True
 
     def _evaluate_requirement(self, actor: CharacterState, req: str) -> bool:
-        """Minimal requirement DSL: `variable>=9`, `hp_pct>0.5`, or bare effect id."""
+        """Minimal requirement DSL: `variable>=9`, `hp_pct>0.5`, `!effect_id`, or bare effect id."""
         req = req.strip()
+        if req.startswith("!"):
+            return not self._evaluate_requirement(actor, req[1:].strip())
         match = _REQUIREMENT_PATTERN.match(req)
         if not match:
             if any(e.id == req for e in actor.active_effects):
@@ -519,6 +545,8 @@ class Engine:
         threshold = float(match.group("val"))
         if var == "hp_pct":
             current = actor.hp_current / max(actor.char.build.stats.hp_max, 1e-9)
+        elif var == "hp_current":
+            current = float(actor.hp_current)
         elif any(e.id == var for e in actor.active_effects):
             current = 1.0
         else:
@@ -526,7 +554,7 @@ class Engine:
         return _COMPARE_OPS[op](current, threshold)
 
     def _default_target(self, actor: CharacterState) -> str:
-        """Ally→first alive enemy; enemy→BaseAggro-weighted random ally ()."""
+        """Ally→first alive enemy; enemy→BaseAggro-weighted random ally (E1.1i)."""
         is_ally = actor in self.state.allies
         if is_ally:
             for c in self.state.enemies:
@@ -577,7 +605,7 @@ class Engine:
                 )
             ]
         if target == EffectTarget.ALL_ALLIES:
-            return [a for a in allies if a.is_alive]
+            return self._filter_effect_hits([a for a in allies if a.is_alive], action)
         if target == EffectTarget.SINGLE_ENEMY:
             if target_enemy_id:
                 found = self.state.find_char(target_enemy_id)
@@ -588,6 +616,16 @@ class Engine:
         if target == EffectTarget.ALL_ENEMIES:
             return [e for e in enemies if e.is_alive]
         return [actor]
+
+    def _filter_effect_hits(
+        self, hits: list[CharacterState], action: Action
+    ) -> list[CharacterState]:
+        if action.effect_exclude_memosprites:
+            hits = [h for h in hits if not h.char.is_memosprite]
+        if action.effect_exclude_ids:
+            blocked = set(action.effect_exclude_ids)
+            hits = [h for h in hits if h.char.id not in blocked]
+        return hits
 
     def _apply_action_effects(
         self,
@@ -700,9 +738,10 @@ class Engine:
             turn_kind=turn_kind,
             target_id=target_id,
         )
-        # Resource costs / gains (: temp max via action.sp_pool_temp_max; log waste)
-        if action.sp_cost > 0:
-            amount = int(action.sp_cost)
+        # Resource costs / gains (D1.2: temp max via action.sp_pool_temp_max; log waste)
+        sp_cost = self._effective_sp_cost(actor, action)
+        if sp_cost > 0:
+            amount = int(sp_cost)
             self.state.sp_team_pool = max(0, self.state.sp_team_pool - amount)
             self.bus.emit(
                 "sp_consumed",
@@ -711,6 +750,15 @@ class Engine:
                     "amount": amount,
                     "action_id": action.id,
                 },
+            )
+        elif sp_cost == 0 and int(action.sp_cost) > 0:
+            # S2: free Sparkle Skill — clear charge; do not emit sp_consumed.
+            from hsrsim.rules.shared_gaps import SPARKLE_11306102_FREE_VAR
+
+            actor.variables[SPARKLE_11306102_FREE_VAR] = 0.0
+            self._log_event(
+                "sparkle_11306102_free_skill",
+                {"actor_id": actor.char.id, "action_id": action.id},
             )
         elif action.sp_cost < 0:
             raw_gain = -action.sp_cost
@@ -741,7 +789,7 @@ class Engine:
                         "waste": wasted,
                     },
                 )
-            #raw_gain (incl. truncated overflow) drives LC 23021 blaze.
+            # E1.1g-2: raw_gain (incl. truncated overflow) drives LC 23021 blaze.
             self.bus.emit(
                 "sp_gained",
                 {
@@ -753,10 +801,78 @@ class Engine:
                 },
             )
         
+        if action.hp_cost_pct:
+            hp_max = float(actor.char.build.stats.hp_max)
+            base = float(actor.hp_current) if action.hp_cost_of_current else hp_max
+            cost = base * float(action.hp_cost_pct)
+            actor.hp_current = max(1.0, actor.hp_current - cost)
+            self._log_event(
+                "hp_consumed",
+                {
+                    "actor_id": actor.char.id,
+                    "action_id": action.id,
+                    "pct": float(action.hp_cost_pct),
+                    "hp_after": actor.hp_current,
+                },
+            )
+        if action.hp_cost_pct_all_allies:
+            side = self.state.allies if actor in self.state.allies else self.state.enemies
+            for unit in side:
+                if not unit.is_alive:
+                    continue
+                if action.hp_cost_skip_memosprites and unit.char.is_memosprite:
+                    continue
+                if unit.char.id in action.effect_exclude_ids:
+                    continue
+                hp_max = float(unit.char.build.stats.hp_max)
+                base = float(unit.hp_current) if action.hp_cost_of_current else hp_max
+                cost = base * float(action.hp_cost_pct_all_allies)
+                unit.hp_current = max(1.0, unit.hp_current - cost)
+                self._log_event(
+                    "hp_consumed",
+                    {
+                        "actor_id": unit.char.id,
+                        "action_id": action.id,
+                        "pct": float(action.hp_cost_pct_all_allies),
+                        "hp_after": unit.hp_current,
+                    },
+                )
+
+        if action.heal_hp_pct_max is not None or action.heal_hp_flat is not None:
+            dummy = Effect(
+                id="_heal_target",
+                name="heal",
+                target=self._effective_effect_target(
+                    Effect(id="_", name="_", target=EffectTarget.SELF),
+                    action,
+                ),
+            )
+            for unit in self._resolve_effect_targets_for_action(
+                actor, action, dummy, target_id
+            ):
+                if not unit.is_alive:
+                    continue
+                cap = float(unit.char.build.stats.hp_max)
+                caster_max = float(actor.char.build.stats.hp_max)
+                amount = (action.heal_hp_pct_max or 0.0) * caster_max + (
+                    action.heal_hp_flat or 0.0
+                )
+                before = unit.hp_current
+                unit.hp_current = min(cap, unit.hp_current + amount)
+                self._log_event(
+                    "hp_restored",
+                    {
+                        "actor_id": unit.char.id,
+                        "action_id": action.id,
+                        "delta": unit.hp_current - before,
+                        "hp_after": unit.hp_current,
+                    },
+                )
+
         if action.energy_cost > 0:
             actor.energy_current = max(0, actor.energy_current - action.energy_cost)
         elif action.energy_cost < 0:
-            # Declared Action gain: raw magnitude × Stats.err ( / EVENT_TRIGGER_DESIGN §6.2)
+            # Declared Action gain: raw magnitude × Stats.err (C4 / EVENT_TRIGGER_DESIGN §6.2)
             grant_energy(
                 actor,
                 -action.energy_cost,
@@ -813,7 +929,9 @@ class Engine:
         else:
             for dmg_instance in action.damage_instances:
                 before = self.state.total_damage_dealt
-                self._resolve_damage(actor, primary_target, dmg_instance, action)
+                targets = self._damage_targets(primary_target, dmg_instance)
+                for tgt in targets:
+                    self._resolve_damage(actor, tgt, dmg_instance, action)
                 damage_total += self.state.total_damage_dealt - before
 
         # E1.5: ally-hit before action_resolved so Trend burn can enter R1 window.
@@ -839,11 +957,12 @@ class Engine:
             "resources_after": {
                 "sp_pool": self.state.sp_team_pool,
                 "actor_energy": actor.energy_current,
+                "actor_hp": actor.hp_current,
                 "actor_variables": dict(actor.variables),
             },
         })
 
-        #post-action Blind Bet / FUA insert (own windows).
+        # E1.1i: post-action Blind Bet / FUA insert (own windows).
         if actor.char.id == "aventurine" and action.id == "aventurine_ult":
             n = int(self._rng.randint(1, 7))
             self.bus.grant_blind_bet(actor, float(n), source="aventurine_ult_blind_bet")
@@ -854,6 +973,54 @@ class Engine:
             # Trace 1304103: FUA grants Fortified Wager (existence+duration).
             self.bus.refresh_aventurine_chip_all_allies(source_id=actor.char.id)
         self._poll_aventurine_fua()
+        self._poll_mortenax_extra_skill()
+        self._apply_unit_lifecycle(action)
+
+    def _apply_unit_lifecycle(self, action: Action) -> None:
+        if action.summon_unit_id:
+            self.state.summon_unit(action.summon_unit_id)
+        if action.immediate_action_unit_id:
+            self.state.apply_immediate_action(action.immediate_action_unit_id)
+        if action.extra_turn_unit_id:
+            self.state.queue_extra_turn(action.extra_turn_unit_id)
+        if action.dismiss_unit_id:
+            self.state.dismiss_unit(action.dismiss_unit_id)
+
+    def _drain_extra_turns(self) -> None:
+        if self._extra_turn_polling:
+            return
+        self._extra_turn_polling = True
+        try:
+            while self.state.extra_turn_queue and not self.state.is_terminal():
+                uid = self.state.extra_turn_queue.pop(0)
+                actor = self.state.find_char(uid)
+                if actor is None or not actor.is_alive:
+                    continue
+                legal = self.legal_actions(actor)
+                if not legal:
+                    continue
+                bot = self._resolve_ally_bot(actor)
+                if actor in self.state.enemies:
+                    bot = self.enemy_bot
+                if bot is None:
+                    continue
+                self.state.begin_normal_turn(actor)
+                from hsrsim.simulator.bots import RandomBot
+
+                if isinstance(bot, RandomBot):
+                    action, target_id = bot.select_action(
+                        actor, self.state, legal, rng=self._rng
+                    )
+                else:
+                    action, target_id = bot.select_action(actor, self.state, legal)
+                if action is None:
+                    self.state.end_normal_turn(actor)
+                    continue
+                self._execute_action(actor, action, target_id, turn_kind="NORMAL")
+                self.state.end_normal_turn(actor)
+                self._poll_ready_ultimates()
+        finally:
+            self._extra_turn_polling = False
 
     def _resolve_enemy_ally_hit(
         self, enemy: CharacterState, action: Action
@@ -931,13 +1098,69 @@ class Engine:
         finally:
             self._aventurine_fua_polling = False
 
+    def _damage_targets(
+        self, primary: CharacterState | None, dmg: DamageInstance
+    ) -> list[CharacterState]:
+        alive = [e for e in self.state.enemies if e.is_alive]
+        if getattr(dmg, "random_alive_enemy", False) and alive:
+            return [self._rng.choice(alive)]
+        if dmg.target == "aoe":
+            return list(alive)
+        return [primary] if primary is not None else []
+
+    def _expire_av_zones(self, peeked: CharacterState) -> None:
+        """Dispel AV-countdown zones that would act at or before the next actor."""
+        act_at = float(self.state.av_clock) + float(peeked.av_remaining)
+        expired = [
+            z
+            for z in list(self.state.active_zones)
+            if z.expire_at_av is not None and float(z.expire_at_av) <= act_at + 1e-9
+        ]
+        if not expired:
+            return
+        self.bus.expire_mortenax_zones(expired)
+
+    def _poll_mortenax_extra_skill(self) -> None:
+        """Talent extra Skill considered Follow-Up ATK (150704)."""
+        from hsrsim.rules.mortenax import MORTENAX_ID, SKILL_FUA_ACTION_ID
+
+        if getattr(self, "_mortenax_fua_polling", False):
+            return
+        self._mortenax_fua_polling = True
+        try:
+            actor = self.state.find_char(MORTENAX_ID)
+            if actor is None or not actor.is_alive:
+                return
+            pending = int(float(actor.variables.get("_mortenax_extra_skill", 0.0)))
+            if pending <= 0:
+                return
+            action = next(
+                (a for a in actor.char.build.actions if a.id == SKILL_FUA_ACTION_ID),
+                None,
+            )
+            if action is None or not self._is_legal(actor, action):
+                if pending > 0 and self._log_event:
+                    self._log_event(
+                        "extra_skill_blocked",
+                        {
+                            "actor_id": actor.char.id,
+                            "hp": actor.hp_current,
+                            "reason": "not_legal",
+                        },
+                    )
+                return
+            actor.variables["_mortenax_extra_skill"] = 0.0
+            self.execute_inserted_action(actor, action, self._default_target(actor) or None)
+        finally:
+            self._mortenax_fua_polling = False
+
     def _resolve_acheron_ult(
         self,
         actor: CharacterState,
         primary_target: CharacterState | None,
         action: Action,
     ) -> None:
-        """/h-2: Rainblade erase-per-slash, Thunder Core, talent −20% RES.
+        """E1.1h/h-2: Rainblade erase-per-slash, Thunder Core, talent −20% RES.
 
         Each Rainblade erases up to 3 Crimson Knots; erase AoE MV =
         ``min(0.60, 0.15 × (1 + k))`` where k = layers erased on that slash.
@@ -1035,7 +1258,7 @@ class Engine:
         return 0
 
     def _settle_turn_start_dots(self, holder: CharacterState) -> None:
-        """: on NORMAL turn_start, settle DoTs that carry ``dot_instance``.
+        """C8: on NORMAL turn_start, settle DoTs that carry ``dot_instance``.
 
         Reuses ``compute_damage`` with ``DamageType.DOT`` (existing zone matrix;
         no invented formula). Effects with ``tick_timing=turn_start`` but no
@@ -1128,14 +1351,14 @@ class Engine:
         self._apply_hp_damage(defender, damage_value)
         self.state.total_damage_dealt += damage_value
         
-        # Toughness damage (: always_unbroken skips; realistic reduces until break)
+        # Toughness damage (D1.10: always_unbroken skips; realistic reduces until break)
         if self.scenario.toughness_mode != "always_unbroken" and not defender.toughness_broken:
             tough_dmg = dmg.toughness_dmg
             if dmg.element in defender.char.weaknesses:
                 before = defender.toughness_current
                 defender.toughness_current = max(0, defender.toughness_current - tough_dmg)
                 if before > 0 and defender.toughness_current <= 0:
-                    # Break action delay: UNKNOWN in L2/datamine → no delay .
+                    # Break action delay: UNKNOWN in L2/datamine → no delay (D1.10).
                     self._log_event(
                         "toughness_broken",
                         {
@@ -1191,42 +1414,6 @@ class Engine:
                     "action_id": action.id,
                 },
             )
-        self._apply_true_followup(attacker, defender, damage_value, dmg, action)
-
-    def _apply_true_followup(
-        self,
-        attacker: CharacterState,
-        defender: CharacterState,
-        primary_damage: float,
-        source_dmg: DamageInstance,
-        action: Action,
-    ) -> None:
-        """Ally hits under Cyrene aura: append pct of dealt damage as true damage."""
-        if primary_damage <= 0 or not defender.is_alive:
-            return
-        if source_dmg.damage_type in (
-            DamageType.TRUE,
-            DamageType.DOT,
-            DamageType.BREAK,
-            DamageType.SUPER_BREAK,
-        ):
-            return
-        atk_buffs = aggregate_effects(attacker.active_effects, side="attacker")
-        pct = atk_buffs.get("true_followup", 0.0)
-        if pct <= 0:
-            return
-        true_dmg = primary_damage * pct
-        self._apply_hp_damage(defender, true_dmg)
-        self.state.total_damage_dealt += true_dmg
-        self._log_event("true_followup", {
-            "attacker": attacker.char.id,
-            "defender": defender.char.id,
-            "source_action": action.id,
-            "primary_damage": primary_damage,
-            "followup_pct": pct,
-            "true_damage": true_dmg,
-            "defender_hp_after": defender.hp_current,
-        })
 
     def _build_damage_context(
         self,
@@ -1242,8 +1429,12 @@ class Engine:
         """
         a_stats = attacker.char.build.stats
         d_stats = defender.char.build.stats
-        atk_buffs = aggregate_effects(attacker.active_effects, side="attacker")
-        def_debuffs = aggregate_effects(defender.active_effects, side="defender")
+        atk_buffs = aggregate_effects(
+            attacker.active_effects, side="attacker", action_kind=action.type.value
+        )
+        def_debuffs = aggregate_effects(
+            defender.active_effects, side="defender", action_kind=action.type.value
+        )
         # Figment aura: enemies take increased damage. Only when hitting an enemy.
         aura_vuln = 0.0
         unnerved_cd = 0.0
@@ -1255,11 +1446,22 @@ class Engine:
             )
             # 惊惶: 我方击中该目标时暴击伤害提高（effect on defender → attacker CD）.
             for eff in defender.active_effects:
-                if eff.id != AVENTURINE_UNNERVED_ID:
-                    continue
-                for mod in eff.modifiers:
-                    if mod.target_stat == "crit_dmg" and mod.operation == "add":
-                        unnerved_cd += float(mod.value) * float(eff.current_stacks)
+                if eff.id == AVENTURINE_UNNERVED_ID:
+                    for mod in eff.modifiers:
+                        if mod.target_stat == "crit_dmg" and mod.operation == "add":
+                            unnerved_cd += float(mod.value) * float(eff.current_stacks)
+                if eff.id == "lc_23059_purgatory":
+                    wearer_id = eff.source_id
+                    si = 1
+                    wearer = (
+                        self.state.find_char(wearer_id) if wearer_id else None
+                    )
+                    if wearer is not None:
+                        si = int(wearer.char.light_cone_superimposition or 1)
+                    params = lc_param_list(23059, si)
+                    unnerved_cd += float(params[3])
+                    if wearer_id and attacker.char.id == wearer_id:
+                        unnerved_cd += float(params[4])
 
         dmg_boost_pct = (
             a_stats.dmg_boost.get("all", 0.0)
@@ -1321,7 +1523,7 @@ class Engine:
             + stat_bonus_for_element(atk_buffs, "res_pen", dmg.element)
             + atk_buffs.get("res_pen", 0.0)
         )
-        #no fictional weakness RES PEN. Weakness → RES=0 on dummy
+        # E1.1h-2: no fictional weakness RES PEN. Weakness → RES=0 on dummy
         # (element_res table); additive RES zone must not invent +0.20 pen.
 
         mit_layers: list[float] = []
@@ -1354,6 +1556,21 @@ class Engine:
             scaling_base = attacker.variables.get("heal_accumulated", 0.0)
         else:
             scaling_base = a_stats.atk + atk_buffs.get("atk", 0.0)
+        scale_src = getattr(dmg, "scaling_from", "self")
+        owner = None
+        if attacker.char.is_memosprite and attacker.char.owner_id:
+            owner = self.state.find_char(attacker.char.owner_id)
+        if scale_src == "owner" and owner is not None:
+            o_stats = owner.char.build.stats
+            o_buffs = aggregate_effects(
+                owner.active_effects, side="attacker", action_kind=action.type.value
+            )
+            if dmg.scaling_stat == "hp":
+                scaling_base = o_stats.hp_max + o_buffs.get("hp_max", 0.0)
+            elif dmg.scaling_stat == "defense":
+                scaling_base = o_stats.defense + o_buffs.get("defense", 0.0)
+            elif dmg.scaling_stat != "heal_accumulated":
+                scaling_base = o_stats.atk + o_buffs.get("atk", 0.0)
 
         skill_mult = dmg.multiplier
         if dmg.memoria_base is not None:
@@ -1374,6 +1591,23 @@ class Engine:
         )
 
         crit_rate = a_stats.crit_rate + atk_buffs.get("crit_rate", 0.0)
+        crit_dmg = a_stats.crit_dmg + atk_buffs.get("crit_dmg", 0.0)
+        if (
+            attacker.char.is_memosprite
+            and self.combat_rules.memosprite_inherit_secondary_stats
+            and owner is not None
+        ):
+            o_buffs = aggregate_effects(
+                owner.active_effects, side="attacker", action_kind=action.type.value
+            )
+            o_stats = owner.char.build.stats
+            crit_rate = o_stats.crit_rate + o_buffs.get("crit_rate", 0.0)
+            crit_dmg = o_stats.crit_dmg + o_buffs.get("crit_dmg", 0.0)
+            dmg_boost_pct += (
+                o_stats.dmg_boost.get("all", 0.0)
+                + o_stats.dmg_boost.get(dmg.element, 0.0)
+                + o_buffs.get("dmg_boost", 0.0)
+            )
         # Acheron E1: +18% CR when defender has any debuff.
         if (
             attacker.char.id == "acheron"
@@ -1400,8 +1634,7 @@ class Engine:
             attacker_level=attacker.char.level,
             attacker_atk=scaling_base,
             attacker_crit_rate=crit_rate,
-            attacker_crit_dmg=a_stats.crit_dmg
-            + atk_buffs.get("crit_dmg", 0.0)
+            attacker_crit_dmg=crit_dmg
             + unnerved_cd
             + float(relic_cd),
             attacker_break_effect=a_stats.break_effect + atk_buffs.get("break_effect", 0.0),
@@ -1432,6 +1665,7 @@ class Engine:
             weaken_pct=def_debuffs.get("weaken", 0.0),
             super_break_boost_pct=atk_buffs.get("super_break_boost", 0.0)
             + atk_buffs.get("super_break_dmg", 0.0),
+            true_dmg_pct=float(atk_buffs.get("true_followup", 0.0)),
         )
 
     # -----------------------------

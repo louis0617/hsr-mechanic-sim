@@ -37,11 +37,13 @@ FILES = (
     "ExcelOutput/EquipmentSkillConfig.json",
     "ExcelOutput/RelicSetConfig.json",
     "ExcelOutput/RelicSetSkillConfig.json",
+    "ExcelOutput/AvatarServantSkillConfig.json",
     "TextMap/TextMapEN.json",
+    "TextMap/TextMapCHS.json",
 )
 
 # Expected sizes/blob prefixes for commit 4ce30f69b32d (D1 + D6 + D5.2).
-PINNED_EXPECT: dict[str, dict[str, tuple[int, str]]] = {
+D1_EXPECT: dict[str, dict[str, tuple[int, str]]] = {
     "4ce30f69b32d": {
         "ExcelOutput/AvatarSkillConfig.json": (10_683_800, "2fb72d62e4e9"),
         "ExcelOutput/AvatarConfig.json": (230_483, "d400bf68e117"),
@@ -55,7 +57,7 @@ PINNED_EXPECT: dict[str, dict[str, tuple[int, str]]] = {
         "ExcelOutput/EquipmentPromotionConfig.json": (677_186, "707a0cf9e371"),
         "ExcelOutput/EquipmentSkillConfig.json": (391_164, "5d0d2dcd75a9"),
         "ExcelOutput/RelicSetConfig.json": (22_101, "0ddef773f0f6"),
-        "ExcelOutput/RelicSetSkillConfig.json": (30_473, "d04cd68ad009"),
+        "ExcelOutput/AvatarServantSkillConfig.json": (619_516, "a630fc550a3f"),
         "TextMap/TextMapEN.json": (57_589_766, "3837d223f756"),
     }
 }
@@ -67,8 +69,8 @@ def lookup_pinned(table: dict[str, str], commit_sha: str) -> str | None:
     return None
 
 
-def pinned_row(commit_sha: str, path: str) -> tuple[int, str] | None:
-    for key, table in PINNED_EXPECT.items():
+def d1_row(commit_sha: str, path: str) -> tuple[int, str] | None:
+    for key, table in D1_EXPECT.items():
         if commit_sha.startswith(key) or key.startswith(commit_sha):
             return table.get(path)
     return None
@@ -180,7 +182,7 @@ def fetch_one(path: str, sha: str, meta: dict) -> tuple[Path, str, int]:
             f"API mismatch {path}: downloaded {size} blob {blob}; "
             f"API size {api_size} blob {api_sha}"
         )
-    expect = pinned_row(sha, path)
+    expect = d1_row(sha, path)
     if expect is not None:
         exp_size, exp_prefix = expect
         if size != exp_size or not blob.startswith(exp_prefix):

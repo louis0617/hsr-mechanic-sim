@@ -1,0 +1,15 @@
+character_id: "1106"
+slug: pela
+decision_dims:
+  - name: sp_min
+    values: [1, 2, 99]
+    default: 1
+  - name: ult_timing
+    values: [immediate_when_full]
+    default: immediate_when_full
+cycle_signature_fields:
+  - {kind: energy, on: self}
+  # L2 终结技减防效果 id
+  - {kind: modifier_stacks, id: pela_ult_def_shred, on: enemies_any}
+  - {kind: skill_points, on: team}
+  - {kind: av_phase, on: self}

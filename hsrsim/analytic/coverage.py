@@ -38,7 +38,7 @@ class ActionBuff:
     ``iterate_state`` routes through ``expected_combo_damage``. The legacy
     damage fields remain for single-buff binary mix (L1-T5/T6).
 
-     extensions:
+    E1.1g-4 extensions:
     - ``source_action=\"all\"``: apply rate = nb+ns+u
     - ``enemy_speed>0``: duration ticks on enemy clock
     - ``apply_before_damage=False``: 先算伤再挂 → cold-hit coverage
@@ -69,9 +69,9 @@ class ActionBuff:
     sp_gain_ult: float = 0.0
     blaze_threshold: float = 4.0
     applies_to: frozenset[str] | None = None
-    #mirage hit-weighted coverage (ult multi-segment).
+    # E1.1g-5: mirage hit-weighted coverage (ult multi-segment).
     mirage_hits_per_attack: float = 1.0
-    # F0-lite /: when set, skip min(1,λ) and use this coverage.
+    # F0-lite / E1.3: when set, skip min(1,λ) and use this coverage.
     force_coverage: float | None = None
 
     def __post_init__(self) -> None:
@@ -187,7 +187,7 @@ class EnemyStackVuln:
     """Enemy vulnerability from Sparkle figment stacks plus optional cipher.
 
     Trigger rate is the team's total skill rate ``Σ ns_i``. Expected stacks
-    tick on the stack holder's turns (: Sparkle), falling back to
+    tick on the stack holder's turns (E1.1d: Sparkle), falling back to
     ``enemy_speed / 100`` when ``stack_holder_id`` is absent. Cipher is an
     ally buff; coverage uses recipient uptime when ``cipher_recipient_id``
     is set, else the legacy enemy-turn clock. Total vulnerability is
@@ -230,7 +230,7 @@ class StackVulnState:
 
 @dataclass(frozen=True)
 class DotStream:
-    """Enemy-turn DoT contribution (): ticks = enemy_turns × coverage."""
+    """Enemy-turn DoT contribution (E1.1g-4): ticks = enemy_turns × coverage."""
 
     id: str
     applier_id: str
@@ -272,7 +272,7 @@ class FixedPointResult:
     stack_vulns: dict[str, StackVulnState] | None = None
     enum_groups: list[list[str]] | None = None
     combo_notes: list[str] | None = None
-    #solution without overflow extras (same coverages/adv), for before/after.
+    # D1.7: solution without overflow extras (same coverages/adv), for before/after.
     solution_before_overflow: FlowSolution | None = None
     overflow_report: object | None = None
     dot_damage_per_100_av: float = 0.0
@@ -324,7 +324,7 @@ def _coverage(buff: ActionBuff, rates: dict[str, dict[str, float]]) -> float:
         return 1.0
 
     if buff.coverage_mode == "mirage_residual":
-        # 先算伤再挂 working model (engine choice; see evidence).
+        # 先算伤再挂 working model (engine choice; see E1.1g-5 evidence).
         # Residual on attack-start from all apply rate; single-hit uses normal-turn
         # clock; multi-hit ult averages cold first segment + warm rest.
         row = rates[buff.applier_id]
@@ -832,6 +832,7 @@ def iterate_state(
     stack_vulns: list[EnemyStackVuln] | None = None,
     action_contexts: dict[str, dict[str, DamageContext]] | None = None,
     fixed_rates: dict[str, dict[str, float]] | None = None,
+    skill_shares: dict[str, float] | None = None,
     apply_advance: bool = False,
     sp_other: float = 0.0,
     counters: list[CounterResource] | None = None,
@@ -851,7 +852,10 @@ def iterate_state(
     ``fixed_rates`` pins buff-only (or other) actions for the outer grid in
     ``enumerate_buff_actions``; every inner ``solve_flow`` call receives them.
 
-    ``apply_overflow`` (): fold fill-then-spend average overshoot into
+    ``skill_shares`` pins ``ns / (nb+ns)`` per character. Compatible with
+    ``apply_advance``; incompatible with pinning basic/skill via ``fixed_rates``.
+
+    ``apply_overflow`` (D1.7): fold fill-then-spend average overshoot into
     energy / counter consume; extras refresh from the latest rates in-loop.
     """
     from hsrsim.analytic.overflow import build_overflow_report
@@ -863,6 +867,7 @@ def iterate_state(
     counters = list(counters or [])
     dot_streams = list(dot_streams or [])
     fixed_rates = {cid: dict(actions) for cid, actions in (fixed_rates or {}).items()}
+    skill_shares = {cid: float(v) for cid, v in (skill_shares or {}).items()}
     by_id = _known(characters)
     ids = [c.id for c in characters]
     for item in advances:
@@ -872,6 +877,8 @@ def iterate_state(
         _require_cast(by_id, spec.cipher_applier_id, f"stack vuln {spec.id} cipher applier")
     for cid in fixed_rates:
         _require_cast(by_id, cid, "fixed_rates")
+    for cid in skill_shares:
+        _require_cast(by_id, cid, "skill_shares")
 
     cov_ids = [b.id for b in buffs] + [s.id for s in speed_buffs]
     if len(cov_ids) != len(set(cov_ids)):
@@ -917,6 +924,7 @@ def iterate_state(
             counters=counters or None,
             extra_turns=adv if apply_advance else None,
             fixed_rates=fixed_rates or None,
+            skill_shares=skill_shares or None,
             energy_consume_extra=e_extra or None,
             counter_consume_extra=c_extra or None,
         )

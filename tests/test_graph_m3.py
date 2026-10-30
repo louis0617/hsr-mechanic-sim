@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from hsrsim.graph.compiler import HSRGraphCompiler, graph_summary
-from hsrsim.catalog.loader import CHARACTERS_DIR, load_character
+from hsrsim.graph.loader import CHARACTERS_DIR, load_character
 from hsrsim.graph.validators import (
     check_coverage,
     check_parameter_locality,

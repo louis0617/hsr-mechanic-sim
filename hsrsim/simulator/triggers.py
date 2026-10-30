@@ -1,4 +1,4 @@
-"""Event trigger bus (): emit, depth limit, Acheron R1–R5, stack transfer."""
+"""Event trigger bus (C3b): emit, depth limit, Acheron R1–R5, stack transfer."""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -9,7 +9,7 @@ from hsrsim.simulator.combat_rules import (
     CombatRules,
     StackTransferRule,
 )
-from hsrsim.simulator.energy import grant_spbase_on_action
+from hsrsim.simulator.energy import grant_energy, grant_spbase_on_action
 from hsrsim.simulator.queries import effect_stacks, select_unit
 from hsrsim.simulator.state import BattleState, CharacterState
 from hsrsim.simulator.types import Effect, EffectModifier, EffectTarget
@@ -28,6 +28,12 @@ from hsrsim.simulator.field_zone import (
     FieldZone,
 )
 from hsrsim.rules.wiring import lc_param_list
+from hsrsim.rules.pela_talent import talent_extra_energy
+from hsrsim.rules.shared_gaps import (
+    SPARKLE_11306102_FREE_VAR,
+    SPARKLE_11306102_SP_THRESHOLD,
+    SPARKLE_11306102_TURN_SP_VAR,
+)
 
 CRIMSON_KNOT_ID = "crimson_knot"
 SLASHED_DREAM_ID = "nihility_stacks"
@@ -59,7 +65,7 @@ BLIND_BET_EXTRA_ICD = 2.0
 CHIP_TRACE_DURATION = 3
 AVENTURINE_FUA_ACTION_ID = "aventurine_fua"
 
-#how an effect reached the field (R1 only counts action_cast).
+# D1.13: how an effect reached the field (R1 only counts action_cast).
 APPLY_SOURCE_ACTION_CAST = "action_cast"
 APPLY_SOURCE_TRIGGERED = "triggered"
 
@@ -74,7 +80,7 @@ def crimson_knot_template(*, stacks: int = 1) -> Effect:
         is_buff=False,
         target=EffectTarget.SINGLE_ENEMY,
         duration_turns=-1,
-        max_stacks=9,  #hard cap 9 (not 99)
+        max_stacks=9,  # E1.1h-3: hard cap 9 (not 99)
         current_stacks=max(1, min(9, stacks)),
         modifiers=[],
     )
@@ -111,7 +117,7 @@ class EventBus:
     depth_exceeded_count: int = 0
     action_ctx: ActionTriggerContext | None = None
     acheron_e0_enabled: bool = True
-    #shared counter-gain specs (same JSON as L1 adapter).
+    # D1.1: shared counter-gain specs (same JSON as L1 adapter).
     counter_gain_specs: list[CounterGainSpec] = field(default_factory=list)
     # Optional RNG for LC EHR rolls (set by Engine).
     rng: Any = None
@@ -198,6 +204,8 @@ class EventBus:
             return
         self.depth += 1
         try:
+            if self.log and event in ("effect_applied", "effect_expired"):
+                self.log(event, payload)
             for handler in list(self._handlers.get(event, [])):
                 handler(payload)
         finally:
@@ -213,7 +221,9 @@ class EventBus:
         for v in acheron.char.build.variables:
             if v.id == SLASHED_DREAM_ID:
                 return float(v.max_value)
-        return 9.0
+        raise KeyError(
+            "UNKNOWN slashed-dream cap: acheron has no nihility_stacks variable"
+        )
 
     def _grant_dream(self, acheron: CharacterState, *, source: str) -> None:
         cur = float(acheron.variables.get(SLASHED_DREAM_ID, 0.0))
@@ -242,7 +252,7 @@ class EventBus:
     ) -> bool:
         """+1 dream and +1 knot while under cap; at dream=9 overflow → 四相断我.
 
-        （撤销 g-2「满层仍挂集真赤」）:
+        E1.1h-3（撤销 g-2「满层仍挂集真赤」）:
         - dream < 9: +1 dream + (if target) +1 knot（knot 上限 9）
         - dream == 9: **不**再挂集真赤；溢出 → +1 四相（cap 3），否则 waste
         依据：残梦与集真赤同步；叠满后不再叠加，满后再试挂 → 四相。
@@ -346,7 +356,7 @@ class EventBus:
         was_refresh = existing is not None
         stacks_before = int(existing.current_stacks) if existing else 0
         if stacks_before >= 9:
-            # Hard cap 9: refuse without stacking .
+            # Hard cap 9: refuse without stacking (E1.1h-3).
             if self.log:
                 self.log(
                     "crimson_knot_capped",
@@ -393,9 +403,9 @@ class EventBus:
             return
         if not is_skill_cast_kind(ctx.action_kind, self.rules):
             return
-        #no apply_source gate. Any in-window enemy debuff (incl. future
+        # E1.1c: no apply_source gate. Any in-window enemy debuff (incl. future
         # zone) shares per-action cap 1 via talent_settled.
-        #figment is a Sparkle self-buff — never enemy effect_applied,
+        # E1.1d: figment is a Sparkle self-buff — never enemy effect_applied,
         # so R1 excludes it naturally (no FIGMENT switch).
         if not payload.get("is_debuff"):
             return
@@ -414,6 +424,9 @@ class EventBus:
                 override=self.rules.zone_proc_counts_for_dream
             ):
                 return
+        if payload.get("from_trigger") == "mortenax_zone_talent":
+            if not bool(self.rules.mortenax_zone_debuff_counts_for_dream):
+                return
         target_id = payload.get("target_id")
         if not target_id:
             return
@@ -425,7 +438,7 @@ class EventBus:
             self.log("toughness_recovered", dict(payload))
 
     def _on_sp_consumed(self, payload: dict[str, Any]) -> None:
-        """: team SP spend → Sparkle gains sparkle_figment stacks.
+        """E1.1d figment + S2 11306102 turn SP window.
 
         Figment is a self-buff on Sparkle. Enemy vuln is an aura read at damage
         time — no enemy effect_applied (R1 naturally does not count).
@@ -433,10 +446,11 @@ class EventBus:
         amount = int(payload.get("amount") or 0)
         if amount <= 0:
             return
+        consumer_id = str(payload.get("consumer_id") or "unknown")
+        self._sparkle_11306102_on_sp_consumed(consumer_id, amount)
         sparkle, tmpl = self._sparkle_figment_holder_and_template()
         if sparkle is None or tmpl is None:
             return
-        consumer_id = str(payload.get("consumer_id") or "unknown")
         for _ in range(amount):
             stacks_before = effect_stacks(sparkle, SPARKLE_FIGMENT_ID)
             result = sparkle.apply_effect(tmpl, source_id="sparkle")
@@ -455,6 +469,46 @@ class EventBus:
                     "consumer_id": consumer_id,
                 },
             )
+
+    def _sparkle_11306102_on_sp_consumed(
+        self, consumer_id: str, amount: int
+    ) -> None:
+        """S2: ally spends ≥3 SP in one NORMAL turn → Sparkle next Skill free.
+
+        Working assumptions (see Phase 0.5c C items for Siqi):
+        - 「单回合」= that ally's current NORMAL turn (``current_turn.owner_id``).
+        - Ult SP *gain* is not consume; SP spent after ult gain still counts.
+        - Insert ultimates do not open a NORMAL turn window (no count there).
+        """
+        if not bool(self.rules.sparkle_trace_11306102):
+            return
+        sparkle = self.state.find_char("sparkle")
+        if sparkle is None or not sparkle.is_alive:
+            return
+        turn = self.state.current_turn
+        if turn is None or str(getattr(turn, "kind", "") or "") != "NORMAL":
+            return
+        owner = str(getattr(turn, "owner_id", "") or "")
+        if not owner or owner != consumer_id:
+            return
+        consumer = self.state.find_char(consumer_id)
+        if consumer is None:
+            return
+        key = SPARKLE_11306102_TURN_SP_VAR
+        before = int(consumer.variables.get(key, 0) or 0)
+        after = before + int(amount)
+        consumer.variables[key] = float(after)
+        if before < SPARKLE_11306102_SP_THRESHOLD <= after:
+            sparkle.variables[SPARKLE_11306102_FREE_VAR] = 1.0
+            if self.log:
+                self.log(
+                    "sparkle_11306102_armed",
+                    {
+                        "consumer_id": consumer_id,
+                        "turn_sp": after,
+                        "threshold": SPARKLE_11306102_SP_THRESHOLD,
+                    },
+                )
 
     def _sparkle_figment_holder_and_template(
         self,
@@ -499,6 +553,16 @@ class EventBus:
         if actor_id == "jiaoqiu" and action_kind == "ultimate":
             self._jiaoqiu_ult_equalize_and_open_zone(actor)
             return
+        if actor_id == "mortenaxblade" and action_id == "mortenax_ult_bind":
+            self._mortenax_open_zone(actor)
+            from hsrsim.simulator.energy import convert_mortenax_overflow_after_ult
+
+            convert_mortenax_overflow_after_ult(actor, log=self.log)
+            return
+        if actor_id == "mortenaxblade" and action_kind == "ultimate":
+            from hsrsim.simulator.energy import convert_mortenax_overflow_after_ult
+
+            convert_mortenax_overflow_after_ult(actor, log=self.log)
         if actor in self.state.enemies:
             self._try_zone_ashen_proc(actor)
 
@@ -681,6 +745,7 @@ class EventBus:
         self._apply_spbase_energy(payload)
         self._apply_sacerdos_4pc(payload)
         self._apply_acheron_on_action_resolved(payload)
+        self._apply_mortenax_talent_after_attack(payload)
 
     def _apply_sacerdos_4pc(self, payload: dict[str, Any]) -> None:
         """Sacerdos 121 4pc: skill/ult on single ally → +18% CD, 2 turns, max 2.
@@ -742,7 +807,7 @@ class EventBus:
         target.apply_effect(tmpl, source_id="sparkle")
 
     def _apply_spbase_energy(self, payload: dict[str, Any]) -> None:
-        """: SPBase × Stats.err on skill-cast action_resolved. Hit/kill: UNKNOWN."""
+        """C4: SPBase × Stats.err on skill-cast action_resolved. Hit/kill: UNKNOWN."""
         ctx = self.action_ctx
         if ctx is None:
             return
@@ -853,7 +918,13 @@ class EventBus:
     def _on_turn_start(self, payload: dict[str, Any]) -> None:
         """Acheron E2 + Aventurine Blind Bet ICD + zone duration tick."""
         unit_id = str(payload.get("unit_id") or "")
+        # S2: reset per-ally NORMAL-turn SP consume counter at turn open.
+        unit = self.state.find_char(unit_id) if unit_id else None
+        if unit is not None:
+            unit.variables[SPARKLE_11306102_TURN_SP_VAR] = 0.0
         self._tick_zones_on_source_turn(unit_id)
+        self._mortenax_lc_turn_energy(unit_id)
+        self._mortenax_sensitivity_heal(unit_id)
         if unit_id == "acheron":
             ach = self.state.find_char("acheron")
             if ach is not None and getattr(ach, "_pioneer_double_active", False):
@@ -909,6 +980,31 @@ class EventBus:
         self._apply_lc_mask_battle_start()
         self._apply_broken_keel_team_cd()
         self._apply_pela_team_ehr()
+        self._apply_mortenax_battle_start()
+        self._apply_jiaoqiu_1218102_gate()
+
+    def _apply_jiaoqiu_1218102_gate(self) -> None:
+        """S1: strip loadout-baked Hearth Kindle ATK when CombatRules disables it."""
+        jq = self.state.find_char("jiaoqiu")
+        if jq is None:
+            return
+        flat = float(getattr(jq.char, "hearth_kindle_atk_flat", 0.0) or 0.0)
+        if flat <= 0.0:
+            return
+        if bool(self.rules.jiaoqiu_trace_1218102):
+            if self.log:
+                self.log(
+                    "jiaoqiu_1218102_active",
+                    {"atk_flat": flat, "ehr": jq.char.build.stats.ehr},
+                )
+            return
+        jq.char.build.stats.atk = max(0.0, float(jq.char.build.stats.atk) - flat)
+        jq.char.hearth_kindle_atk_flat = 0.0
+        if self.log:
+            self.log(
+                "jiaoqiu_1218102_stripped",
+                {"atk_flat_removed": flat, "atk_after": jq.char.build.stats.atk},
+            )
 
     def _apply_pela_team_ehr(self) -> None:
         """佩拉行迹「秘策」：在场时我方全体效果命中 +10%（SkillTree 1106102）。"""
@@ -1147,6 +1243,8 @@ class EventBus:
             self._apply_lc_22000_energy(attacker, defender, si)
         elif lc_id == 23023 and action_kind == "follow_up":
             self._apply_lc_23023_fua_vuln(attacker, defender, si)
+        elif lc_id == 23059 and action_kind in ("skill", "follow_up"):
+            self._apply_lc_23059_purgatory(attacker, defender, si)
         # Pela talent: extra energy when hitting a debuffed enemy.
         if attacker.char.id == "pela":
             self._pela_talent_energy_on_hit(attacker, defender)
@@ -1198,7 +1296,7 @@ class EventBus:
         turns = int(params[3])
         upgraded_vuln = float(params[5])
         # 原文：「若目标处于装备者施加的持续伤害状态」→ 升级卸甲为穷寇。
-        #generic wearer DoT (dot_instance + source/dot_source_id == wearer).
+        # E1.1g-2: generic wearer DoT (dot_instance + source/dot_source_id == wearer).
         # No ashen_roast name hardcode — 烬煨满足条件则自然升级.
         has_wearer_dot = _defender_has_wearer_dot(defender, attacker.char.id)
         if has_wearer_dot:
@@ -1278,7 +1376,9 @@ class EventBus:
         from hsrsim.simulator.ehr import debuff_hit_chance
 
         final_chance = debuff_hit_chance(chance, ehr, effect_res)
-        roll = self.rng.random() if self.rng is not None else 0.0
+        if self.rng is None:
+            raise RuntimeError("UNKNOWN RNG: 21015 Ensnared roll requires seeded rng")
+        roll = self.rng.random()
         if roll > final_chance:
             return
         debuff = Effect(
@@ -1329,7 +1429,9 @@ class EventBus:
         if not has_def_down:
             return
         params = lc_param_list(22000, si)
-        gain = float(params[1]) if len(params) > 1 else 8.0
+        if len(params) < 2:
+            raise KeyError("LC 22000 ParamList missing #2 extra energy")
+        gain = float(params[1])
         before = float(attacker.energy_current)
         attacker.energy_current = min(
             float(attacker.char.build.stats.energy_max), before + gain
@@ -1349,7 +1451,7 @@ class EventBus:
     def _pela_talent_energy_on_hit(
         self, attacker: CharacterState, defender: CharacterState
     ) -> None:
-        """天赋数据采集：目标有减益时额外能量（E6 烘焙 L12=11）；每行动至多一次。"""
+        """天赋数据采集：目标有减益时额外能量（ParamList L12）；每行动至多一次。"""
         ctx = self.action_ctx
         if ctx is not None and ctx.pela_talent_energy_done:
             return
@@ -1358,7 +1460,7 @@ class EventBus:
             return
         if ctx is not None:
             ctx.pela_talent_energy_done = True
-        gain = 11.0
+        gain = talent_extra_energy(attacker.char.talent_skill_level)
         before = float(attacker.energy_current)
         attacker.energy_current = min(
             float(attacker.char.build.stats.energy_max), before + gain
@@ -1387,6 +1489,7 @@ class EventBus:
         defender = self.state.find_char(defender_id)
         if defender is None or defender not in self.state.allies:
             return
+        self._mortenax_on_being_hit(defender, attacker_id)
         self._try_lc_trend_burn(defender, attacker_id)
         if not any(e.id == AVENTURINE_CHIP_ID for e in defender.active_effects):
             return
@@ -1729,3 +1832,338 @@ class EventBus:
                 },
             )
         return dest
+
+    def _mortenax_zone_active(self) -> bool:
+        from hsrsim.rules.mortenax import ZONE_ID
+
+        return any(z.id == ZONE_ID and z.is_active() for z in self.state.active_zones)
+
+    def _apply_mortenax_battle_start(self) -> None:
+        from hsrsim.rules.mortenax import ENERGY_FLOOR, MORTENAX_ID
+
+        actor = self.state.find_char(MORTENAX_ID)
+        if actor is None:
+            return
+        emax = float(actor.char.build.stats.energy_max)
+        floor = ENERGY_FLOOR * emax
+        if actor.energy_current < floor:
+            actor.energy_current = floor
+            if self.log:
+                self.log(
+                    "energy_gained",
+                    {
+                        "actor_id": MORTENAX_ID,
+                        "source": "trace_1507101_battle_start_floor",
+                        "energy_after": actor.energy_current,
+                    },
+                )
+
+    def _mortenax_lc_turn_energy(self, unit_id: str) -> None:
+        from hsrsim.rules.mortenax import LC_ENERGY_ONCE_VAR, LC_ID, MORTENAX_ID
+
+        if unit_id != MORTENAX_ID:
+            return
+        actor = self.state.find_char(MORTENAX_ID)
+        if actor is None or int(actor.char.light_cone_id or 0) != LC_ID:
+            return
+        if float(actor.variables.get(LC_ENERGY_ONCE_VAR, 0.0)) >= 1.0:
+            return
+        si = int(actor.char.light_cone_superimposition or 1)
+        raw = float(lc_param_list(LC_ID, si)[1])
+        grant_energy(actor, raw, source="lc_23059_turn_energy", log=self.log)
+        actor.variables[LC_ENERGY_ONCE_VAR] = 1.0
+
+    def _mortenax_sensitivity_heal(self, unit_id: str) -> None:
+        from hsrsim.rules.mortenax import MORTENAX_ID
+
+        if unit_id != MORTENAX_ID or not self.rules.mortenax_sensitivity_full_heal:
+            return
+        actor = self.state.find_char(MORTENAX_ID)
+        if actor is None:
+            return
+        actor.hp_current = float(actor.char.build.stats.hp_max)
+        if self.log:
+            self.log(
+                "hp_healed",
+                {
+                    "actor_id": MORTENAX_ID,
+                    "source": "sensitivity_full_heal_not_original",
+                    "hp_after": actor.hp_current,
+                },
+            )
+
+    def _apply_lc_23059_purgatory(
+        self, attacker: CharacterState, defender: CharacterState, si: int
+    ) -> None:
+        from hsrsim.rules.mortenax import PURGATORY_ID
+
+        params = lc_param_list(23059, si)
+        turns = int(params[2])
+        debuff = Effect(
+            id=PURGATORY_ID,
+            name="Purgatory",
+            is_buff=False,
+            target=EffectTarget.SINGLE_ENEMY,
+            duration_turns=turns,
+            max_stacks=1,
+            current_stacks=1,
+            modifiers=[],
+        )
+        result = defender.apply_effect(debuff, source_id=attacker.char.id)
+        self.emit(
+            "effect_applied",
+            {
+                "effect_id": PURGATORY_ID,
+                "is_debuff": True,
+                "source_id": attacker.char.id,
+                "target_id": defender.char.id,
+                "target_side": "enemy",
+                "was_refresh": result["was_refresh"],
+                "from_trigger": "lc_23059",
+            },
+        )
+
+    def _mortenax_balefire_template(self) -> Effect:
+        from hsrsim.rules.mortenax import (
+            BALEFIRE_DEF_SHRED,
+            BALEFIRE_ID,
+            BALEFIRE_TURNS,
+            BALEFIRE_VULN,
+        )
+
+        actor = self.state.find_char("mortenaxblade")
+        if actor is not None:
+            for eff in actor.char.build.effects:
+                if eff.id == BALEFIRE_ID:
+                    return eff.model_copy(deep=True)
+        return Effect(
+            id=BALEFIRE_ID,
+            name="Balefire Bind",
+            is_buff=False,
+            target=EffectTarget.ALL_ENEMIES,
+            duration_turns=BALEFIRE_TURNS,
+            max_stacks=1,
+            current_stacks=1,
+            modifiers=[
+                EffectModifier(target_stat="def_reduction", operation="add", value=BALEFIRE_DEF_SHRED),
+                EffectModifier(target_stat="vuln", operation="add", value=BALEFIRE_VULN),
+            ],
+        )
+
+    def _apply_balefire(self, enemy: CharacterState, *, from_trigger: str) -> None:
+        tmpl = self._mortenax_balefire_template()
+        result = enemy.apply_effect(tmpl, source_id="mortenaxblade")
+        self.emit(
+            "effect_applied",
+            {
+                "effect_id": tmpl.id,
+                "is_debuff": True,
+                "source_id": "mortenaxblade",
+                "target_id": enemy.char.id,
+                "target_side": "enemy",
+                "was_refresh": result["was_refresh"],
+                "from_trigger": from_trigger,
+            },
+        )
+
+    def _mortenax_open_zone(self, actor: CharacterState) -> None:
+        from hsrsim.rules.mortenax import (
+            COUNTDOWN_AV,
+            FURY_CD,
+            FURY_CR,
+            FURY_ID,
+            OTHER_NIHILITY_ULT_DMG,
+            SOLO_SELF_DMG,
+            ZONE_AGGRO_MULT,
+            ZONE_ALLY_DMG,
+            ZONE_DMG_ID,
+            ZONE_ID,
+            ZONE_MIT,
+            ZONE_SELF_DMG_ID,
+            ZONE_ULT_DMG_ID,
+        )
+        from hsrsim.simulator.queries import count_units
+
+        for e in self.state.enemies:
+            if e.is_alive:
+                self._apply_balefire(e, from_trigger="mortenax_ult_bind")
+        fury = next((e for e in actor.char.build.effects if e.id == FURY_ID), None)
+        if fury is None:
+            fury = Effect(
+                id=FURY_ID,
+                name="Infinite Fury",
+                is_buff=True,
+                target=EffectTarget.SELF,
+                duration_turns=99,
+                max_stacks=1,
+                current_stacks=1,
+                modifiers=[
+                    EffectModifier(target_stat="crit_rate", operation="add", value=FURY_CR),
+                    EffectModifier(target_stat="crit_dmg", operation="add", value=FURY_CD),
+                ],
+            )
+        actor.apply_effect(fury.model_copy(deep=True), source_id=actor.char.id)
+        other_nihility = count_units(
+            self.state,
+            "allies",
+            {"path": "nihility", "is_alive": True},
+            exclude="self",
+            self_id=actor.char.id,
+        )
+        team_dmg = Effect(
+            id=ZONE_DMG_ID,
+            name="Mortenax Zone DMG",
+            is_buff=True,
+            target=EffectTarget.ALL_ALLIES,
+            duration_turns=99,
+            max_stacks=1,
+            current_stacks=1,
+            modifiers=[EffectModifier(target_stat="dmg_boost", operation="add", value=ZONE_ALLY_DMG)],
+        )
+        for ally in self.state.allies:
+            if ally.is_alive:
+                ally.apply_effect(team_dmg.model_copy(deep=True), source_id=actor.char.id)
+        if other_nihility >= 1:
+            ult_b = Effect(
+                id=ZONE_ULT_DMG_ID,
+                name="Mortenax other-Nihility Ult DMG",
+                is_buff=True,
+                target=EffectTarget.ALL_ALLIES,
+                duration_turns=99,
+                max_stacks=1,
+                current_stacks=1,
+                modifiers=[
+                    EffectModifier(
+                        target_stat="dmg_boost",
+                        operation="add",
+                        value=OTHER_NIHILITY_ULT_DMG,
+                        applies_to_actions=["ultimate"],
+                    )
+                ],
+            )
+            for ally in self.state.allies:
+                if ally.is_alive:
+                    ally.apply_effect(ult_b.model_copy(deep=True), source_id=actor.char.id)
+        else:
+            self_b = Effect(
+                id=ZONE_SELF_DMG_ID,
+                name="Mortenax solo DMG",
+                is_buff=True,
+                target=EffectTarget.SELF,
+                duration_turns=99,
+                max_stacks=1,
+                current_stacks=1,
+                modifiers=[
+                    EffectModifier(target_stat="dmg_boost", operation="add", value=SOLO_SELF_DMG)
+                ],
+            )
+            actor.apply_effect(self_b, source_id=actor.char.id)
+        actor.variables["_aggro_mult"] = ZONE_AGGRO_MULT
+        mit = Effect(
+            id="mortenax_zone_mit",
+            name="Mortenax Zone MIT",
+            is_buff=True,
+            target=EffectTarget.SELF,
+            duration_turns=99,
+            max_stacks=1,
+            current_stacks=1,
+            modifiers=[EffectModifier(target_stat="mit", operation="add", value=ZONE_MIT)],
+        )
+        actor.apply_effect(mit, source_id=actor.char.id)
+        self.state.active_zones.append(
+            FieldZone(
+                id=ZONE_ID,
+                source_id=actor.char.id,
+                remaining_turns=99,
+                expire_at_av=float(self.state.av_clock) + COUNTDOWN_AV,
+            )
+        )
+
+    def expire_mortenax_zones(self, zones: list) -> None:
+        from hsrsim.rules.mortenax import (
+            ENERGY_FLOOR,
+            FURY_ID,
+            MORTENAX_ID,
+            ZONE_DMG_ID,
+            ZONE_ID,
+            ZONE_SELF_DMG_ID,
+            ZONE_ULT_DMG_ID,
+        )
+
+        ids = {z.id for z in zones}
+        self.state.active_zones = [z for z in self.state.active_zones if z.id not in ids]
+        actor = self.state.find_char(MORTENAX_ID)
+        if actor is None:
+            return
+        for eid in (FURY_ID, ZONE_SELF_DMG_ID, "mortenax_zone_mit"):
+            actor.remove_effect(eid)
+        actor.variables["_aggro_mult"] = 1.0
+        for ally in self.state.allies:
+            ally.remove_effect(ZONE_DMG_ID)
+            ally.remove_effect(ZONE_ULT_DMG_ID)
+        emax = float(actor.char.build.stats.energy_max)
+        floor = ENERGY_FLOOR * emax
+        if actor.energy_current < floor:
+            actor.energy_current = floor
+        if self.log:
+            self.log("zone_expired", {"zone_id": ZONE_ID, "source_id": MORTENAX_ID})
+
+    def _apply_mortenax_talent_after_attack(self, payload: dict[str, Any]) -> None:
+        from hsrsim.rules.mortenax import (
+            CHARGE_NEED,
+            CHARGE_VAR,
+            MORTENAX_ID,
+            TALENT_ENERGY,
+        )
+
+        if not self._mortenax_zone_active():
+            return
+        actor_id = str(payload.get("actor_id") or "")
+        actor = self.state.find_char(actor_id)
+        if actor is None or actor not in self.state.allies:
+            return
+        if float(payload.get("damage_total") or 0.0) <= 0:
+            return
+        ctx = self.action_ctx
+        hit_ids = []
+        if ctx is not None and ctx.target_id:
+            hit_ids.append(str(ctx.target_id))
+        action = None
+        if ctx is not None:
+            action = next((a for a in actor.char.build.actions if a.id == ctx.action_id), None)
+        aoe = False
+        if action is not None:
+            aoe = any(getattr(d, "target", "") == "aoe" for d in action.damage_instances)
+        enemies = [e for e in self.state.enemies if e.is_alive]
+        if aoe:
+            targets = enemies
+        else:
+            targets = [self.state.find_char(i) for i in hit_ids]
+            targets = [t for t in targets if t is not None and t in self.state.enemies]
+            if not targets and enemies:
+                targets = [enemies[0]]
+        for t in targets:
+            self._apply_balefire(t, from_trigger="mortenax_zone_talent")
+        holder = self.state.find_char(MORTENAX_ID)
+        if holder is None:
+            return
+        holder.variables[CHARGE_VAR] = float(holder.variables.get(CHARGE_VAR, 0.0)) + 1.0
+        if holder.variables[CHARGE_VAR] + 1e-9 >= CHARGE_NEED and holder.hp_current > 1.0:
+            holder.variables[CHARGE_VAR] -= CHARGE_NEED
+            grant_energy(holder, TALENT_ENERGY, source="mortenax_talent_charge", log=self.log)
+            holder.variables["_mortenax_extra_skill"] = 1.0
+
+    def _mortenax_on_being_hit(self, defender: CharacterState, attacker_id: str) -> None:
+        from hsrsim.rules.mortenax import CHARGE_NEED, CHARGE_VAR, MORTENAX_ID, TALENT_ENERGY
+
+        if defender.char.id != MORTENAX_ID or not self._mortenax_zone_active():
+            return
+        enemy = self.state.find_char(attacker_id)
+        if enemy is None or enemy not in self.state.enemies:
+            return
+        self._apply_balefire(enemy, from_trigger="mortenax_zone_talent")
+        defender.variables[CHARGE_VAR] = float(defender.variables.get(CHARGE_VAR, 0.0)) + 1.0
+        if defender.variables[CHARGE_VAR] + 1e-9 >= CHARGE_NEED and defender.hp_current > 1.0:
+            defender.variables[CHARGE_VAR] -= CHARGE_NEED
+            grant_energy(defender, TALENT_ENERGY, source="mortenax_talent_hit", log=self.log)
+            defender.variables["_mortenax_extra_skill"] = 1.0

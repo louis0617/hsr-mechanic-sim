@@ -1,4 +1,4 @@
-"""Battlefield unit queries () — no per-character specials."""
+"""Battlefield unit queries (C3) — no per-character specials."""
 from __future__ import annotations
 
 from typing import Any, Literal

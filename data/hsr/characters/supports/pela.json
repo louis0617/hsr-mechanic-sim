@@ -259,7 +259,7 @@
       "atk_pct": 0.18
     },
     "talent_energy_l12": 11,
-    "talent_note": "天赋 110604 L12 ParamList #1=11；pcgrllm_sv/rules/pela_talent.py ← data/hsr/tables/pela_talent_energy.json；缺键报错。",
+    "talent_note": "天赋 110604 L12 ParamList #1=11；hsrsim/rules/pela_talent.py ← data/hsr/tables/pela_talent_energy.json；缺键报错。",
     "sources": [
       "AvatarSkillConfig 110601-110604",
       "AvatarRankConfig 110601-110606",

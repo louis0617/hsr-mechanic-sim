@@ -17,7 +17,7 @@ class UltTimingStrategy(str, Enum):
 
 SPARKLE_SKILL_BUFF_ID = "sparkle_skill_buff"
 
-# Control A L2 实测：黄泉终结技/普攻命中时刻花火战技覆盖 ≈0.723。
+# E1.1h-3 Control A L2 实测：黄泉终结技/普攻命中时刻花火战技覆盖 ≈0.723。
 # 策略参数（非 min(1,λ) 整体覆盖）。
 IMMEDIATE_SPARKLE_AT_ACTION = {
     "ult": 0.72,
@@ -36,7 +36,7 @@ def sparkle_buff_coverage_at_action(
     """黄泉关键动作时刻的花火战技增益覆盖 — 由策略参数给定。
 
     wait → 1.0（该策略下只在有增益时开大；普攻/战技仍用策略表或 λ）
-    immediate → ``IMMEDIATE_SPARKLE_AT_ACTION[action]``（ 实测）
+    immediate → ``IMMEDIATE_SPARKLE_AT_ACTION[action]``（E1.1h-3 实测）
     search_measured → 必须传入 ``immediate_by_action``（F5：由搜索局实测覆盖）
     """
     s = UltTimingStrategy(strategy) if strategy != "search_measured" else strategy

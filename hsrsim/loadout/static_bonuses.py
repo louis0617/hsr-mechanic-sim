@@ -33,9 +33,10 @@ _LC_LV80 = {
     22000: (440.64 + 6.48 * 79, 220.32 + 3.24 * 79, 153.0 + 2.25 * 79),
     # 宇宙市场趋势：Promo6 Base + Add*(80-1)
     21016: (489.6 + 7.2 * 79, 171.36 + 2.52 * 79, 183.6 + 2.7 * 79),
+    23059: (636.48 + 9.36 * 79, 195.84 + 2.88 * 79, 214.2 + 3.15 * 79),
 }
 
-# AbilityProperty (a) by SI 1–5 ( / EquipmentSkillConfig).
+# AbilityProperty (a) by SI 1–5 (E1.1f / EquipmentSkillConfig).
 _LC_PROP_BY_SI: dict[int, list[dict[str, float]]] = {
     23024: [
         {"crit_dmg": 0.36},
@@ -80,6 +81,13 @@ _LC_PROP_BY_SI: dict[int, list[dict[str, float]]] = {
         {"def_pct": 0.28},
         {"def_pct": 0.32},
     ],
+    23059: [
+        {"hp_pct": 0.30},
+        {"hp_pct": 0.375},
+        {"hp_pct": 0.45},
+        {"hp_pct": 0.525},
+        {"hp_pct": 0.60},
+    ],
 }
 
 # Confirmed set (a) portions — cavern 4pc + planar 2pc first recommendations
@@ -91,7 +99,7 @@ _SET_A = {
     "prisoner_116": {"atk_pct": 0.12},  # 2pc; 4pc DEF ignore is (b)
     "knight_103": {"def_pct": 0.15},  # 2pc; 4pc shield absorb is (c)
     "pan_cosmic_303": {"ehr": 0.10},  # ATK-from-EHR applied after EHR known
-    "messenger_108": {"spd_pct": 0.06},  # 2pc Hackerspace; Pela 惯例 2+2 速度
+    "messenger_114": {"spd_pct": 0.06},  # 2pc Hackerspace / 疾如飞影；Pela 惯例
 }
 
 IZUMO_SAME_PATH_CR = 0.12

@@ -1,6 +1,9 @@
 # BenchmarkLoadout for acheron_direct (Fribbels 200% perfection)
 # D9: objective-solver allocation + LC S1 + set (a) panel bonuses.
 # 54× max roll substats, no diminishing returns, game-legal mains/subs.
+# Speeds: yaml 现为混沌回忆断点（花火 160 / 辅 143 / 黄泉 134）。
+# F 第三批登记：配装生成器应按队伍卡速度档位（攻略：花火 161 / 辅 160 / 黄泉 101），
+# 本文件数字暂不改，以免打乱历史对账；主实验用 speed_override=GUIDE_SPEED_*。
 # Speeds: chaos-memory breakpoints (confirmed 2026-09-18).
 # LC/sets confirmed 2026-09-18 (first recommendations).
 
