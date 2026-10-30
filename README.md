@@ -1,32 +1,75 @@
 # hsr-mechanic-sim
 
-Honkai: Star Rail combat mechanics, formalized from official skill text into executable trigger definitions, with two independent damage models that check each other.
+Framework for formalizing Honkai: Star Rail combat kits into executable rules, then checking them with two independent damage models.
 
-## Overview
+This public tree is the **shared core**: shared triggers, L1/L2 models, axis/rotation search, and kit graphs. It is meant as a readable outline for collaborators, not a full research dump. Optional backends (e.g. HSR_Nous) are linked, not vendored.
 
-Each character's kit is written as trigger definitions grounded in the official skill descriptions and public datamined parameters. Two models read the same definitions:
+Unofficial fan research. Not affiliated with HoYoverse / Cognosphere.
 
-- **L1**, a steady-state model that solves for long-run action and resource flows as a linear program (`hsrsim/analytic/`).
-- **L2**, an event-driven simulator that plays out the turn order step by step (`hsrsim/simulator/`).
+## Idea
 
-The two are built differently on purpose. When they disagree, the gap is traced back to a specific source, such as a resource rate or a trigger condition, which shows where one of the models or the formalization itself is wrong.
+Hand-write each kit as trigger definitions grounded in official skill text and public ParamLists. Two models consume the **same** definitions:
 
-Trigger definitions in this repository are **hand-written formalizations** grounded in official text and public ParamLists, not model-generated kit code.
+| Model | Role | Package |
+|---|---|---|
+| **L1** | Steady-state / flow model (long-run action & resource rates) | `hsrsim/analytic/` |
+| **L2** | Event-driven turn simulator | `hsrsim/simulator/` |
 
-## How the two models check each other
+They are built differently on purpose. Disagreement points back to a concrete source (resource rate, trigger condition, timing), which is how formalization bugs surface.
 
-```mermaid
-flowchart LR
-  T[Official skill text] --> D[Trigger definitions]
-  D --> L1[L1 steady-state model]
-  D --> L2[L2 event simulator]
-  L1 --> X[Comparison and attribution]
-  L2 --> X
+```text
+official skill text + ParamLists
+            │
+            ▼
+   trigger definitions  (data/hsr/triggers/, character JSON)
+            │
+     ┌──────┴──────┐
+     ▼             ▼
+    L1            L2
+     │             │
+     └──────┬──────┘
+            ▼
+   compare / attribute gaps
 ```
 
-1. **Shared rules.** L1 and L2 load the same trigger specs from `data/hsr/triggers/`, and a fingerprint check confirms that both use identical rules (`examples/l1_l2_crosscheck/run_shared_rule_fingerprint.py`, `tests/test_shared_rules_sp_caps.py`).
-2. **Attribution.** For the included Acheron team, the difference between L1 and L2 is broken down by damage source. The results are in `examples/e2e_acheron/`, with a walkthrough in `docs/l1_l2_source_gap.md`.
-3. **Verification workflow.** Evidence grades, triangulation, residual attribution, and upgrade rules: `docs/workflow.md`. Locked S1/S2 calibration notes: `docs/locked_calibration.md`.
+On top of that core:
+
+- **Axis + rotation** — cycle-axis schemas, enumeration, and adaptive search over action patterns (`hsrsim/axis/`, `hsrsim/rotation/`).
+- **Graph** — kits as heterogeneous graphs (zones / skills / state, typed edges) for structure and extraction eval (`hsrsim/graph/`).
+- **Optional Nous bridge** — `hsrsim/l2_nous/` can call [HSR_Nous](https://github.com/pzc2004/HSR_Nous) if you place a checkout at `third_party/HSR_Nous`. See `third_party/README.md`. Core L1/L2 does not need it.
+
+## Worked example: Acheron line
+
+Data in this repo is scoped to the Acheron example line:
+
+- DPS: Acheron, Mortenax Blade  
+- Supports: Jiaoqiu, Sparkle, Aventurine, Pela, Fu Xuan (for FX teams)
+
+Teams, loadout configs, dims YAML, and frozen example outputs live under `data/hsr/`, `configs/loadout/`, `hsrsim/rotation/dims/`, and `examples/`.
+
+## Layout
+
+```text
+hsrsim/
+  analytic/     L1 steady-state model
+  simulator/    L2 event simulator
+  rules/        shared SP / counter / wiring helpers
+  axis/         cycle-axis schema, enum, L1/L2 eval
+  rotation/     adaptive cycle search (dims + observers)
+  l2_nous/      optional bridge to external HSR_Nous
+  graph/        heterogeneous kit graph + loaders
+  teams/        team JSON loaders
+  loadout/      relic / LC static bonuses
+  enemies/      benchmark dummy helpers
+  llm/          optional LLM client stubs
+data/hsr/       characters, triggers, teams (Acheron line)
+configs/loadout/
+examples/       e2e_acheron, rotation search, replacement gain, L1/L2 fingerprint
+docs/           workflow, calibration notes, Fribbels / graph notes
+tests/          smoke tests around the core
+scripts/        datamine / report helpers
+third_party/    README only — HSR_Nous not shipped
+```
 
 ## Quick start
 
@@ -34,77 +77,37 @@ flowchart LR
 python -m venv .venv
 # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python examples/l1_l2_crosscheck/run_shared_rule_fingerprint.py
 pytest tests/ -q
 ```
 
-## Locked calibration (Acheron line)
+Useful entry points (may need local data tweaks depending on your checkout):
 
-Main numbers quote **S1+S2 on** (Jiaoqiu Hearth Kindle + Sparkle Artificial Flower), guide speeds Sparkle 161 / support 160 / Acheron 101, L2 horizon 100 cycles where noted.
-
-| Metric | pre-S | S-on |
-|---|---:|---:|
-| E1.5 Pela→Jiaoqiu, zone on | +5.53% | +7.80% |
-| E1.5, zone off | −0.53% | +1.73% |
-
-Frozen lock file: `examples/e2e_acheron/frozen_outputs/locked_calibration_S_on.json`.  
-Older pre-S L1/L2 gap dump: `l1_l2_source_gap_results_pre_S.json`. Details: `docs/locked_calibration.md`.
-
-## Examples
-
-| Path | What it shows |
-|---|---|
-| `examples/e2e_acheron/` | Skill text, team files, frozen L1/L2 attribution |
-| `examples/rotation_search_acheron/` | Adaptive cycle-axis search vs community axes |
-| `examples/replacement_gain/` | E1.5 (Pela→Jiaoqiu) and Mortenax Blade replacement lifts |
-| `examples/l1_l2_crosscheck/` | Shared-rule fingerprint |
-
-## Fribbels zone anchor
-
-Solo Acheron skill damage is checked against Fribbels Optimizer zone stacking with a **≤3%** relative gate. Method and table: `docs/fribbels_zone_anchor.md`. Frozen numbers: `examples/e2e_acheron/frozen_outputs/acheron_fribbels_anchor.json`.
-
-## Heterogeneous graph (kit structure)
-
-Kits compile to a NetworkX heterogeneous graph (zones / skills / state; typed edges). Docs: `docs/heterogeneous_graph.md`. Frozen extraction eval (5 characters, no API key needed): `results/eval_extraction_checkpoint.json` — mean aligned edge F1 **0.705**, mean node F1 **0.749**.
-
-## Repository structure
-
-```text
-hsrsim/analytic/      L1 steady-state model
-hsrsim/simulator/     L2 event simulator
-hsrsim/rules/         shared trigger and skill point logic
-hsrsim/axis/          cycle-axis schema, enumeration, L1/L2 eval
-hsrsim/rotation/      adaptive cycle search (dims YAML + observers)
-hsrsim/l2_nous/       optional bridge to external HSR_Nous (not vendored)
-hsrsim/graph/         heterogeneous kit graph compiler + extract/eval helpers
-data/hsr/             Acheron-line characters, triggers, and teams
-docs/                 workflow, Fribbels anchor, graph, locked calibration
-examples/e2e_acheron/ skill text, frozen outputs (incl. S-on lock)
-examples/rotation_search_acheron/
-examples/replacement_gain/
-examples/l1_l2_crosscheck/
-scripts/              helpers for fetching public datamined data
-tests/                smoke tests for rules, rotation, graph, Fribbels
-third_party/          see third_party/README.md (HSR_Nous link only)
+```bash
+python examples/l1_l2_crosscheck/run_shared_rule_fingerprint.py
 ```
 
-## Roadmap
+Frozen numbers and walkthroughs for the Acheron line:
 
-Planned follow-ups (not claimed as completed results):
+| Path | Content |
+|---|---|
+| `examples/e2e_acheron/` | Skill text, teams, frozen L1/L2 attribution |
+| `examples/rotation_search_acheron/` | Adaptive cycle search vs community axes |
+| `examples/replacement_gain/` | Pela→Jiaoqiu / Mortenax replacement lifts |
+| `docs/workflow.md` | Evidence grades and upgrade rules |
+| `docs/locked_calibration.md` | Locked S1/S2 calibration notes |
+| `docs/fribbels_zone_anchor.md` | Fribbels zone stacking gate |
+| `docs/heterogeneous_graph.md` | Kit graph format |
 
-- Memory-team / Remembrance line formalization and L1–L2 checks
-- Robin: Summeretto (知更鸟•晴歌) kit + rotation coverage
-- A second game title using the same L1/L2 + graph formalization pattern
+## Design notes
 
-## Notes
-
-A small Sparkle talent ParamList file is included so the tests run without the full dataset. Character and trigger files are research formalizations, not official game data.
-
-Optional L2 compile / rotation-cache paths call [HSR_Nous](https://github.com/pzc2004/HSR_Nous) if you place a checkout at `third_party/HSR_Nous`. That tree is **not** shipped here; core L1/L2 + axis + graph do not require it.
+- Trigger specs are **hand-written formalizations**, not model-generated kit code.
+- L1 and L2 should load identical shared rules from `data/hsr/triggers/`; fingerprint helpers live under `examples/l1_l2_crosscheck/`.
+- Character JSON under `data/hsr/characters/` is research formalization, not official game data.
+- This public slice intentionally omits private research loops (outer/inner optimization apps, paper dumps, full character catalogs).
 
 ## License
 
-License text to be confirmed (prefer MIT for alignment with related public HSR tooling; pending collaborator sign-off before tagging a release).
+License text to be confirmed with collaborators (MIT preferred for alignment with related public HSR tooling).
 
 ## Disclaimer
 
