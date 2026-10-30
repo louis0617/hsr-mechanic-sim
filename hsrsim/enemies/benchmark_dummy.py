@@ -6,20 +6,20 @@ from collections.abc import Iterable, Sequence
 
 from hsrsim.simulator.types import Character, Element
 
-# Explicit benchmark defaults ( / ).
+# Explicit benchmark defaults (D1.9 / E1.1h-2).
 # Fribbels optimizerFormDefaults: enemyLevel=95, enemyResistance=0.2,
 # enemyEffectResistance=0.3, enemyMaxToughness=360, enemyElementalWeak=true,
 # enemyWeaknessBroken=false. DefZone matches Fribbels level formula (no DEF stat).
 DUMMY_ID = "lv95_dummy"
 DUMMY_LEVEL = 95
 DUMMY_DEFENSE = 1000.0  # nominal only; DefZone uses defender_level+20
-DUMMY_SPEED = 90.0  # Fribbels has no enemy AV; fixed for our turn clock / 
+DUMMY_SPEED = 90.0  # Fribbels has no enemy AV; fixed for our turn clock / E1.1i
 DUMMY_TOUGHNESS = 360.0  # Fribbels enemyMaxToughness
 DUMMY_HP = 1_000_000.0  # immortal floor only; not a fight target
 DUMMY_EFFECT_RES = 0.3  # Fribbels enemyEffectResistance
 # Non-weakness elemental RES; weakness attributes use 0.0.
 DEFAULT_ELEMENT_RES = 0.2
-#one hit per enemy action; target = BaseAggro-weighted random (L1 = expectation).
+# E1.1i: one hit per enemy action; target = BaseAggro-weighted random (L1 = expectation).
 # Explicit standard-dummy assumption — not a stage AI skill.
 DUMMY_HIT_TARGET_RULE = "path_base_aggro_weighted"
 DUMMY_HITS_PER_ENEMY_ACTION = 1
@@ -64,6 +64,7 @@ def build_benchmark_dummy(
     ally_elements: Sequence[str] | None = None,
     weaknesses: Sequence[str] | None = None,
     immortal: bool = False,
+    dummy_id: str | None = None,
 ) -> Character:
     """Lv95 training dummy shared by L1 adapter and L2 scenario.
 
@@ -84,7 +85,7 @@ def build_benchmark_dummy(
             seen.add(e)
             ordered.append(e)
     raw = {
-        "id": DUMMY_ID,
+        "id": dummy_id or DUMMY_ID,
         "name": "Lv95 训练人偶",
         "level": DUMMY_LEVEL,
         "path": "destruction",
@@ -192,7 +193,7 @@ def fribbels_default_enemy_table() -> dict:
             },
             "weakness_res_pen": {
                 "fribbels": "none",
-                "ours": "removed  (no source)",
+                "ours": "removed E1.1h-2 (no source)",
             },
         },
     }

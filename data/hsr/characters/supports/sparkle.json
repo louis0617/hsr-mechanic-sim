@@ -142,7 +142,7 @@
         "conditions": [],
         "name_en": "Cipher",
         "target": "all_allies",
- "description": "我方增益标记。不直接改敌方易伤；持有者攻击时，花火幻相光环每层额外 +0.06 易伤（）。"
+        "description": "我方增益标记。不直接改敌方易伤；持有者攻击时，花火幻相光环每层额外 +0.06 易伤（E1.1d）。"
       },
       {
         "id": "sparkle_figment",
@@ -161,7 +161,7 @@
         ],
         "conditions": [],
         "name_en": "Figment",
- "description": "层数挂花火自身；对敌易伤以光环读取本层数进入 vuln 区，不发敌方 effect_applied（）。持续 2 回合按花火回合递减。"
+        "description": "层数挂花火自身；对敌易伤以光环读取本层数进入 vuln 区，不发敌方 effect_applied（E1.1d）。持续 2 回合按花火回合递减。"
       }
     ],
     "variables": []
@@ -244,6 +244,7 @@
     "sources": {
       "multipliers": "AvatarSkillConfig.ParamList",
       "energy_max": "AvatarConfigEnhanced.SPNeed",
+      "ult_sp_refund": "AvatarSkillConfig SkillID=1130603 (AvatarConfigEnhanced.SkillList) ParamList index1 (1-based #2) Level=10 Value=6; 非加强版 130603 同槽为 4",
       "avatar_base_type": "AvatarConfig.AvatarBaseType",
       "skill_add": "AvatarRankConfig.SkillAddLevelList",
       "traces_flat": "AvatarSkillTreeConfig.StatusAddList",
@@ -274,7 +275,7 @@
         "field": "ult_sp_overflow_cap",
         "value": 10.0,
         "treatment": "action.sp_pool_temp_max",
- "note": "花火终结技战技点溢出上限 10：由 loader 从本字段写入 ultimate.sp_pool_temp_max（）。"
+        "note": "花火终结技战技点溢出上限 10：由 loader 从本字段写入 ultimate.sp_pool_temp_max（D1.2）。"
       }
     ]
   }

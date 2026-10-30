@@ -82,7 +82,9 @@ def pick_weighted_ally(
     for u in alive:
         char = getattr(u, "char", u)
         units.append(u)
-        weights.append(base_aggro(char))
+        weights.append(
+            base_aggro(char) * float(getattr(u, "variables", {}).get("_aggro_mult", 1.0) or 1.0)
+        )
     total = sum(weights)
     if total <= 0.0:
         return units[0]

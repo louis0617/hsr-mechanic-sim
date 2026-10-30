@@ -1,4 +1,4 @@
-""": fail-loud wiring gate for declared eidolons / light cones.
+"""E1.1g: fail-loud wiring gate for declared eidolons / light cones.
 
 Simulator has no preference for any config; declaring an unwired capability
 must raise so benchmarks refuse to emit numbers.
@@ -15,22 +15,23 @@ WIRED_EIDOLON_MAX: dict[str, int] = {
     "aventurine": 0,
     "pela": 6,  # E1.5: E4 ice RES on skill; E6 extra hit; SkillAdd baked in JSON
     "fu_xuan": 0,  # E1.5 stub tank for Trend LC leave-out
+    "mortenaxblade": 0,
 }
 
 # Light cones with AbilityProperty (a) S1–S5 tables.
 WIRED_LC_ABILITY_PROPERTY: frozenset[int] = frozenset(
-    {23024, 23029, 23021, 23023, 21015, 22000, 21016}
+    {23024, 23029, 23021, 23023, 21015, 22000, 21016, 23059}
 )
 
 # Light cones with conditional (b) runtime fully or partially wired.
 WIRED_LC_CONDITIONAL: frozenset[int] = frozenset(
-    {23024, 23029, 23021, 23023, 21015, 22000, 21016}
+    {23024, 23029, 23021, 23023, 21015, 22000, 21016, 23059}
 )
 
 # Partial (b): load allowed; must surface in notes/gaps (do not reject paper team).
 LC_CONDITIONAL_GAPS: dict[int, str] = {}
 
-# ParamList indexed by SI-1 (from EquipmentSkillConfig / audit).
+# ParamList indexed by SI-1 (from EquipmentSkillConfig / E1.1f audit).
 _LC_PARAM_LIST: dict[int, list[list[float]]] = {
     23024: [
         [0.36, 0.24, 0.24],
@@ -83,6 +84,14 @@ _LC_PARAM_LIST: dict[int, list[list[float]]] = {
         [0.24, 1.10, 0.60, 2],
         [0.28, 1.15, 0.70, 2],
         [0.32, 1.20, 0.80, 2],
+    ],
+    # 23059 炼狱重铸 / Tempering: HP% / 回能 / 炼狱持续 / 受击暴伤 / 来自装备者额外暴伤
+    23059: [
+        [0.30, 20, 2, 0.30, 0.30],
+        [0.375, 20, 2, 0.375, 0.375],
+        [0.45, 20, 2, 0.45, 0.45],
+        [0.525, 20, 2, 0.525, 0.525],
+        [0.60, 20, 2, 0.60, 0.60],
     ],
 }
 
@@ -236,7 +245,7 @@ def assert_l1_consumes_paper_config(l1_input: Any) -> list[str]:
     Returns notes for soft warnings (e.g. CR already capped). Raises ValueError
     when a required consume path is missing.
 
-    : gate covers damage consume **and** counter/resource flow consume
+    E1.1g-4: gate covers damage consume **and** counter/resource flow consume
     (E2 turn-start dream, mirage→R1 fires).
     """
     notes: list[str] = []
@@ -309,7 +318,7 @@ def assert_l1_consumes_paper_config(l1_input: Any) -> list[str]:
                 missing.append("23021 假面未使用 sp_blaze 覆盖（仍为 basic×8？）")
                 break
 
-    # Counter / resource flow consume .
+    # Counter / resource flow consume (E1.1g-4).
     dream_counters = [c for c in counters if "nihility" in str(getattr(c, "name", ""))]
     if not dream_counters:
         missing.append("残梦计数器未进 L1 counters")

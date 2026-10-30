@@ -1,0 +1,13 @@
+{
+  "_meta": {
+    "source": "AvatarSkillConfig.ParamList #1",
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "skill_id": 110604,
+    "note": "Pela talent Data Collecting: extra energy if target is debuffed after the attack. SPBase ABSENT. Value does not vary with ERR in JSON; L2 currently grants raw (no ERR). Per-attack cap 1 is engine."
+  },
+  "energy_by_level": {
+    "1": 5.0,
+    "10": 10.0,
+    "12": 11.0
+  }
+}

@@ -12,7 +12,7 @@ import networkx as nx
 
 from hsrsim.graph.compiler import HSRGraphCompiler
 from hsrsim.graph.extractor import GraphExtractor
-from hsrsim.catalog.loader import CHARACTERS_DIR, load_character
+from hsrsim.graph.loader import CHARACTERS_DIR, load_character
 from hsrsim.llm.client import create_llm_client
 from hsrsim.simulator.types import Character
 
@@ -192,7 +192,7 @@ def main() -> None:
     parser.add_argument(
         "--provider",
         default=None,
-        help="LLM provider: deepseek (default) or anthropic",
+        help="LLM provider: deepseek only (flash-only policy)",
     )
     parser.add_argument(
         "--no-thinking",

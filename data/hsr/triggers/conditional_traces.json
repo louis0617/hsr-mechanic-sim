@@ -1,6 +1,6 @@
 {
   "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
- "note": "Descriptors only; runtime after . No character-id engine specials.",
+  "note": "Descriptors only; runtime after C3b. No character-id engine specials.",
   "trace_triggers": [
     {
       "id": "acheron_abyss",
@@ -90,7 +90,7 @@
       "hooks": [
         "turn_start"
       ],
- "effects_note": "gain 1 Slashed Dream; +1 Crimson Knot on enemy with most stacks — +",
+      "effects_note": "gain 1 Slashed Dream; +1 Crimson Knot on enemy with most stacks — C3b+",
       "also_modifies": [
         "acheron_abyss.eidolon_mods"
       ]

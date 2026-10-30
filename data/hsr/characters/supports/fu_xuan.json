@@ -1,0 +1,65 @@
+{
+  "id": "fu_xuan",
+  "name": "符玄",
+  "name_en": "Fu Xuan",
+  "level": 80,
+  "path": "preservation",
+  "elements": ["quantum"],
+  "weaknesses": [],
+  "toughness_max": 100.0,
+  "eidolon": 0,
+  "build": {
+    "stats": {
+      "hp_max": 1474.0,
+      "atk": 466.0,
+      "defense": 606.0,
+      "speed": 100.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5,
+      "break_effect": 0.0,
+      "ehr": 0.0,
+      "dmg_boost": {"quantum": 0.0},
+      "res_pen": {},
+      "energy_max": 135.0,
+      "elation": 0.0,
+      "punchline": 0.0,
+      "merrymake": 0.0
+    },
+    "actions": [
+      {
+        "id": "fu_xuan_basic",
+        "name": "普攻",
+        "type": "basic_attack",
+        "description": "E1.5 stub：生存位占位；受击走 BaseAggro 存护权，挂载 21016 市场。完整技能/行迹第二次留出。",
+        "damage_instances": [],
+        "skill_id": 120801,
+        "skill_level": {"skill_id": 120801, "final": 6, "param_list_level": 6},
+        "sp_cost": -1,
+        "applies_effects": [],
+        "effect_target": "self",
+        "variable_changes": {},
+        "requires": []
+      }
+    ],
+    "effects": [],
+    "variables": []
+  },
+  "_meta": {
+    "datamine_commit": "4ce30f69b32dc259ab9a8da3ba57035485103221",
+    "avatar_id": 1208,
+    "generation_eidolon": 0,
+    "enhanced": false,
+    "stub": true,
+    "note": "E1.5 生存位 stub：受击+21016 残梦路径；普攻 SkillID=120801 仅用于 SPBase 回能，完整技能/行迹第二次留出",
+    "promotion_base": {
+      "hp": 1474.0,
+      "atk": 466.0,
+      "defense": 606.0,
+      "speed": 100.0,
+      "crit_rate": 0.05,
+      "crit_dmg": 0.5
+    },
+    "flat_traces": {},
+    "sources": ["E1.5 stub for Trend LC leave-out"]
+  }
+}

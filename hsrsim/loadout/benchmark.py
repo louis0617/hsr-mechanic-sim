@@ -21,6 +21,10 @@ from hsrsim.simulator.types import Character
 REPO = Path(__file__).resolve().parents[2]
 LOADOUT_DIR = REPO / "configs" / "loadout"
 
+# F 第三批登记：生成器默认应读队伍卡速度档，而不是写死混沌回忆断点。
+# apply_team_benchmark 仍消费 yaml.target_speed；主配置通过 speed_override 注入 GUIDE_SPEED_*。
+SPEED_POLICY = "team_card_guide_tier"
+
 # 5★ +15 main (Fribbels MainStatsValues)
 _MAIN = {
     "hp_pct": 6.912 + 15 * 2.4192,
@@ -83,6 +87,7 @@ _ROLE_CANDIDATES: dict[str, list[str]] = {
     "pull_support": ["crit_dmg", "hp_pct", "atk_pct"],
     "amp_support": ["ehr", "atk_pct", "atk_flat"],
     "shielder": ["def_pct", "def_flat", "hp_pct"],
+    "hp_dps": ["crit_rate", "crit_dmg", "hp_pct", "hp_flat"],
 }
 
 # Broken Keel 310 (b): wearer RES ≥30% → team +10% CD. Generator must satisfy.
@@ -243,6 +248,8 @@ def _objective(role: str, panel: dict[str, float], *, ehr_hit_cap: float | None 
         return cap * 1000.0 + panel["atk"]
     if role == "shielder":
         return panel["defense"]
+    if role == "hp_dps":
+        return expected_damage_mult(panel["hp_max"], panel["crit_rate"], panel["crit_dmg"])
     raise ValueError(f"unknown role {role}")
 
 
@@ -747,7 +754,38 @@ def apply_benchmark_to_character(
                     mod.value = round(buff, 6)
             notes.append(f"sparkle_skill_buff recomputed to {buff:.4f} from panel CD")
 
-    #stamp LC id / SI onto Character for wiring + runtime conditionals.
+    # S1 1218102 Hearth Kindle: EHR→ATK% of base ATK (ParamList [0.8,0.15,0.6,2.4]).
+    if character_id == "jiaoqiu":
+        from hsrsim.rules.shared_gaps import (
+            jiaoqiu_hearth_kindle_atk_flat,
+            jiaoqiu_hearth_kindle_atk_pct,
+        )
+
+        hk_pct = jiaoqiu_hearth_kindle_atk_pct(float(char.build.stats.ehr))
+        hk_flat = jiaoqiu_hearth_kindle_atk_flat(
+            float(char.build.stats.ehr), float(base_atk)
+        )
+        char.build.stats.atk = float(char.build.stats.atk) + hk_flat
+        char.hearth_kindle_atk_flat = float(hk_flat)
+        notes.append(
+            f"1218102 Hearth Kindle: EHR={char.build.stats.ehr:.4f} → "
+            f"ATK%={hk_pct:.2%} flat=+{hk_flat:.1f} (base_atk={base_atk:.1f})"
+        )
+
+    # Trace 1304101 Leverage: DEF→CRIT Rate (official: +2% CR per 100 DEF over 1600, cap 48%).
+    # Host expr uses round; Fribbels floorSafe — we match Nous/fixture round for parity.
+    if character_id == "aventurine":
+        defense = float(char.build.stats.defense)
+        lev = min(0.48, 0.02 * round(max(0.0, defense - 1600.0) / 100.0))
+        before_cr = float(char.build.stats.crit_rate)
+        char.build.stats.crit_rate = min(1.0, before_cr + lev)
+        char.leverage_crit_rate = float(lev)
+        notes.append(
+            f"1304101 Leverage: DEF={defense:.1f} → CR+{lev:.4f} "
+            f"(panel {before_cr:.4f}→{char.build.stats.crit_rate:.4f})"
+        )
+
+    # E1.1g: stamp LC id / SI onto Character for wiring + runtime conditionals.
     lc_cfg = cfg.get("light_cone") or {}
     if lc_cfg:
         char.light_cone_id = int(lc_cfg["id"])

@@ -47,7 +47,7 @@ def figment_aura_vuln(
 ) -> float:
     """Sparkle figment stacks → enemy vuln aura; cipher bonus if attacker holds it.
 
-    : figment lives on Sparkle (ally). Enemies are never inflicted.
+    E1.1d: figment lives on Sparkle (ally). Enemies are never inflicted.
     Cipher (谜诡) is an ally buff; only the attacker having it raises per-stack
     talent vuln.
     """
@@ -70,17 +70,21 @@ def figment_aura_vuln(
     return float(figment.current_stacks) * (base + bonus)
 
 
-def aggregate_effects(effects: list[Effect], *, side: str) -> dict[str, float]:
+def aggregate_effects(
+    effects: list[Effect], *, side: str, action_kind: str | None = None
+) -> dict[str, float]:
     """Sum modifiers from active effects, filtered by combat role.
 
     side='attacker': dmg_boost, crit, res_pen, break_effect, etc. on the hitter
     side='defender': def_reduction, vuln, weaken on the target being hit
 
-    : sparkle_figment / sparkle_enemy_vuln are not read here as defender
+    E1.1d: sparkle_figment / sparkle_enemy_vuln are not read here as defender
     debuffs. Use ``figment_aura_vuln`` (holder stacks + attacker cipher).
+    Empty ``applies_to_actions`` means all actions.
     """
     allowed = ATTACKER_STATS if side == "attacker" else DEFENDER_STATS
     totals: dict[str, float] = defaultdict(float)
+    kind = (action_kind or "").replace("basic_attack", "basic_attack")
     for effect in effects:
         # Figment/cipher: aura path only (never flat on defender bag).
         if effect.id in (SPARKLE_FIGMENT_ID, SPARKLE_CIPHER_ID):
@@ -92,6 +96,9 @@ def aggregate_effects(effects: list[Effect], *, side: str) -> dict[str, float]:
         for mod in effect.modifiers:
             if mod.operation != "add":
                 continue
+            scope = list(mod.applies_to_actions or [])
+            if scope and kind and kind not in scope:
+                continue
             base_stat = mod.target_stat.split(".", 1)[0]
             if base_stat not in allowed:
                 continue
@@ -100,7 +107,7 @@ def aggregate_effects(effects: list[Effect], *, side: str) -> dict[str, float]:
 
 
 def _ashen_roast_vuln(effect: Effect) -> float | None:
-    """Ashen Roast: vuln = at_one + (stacks-1)*per_extra ( talent L10)."""
+    """Ashen Roast: vuln = at_one + (stacks-1)*per_extra (E1.0 talent L10)."""
     if effect.vuln_at_one_stack is None or effect.vuln_per_extra_stack is None:
         return None
     stacks = float(effect.current_stacks)

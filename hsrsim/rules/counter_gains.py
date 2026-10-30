@@ -1,4 +1,4 @@
-"""Shared counter-gain specs for L1 adapter and L2 EventBus ()."""
+"""Shared counter-gain specs for L1 adapter and L2 EventBus (D1.1)."""
 from __future__ import annotations
 
 import json
@@ -58,7 +58,7 @@ def zone_proc_counts_for_dream(
 ) -> bool:
     """L1/L2 shared flag: ult-zone Ashen Roast on enemy action → Slashed Dream.
 
-    Default True (community convention).
+    Default True (community); pending live/Fribbels confirmation (E1.0).
     """
     if override is not None:
         return bool(override)
@@ -68,7 +68,11 @@ def zone_proc_counts_for_dream(
 def figment_counts_for_dream(
     path: Path | None = None, *, override: bool | None = None
 ) -> bool:
-    """Figment never counts as an enemy infliction; always False unless overridden."""
+    """Archived E1.1d: always False — figment never enemy-inflicts.
+
+    Historical sensitivity (wrong enemy-holder model, E1.1c): T→ult≈0.696,
+    F→ult≈0.487. JSON may still carry an archived object under the old key.
+    """
     if override is not None:
         return bool(override)
     raw = _load_raw(path)
@@ -131,7 +135,7 @@ def _debuff_action_fires(allies: list[Character]) -> dict[str, dict[str, float]]
 
 
 def _figment_sp_fires(allies: list[Character]) -> dict[str, dict[str, float]]:
-    """Deprecated : figment no longer feeds R1 fires."""
+    """Deprecated E1.1d: figment no longer feeds R1 fires."""
     _ = allies
     return {}
 
@@ -140,9 +144,9 @@ def _enrich_acheron_trigger_r1_fires(
     debuff_fires: dict[str, dict[str, float]],
     allies: list[Character],
 ) -> dict[str, dict[str, float]]:
-    """LC 23024 mirage → R1. Crimson Knot is NOT an R1 source ().
+    """LC 23024 mirage → R1. Crimson Knot is NOT an R1 source (E1.1c).
 
-    : 集真赤是天赋产物，不算天赋触发源。L2 ``_on_effect_applied``
+    E1.1c: 集真赤是天赋产物，不算天赋触发源。L2 ``_on_effect_applied``
     已排除 ``crimson_knot``；战技上的 ``acheron_r2`` 来自泡影，不是集真赤。
     L1 不得把 knot 写进 R1 fires。
     """

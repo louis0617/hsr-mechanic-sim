@@ -1,0 +1,16 @@
+character_id: "1306"
+slug: sparkle
+decision_dims:
+  - name: sp_min
+    values: [1]
+    default: 1
+  - name: skill_target
+    values: [acheron]
+    default: acheron
+cycle_signature_fields:
+  - {kind: energy, on: self}
+  # L2：战技 buff 是 sparkle_skill_buff；行迹计数是 _ally_turn_sp_consumed
+  - {kind: modifier_stacks, id: sparkle_skill_buff, on: allies_named, name: acheron}
+  - {kind: resource, id: _ally_turn_sp_consumed, on: self}
+  - {kind: skill_points, on: team}
+  - {kind: av_phase, on: self}

@@ -62,7 +62,7 @@
         "id": "aventurine_skill",
         "name": "战技",
         "type": "skill",
- "description": "为我方全体提供【坚垣筹码】护盾（存在+持续；无数值/血量；）",
+        "description": "为我方全体提供【坚垣筹码】护盾（存在+持续；无数值/血量；E1.1i）",
         "damage_instances": [],
         "energy_cost": 0.0,
         "sp_cost": 1,

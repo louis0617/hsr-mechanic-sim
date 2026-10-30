@@ -4,16 +4,16 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from hsrsim.rotation.community import (
+from hsrsim.axis.community import (
     GUIDE_SPEED_JQ,
     GUIDE_SPEED_PELA,
     community_jq_axis,
     community_pela_axis,
 )
-from hsrsim.rotation.coverage import attach_live_sampler, summarize_snaps
-from hsrsim.rotation.enumerate import iter_adaptive_axes, summarize_leaderboard
-from hsrsim.rotation.eval import play_axis_l2
-from hsrsim.rotation.schema import CycleAxis, f6_key
+from hsrsim.axis.coverage import attach_live_sampler, summarize_snaps
+from hsrsim.axis.enumerate import iter_adaptive_axes, summarize_leaderboard
+from hsrsim.axis.eval import play_axis_l2
+from hsrsim.axis.schema import CycleAxis, f6_key
 
 REPO = Path(__file__).resolve().parents[1]
 OUT_MD = REPO / "docs" / "V1.0" / "F_CLOSE_REPORT.md"
@@ -27,7 +27,7 @@ def _labels(axis: CycleAxis) -> dict:
         if p.mode == "adaptive":
             out[cid] = f"ad k={p.sp_min}"
         else:
-            from hsrsim.rotation.schema import pattern_label
+            from hsrsim.axis.schema import pattern_label
 
             out[cid] = pattern_label(p.normal_cycle)
     out["acheron_ult"] = axis.acheron_ult()
@@ -74,7 +74,7 @@ def play_many(axes, comm, *, zone, speed, tag):
 
 
 def ult_sparkle_cov(axis: CycleAxis, *, zone: bool, speed) -> dict:
-    from hsrsim.rotation.eval import play_axis_l2 as play
+    from hsrsim.axis.eval import play_axis_l2 as play
 
     spec_play = play(
         axis, zone=zone, max_cycles=CYCLES, speed_override=speed, keep_engine=True
@@ -83,7 +83,7 @@ def ult_sparkle_cov(axis: CycleAxis, *, zone: bool, speed) -> dict:
         return {"feasible": False, "reason": spec_play.get("reason")}
     # sampler must attach before run — replay
     from hsrsim.teams.loader import load_team_spec
-    from hsrsim.rotation.policy_bot import build_axis_bots
+    from hsrsim.axis.policy_bot import build_axis_bots
     from hsrsim.simulator.bots import GreedyBot
     from hsrsim.simulator.combat_rules import CombatRules
     from hsrsim.simulator.engine import Engine

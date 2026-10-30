@@ -1,0 +1,17 @@
+character_id: "1218"
+slug: jiaoqiu
+decision_dims:
+  - name: sp_min
+    values: [1, 2, 99]
+    default: 1
+  - name: ult_timing
+    values: [immediate_when_full]
+    default: immediate_when_full
+cycle_signature_fields:
+  - {kind: energy, on: self}
+  # simulator/triggers.py:45 ASHEN_ROAST_ID = "ashen_roast"
+  - {kind: modifier_stacks, id: ashen_roast, on: enemies_max}
+  # types.py:183 dot_instance；types.py:159 duration_turns；state.py:200 每回合递减
+  - {kind: dot_remaining_turns, id: ashen_roast, on: enemies_max}
+  - {kind: skill_points, on: team}
+  - {kind: av_phase, on: self}

@@ -1,4 +1,4 @@
-"""Team composition loading and team-level GSD evaluation ()."""
+"""Team composition loading and team-level GSD evaluation (M9)."""
 from __future__ import annotations
 
 import copy
@@ -6,8 +6,12 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from hsrsim.enemies.benchmark_dummy import ally_element_keys, build_benchmark_dummy
-from hsrsim.catalog.loader import load_character_by_id
+from hsrsim.enemies.benchmark_dummy import (
+    DUMMY_ID,
+    ally_element_keys,
+    build_benchmark_dummy,
+)
+from hsrsim.graph.loader import load_character_by_id
 from hsrsim.simulator.types import Character, Scenario
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -70,7 +74,13 @@ def _require_eidolons(raw: dict, members: list[str]) -> dict[str, int]:
     return out
 
 
-def load_team_spec(team_id: str, *, apply_loadout: bool = True) -> TeamSpec:
+def load_team_spec(
+    team_id: str,
+    *,
+    apply_loadout: bool = True,
+    speed_override: dict[str, float] | None = None,
+    n_enemies: int | None = None,
+) -> TeamSpec:
     path = TEAMS_DIR / f"{team_id}.json"
     if not path.is_file():
         raise FileNotFoundError(f"Team spec not found: {path}")
@@ -86,7 +96,7 @@ def load_team_spec(team_id: str, *, apply_loadout: bool = True) -> TeamSpec:
         loadout_cfg = load_loadout_config(team_id)
         if loadout_cfg is not None:
             raw_metas: dict = {}
-            from hsrsim.catalog.loader import CHARACTERS_DIR
+            from hsrsim.graph.loader import CHARACTERS_DIR
 
             for mid in members:
                 for cand in (
@@ -98,9 +108,11 @@ def load_team_spec(team_id: str, *, apply_loadout: bool = True) -> TeamSpec:
                         if meta:
                             raw_metas[mid] = meta
                         break
-            allies, _reports = apply_team_benchmark(allies, team_id, raw_metas=raw_metas)
+            allies, _reports = apply_team_benchmark(
+                allies, team_id, raw_metas=raw_metas, speed_override=speed_override
+            )
 
-    #stamp eidolon onto each Character (LC stamped in apply_benchmark).
+    # E1.1g: stamp eidolon onto each Character (LC stamped in apply_benchmark).
     stamped: list[Character] = []
     for ally in allies:
         stamped.append(
@@ -116,17 +128,25 @@ def load_team_spec(team_id: str, *, apply_loadout: bool = True) -> TeamSpec:
         loadout=loadout_cfg,
     )
 
-    enemy = build_benchmark_dummy(
+    dummy_kw = dict(
         ally_elements=ally_element_keys(allies),
         immortal=False,
     )
+    n = 1 if n_enemies is None else int(n_enemies)
+    if n < 1:
+        raise ValueError(f"n_enemies must be >= 1, got {n}")
+    dummies: list[Character] = []
+    for i in range(n):
+        did = DUMMY_ID if n == 1 else f"{DUMMY_ID}_{i + 1}"
+        dummies.append(build_benchmark_dummy(**dummy_kw, dummy_id=did))
     # Optional team override: narrow or replace weaknesses (still explicit on the same object).
     weaknesses = raw.get("enemy_weaknesses") or []
     if weaknesses:
         from hsrsim.enemies.benchmark_dummy import element_res_table
 
-        enemy.weaknesses = list(weaknesses)
-        enemy.build.stats.element_res = element_res_table(weaknesses)
+        for enemy in dummies:
+            enemy.weaknesses = list(weaknesses)
+            enemy.build.stats.element_res = element_res_table(weaknesses)
     scenario = Scenario(
         name=raw.get("name", team_id),
         description=raw.get("description", ""),
@@ -134,7 +154,7 @@ def load_team_spec(team_id: str, *, apply_loadout: bool = True) -> TeamSpec:
         # max_rounds is engine-round bookkeeping, NOT MoC cycles (C9).
         max_cycles=int(raw.get("max_cycles", 4)),
         allies=allies,
-        enemies=[enemy],
+        enemies=dummies,
         rotation=None,
         toughness_mode=raw.get("toughness_mode", "realistic"),
     )

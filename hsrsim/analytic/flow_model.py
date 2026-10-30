@@ -62,9 +62,9 @@ class CounterResource:
     cap: float
     consume: dict[str, float]
     rules: tuple[GainRule, ...] | list[GainRule]
-    #soft overshoot buffer (Acheron 四相断我 max 3) before hard waste.
+    # E1.1g-2: soft overshoot buffer (Acheron 四相断我 max 3) before hard waste.
     overflow_buffer: float = 0.0
-    #gains outside LP actions (e.g. Aventurine FUA → R1 dream via 23023).
+    # E1.1i: gains outside LP actions (e.g. Aventurine FUA → R1 dream via 23023).
     external_gain: float = 0.0
 
 
@@ -84,7 +84,7 @@ class FlowSolution:
     success: bool
     message: str = ""
     resource_gains: dict[str, float] | None = None
-    #fill-then-spend overflow correction used / implied by this solve.
+    # D1.7: fill-then-spend overflow correction used / implied by this solve.
     overflow: object | None = None
 
 
@@ -146,6 +146,7 @@ def solve_flow(
     counters: list[CounterResource] | None = None,
     extra_turns: dict[str, float] | None = None,
     fixed_rates: dict[str, dict[str, float]] | None = None,
+    skill_shares: dict[str, float] | None = None,
     energy_consume_extra: dict[str, float] | None = None,
     counter_consume_extra: dict[str, float] | None = None,
 ) -> FlowSolution:
@@ -153,17 +154,26 @@ def solve_flow(
 
     Constraints
     - turns: ``nb + ns = speed / 100 + extra_turns``
+    - skill share (optional): ``ns = r (nb + ns)`` i.e. ``(1-r) ns - r nb = 0``
     - sp_balance: ``sum(sp_add*nb - sp_need*ns + sp_ult*u) + sp_other >= 0``
     - energy / counter: consumption rate <= gain rate (shared row builder)
 
     ``extra_turns`` is the action-advance term ``adv_i``. Callers that omit
     it keep the B1 equality ``nb + ns = speed / 100``.
 
+    Skill-share vs extra_turns (derivation): pinning ``ns = r * speed/100``
+    (and ``nb = (1-r) * speed/100``) conflicts with the turn row when
+    ``extra_turns > 0``, because that forces ``nb+ns = speed/100`` while the
+    turn row requires ``nb+ns = speed/100 + extra``. The share equality does
+    not mention extra: together with the turn row it uniquely sets
+    ``ns = r (speed/100 + extra)``, ``nb = (1-r) (speed/100 + extra)``.
+    Do not combine share constraints with ``fixed_rates`` on basic/skill.
+
     ``fixed_rates`` pins named actions (e.g. ``{"S": {"skill": 0.5}}``) to
     exact values via variable bounds. Used by the outer buff-action grid so
     the LP cannot discard zero-damage support skills.
 
-    ``energy_consume_extra`` / ``counter_consume_extra`` () add the
+    ``energy_consume_extra`` / ``counter_consume_extra`` (D1.7) add the
     fill-then-spend average overshoot to nominal consume per spend action.
     """
     if not characters:
@@ -204,13 +214,14 @@ def solve_flow(
     n = len(characters)
     n_vars = 3 * n
     c_obj = np.zeros(n_vars)
-    a_eq = np.zeros((n, n_vars))
-    b_eq = np.zeros(n)
+    eq_rows: list[np.ndarray] = []
+    eq_rhs: list[float] = []
     names_eq: list[str] = []
     ub_rows: list[np.ndarray] = []
     ub_rhs: list[float] = []
     names_ub: list[str] = []
     bounds: list[tuple[float, float | None]] = [(0.0, None)] * n_vars
+    turn_budget: dict[str, float] = {}
 
     sp_row = np.zeros(n_vars)
     for i, ch in enumerate(characters):
@@ -219,9 +230,13 @@ def solve_flow(
         c_obj[isk] = -float(ch.skill_damage)
         c_obj[iu] = -float(ch.ult_damage)
 
-        a_eq[i, ib] = 1.0
-        a_eq[i, isk] = 1.0
-        b_eq[i] = float(ch.speed) / 100.0 + float((extra_turns or {}).get(ch.id, 0.0))
+        trow = np.zeros(n_vars)
+        trow[ib] = 1.0
+        trow[isk] = 1.0
+        budget = float(ch.speed) / 100.0 + float((extra_turns or {}).get(ch.id, 0.0))
+        turn_budget[ch.id] = budget
+        eq_rows.append(trow)
+        eq_rhs.append(budget)
         names_eq.append(f"turns:{ch.id}")
 
         sp_row[ib] += -float(ch.sp_add)
@@ -247,7 +262,7 @@ def solve_flow(
 
     for cid, actions in fixed_rates.items():
         i = index[cid]
-        turns = float(b_eq[i])
+        turns = float(turn_budget[cid])
         for action, value in actions.items():
             rate = float(value)
             if action in ("basic", "skill") and rate > turns + 1e-9:
@@ -256,6 +271,26 @@ def solve_flow(
                 )
             idx = _action_index(i, action)
             bounds[idx] = (rate, rate)
+
+    for cid, raw_r in (skill_shares or {}).items():
+        if cid not in index:
+            raise KeyError(f"skill_shares refers to unknown character {cid}")
+        r = min(1.0, max(0.0, float(raw_r)))
+        if cid in fixed_rates and any(a in ("basic", "skill") for a in fixed_rates[cid]):
+            raise ValueError(
+                f"skill_shares[{cid}] cannot combine with fixed_rates basic/skill"
+            )
+        i = index[cid]
+        ib, isk = _action_index(i, "basic"), _action_index(i, "skill")
+        srow = np.zeros(n_vars)
+        srow[ib] = -r
+        srow[isk] = 1.0 - r
+        eq_rows.append(srow)
+        eq_rhs.append(0.0)
+        names_eq.append(f"skill_share:{cid}")
+
+    a_eq = np.vstack(eq_rows)
+    b_eq = np.asarray(eq_rhs, dtype=float)
 
     ub_rows.insert(0, sp_row)
     ub_rhs.insert(0, float(sp_other))

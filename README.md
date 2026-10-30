@@ -73,16 +73,19 @@ Kits compile to a NetworkX heterogeneous graph (zones / skills / state; typed ed
 hsrsim/analytic/      L1 steady-state model
 hsrsim/simulator/     L2 event simulator
 hsrsim/rules/         shared trigger and skill point logic
-hsrsim/rotation/      adaptive cycle-axis enumeration and L1/L2 eval
+hsrsim/axis/          cycle-axis schema, enumeration, L1/L2 eval
+hsrsim/rotation/      adaptive cycle search (dims YAML + observers)
+hsrsim/l2_nous/       optional bridge to external HSR_Nous (not vendored)
 hsrsim/graph/         heterogeneous kit graph compiler + extract/eval helpers
-data/hsr/             characters, triggers and team for the Acheron example
+data/hsr/             Acheron-line characters, triggers, and teams
 docs/                 workflow, Fribbels anchor, graph, locked calibration
 examples/e2e_acheron/ skill text, frozen outputs (incl. S-on lock)
 examples/rotation_search_acheron/
 examples/replacement_gain/
 examples/l1_l2_crosscheck/
 scripts/              helpers for fetching public datamined data
-tests/                CI smoke tests for rules, rotation, graph, Fribbels freeze
+tests/                smoke tests for rules, rotation, graph, Fribbels
+third_party/          see third_party/README.md (HSR_Nous link only)
 ```
 
 ## Roadmap
@@ -96,6 +99,8 @@ Planned follow-ups (not claimed as completed results):
 ## Notes
 
 A small Sparkle talent ParamList file is included so the tests run without the full dataset. Character and trigger files are research formalizations, not official game data.
+
+Optional L2 compile / rotation-cache paths call [HSR_Nous](https://github.com/pzc2004/HSR_Nous) if you place a checkout at `third_party/HSR_Nous`. That tree is **not** shipped here; core L1/L2 + axis + graph do not require it.
 
 ## License
 

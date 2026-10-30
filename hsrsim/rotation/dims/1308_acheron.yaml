@@ -1,0 +1,18 @@
+character_id: "1308"
+slug: acheron
+decision_dims:
+  - name: ult_timing
+    values: [immediate_when_full, wait_sparkle_skill_buff]
+    default: immediate_when_full
+  - name: sp_min
+    values: [1, 2, 99]
+    default: 1
+cycle_signature_fields:
+  # simulator/triggers.py:39 SLASHED_DREAM_ID = "nihility_stacks"
+  - {kind: resource, id: nihility_stacks, on: self}
+  - {kind: energy, on: self}
+  # simulator/triggers.py:38 CRIMSON_KNOT_ID = "crimson_knot"
+  # ULT_KNOT_LOCK 已移除：engine.py:1239 只 remove_effect(crimson_knot)，没有锁定状态
+  - {kind: modifier_stacks, id: crimson_knot, on: enemies_max}
+  - {kind: skill_points, on: team}
+  - {kind: av_phase, on: self}

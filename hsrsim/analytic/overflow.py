@@ -1,4 +1,4 @@
-"""Discrete pool overflow correction for L1 fill-then-spend resources ().
+"""Discrete pool overflow correction for L1 fill-then-spend resources (D1.7).
 
 When a resource is acquired in random packets and spent only when the pool
 reaches a hard cap, the crossing acquisition wastes the overshoot. Under
@@ -185,9 +185,9 @@ def build_overflow_report(
         buffer = float(getattr(counter, "overflow_buffer", 0.0) or 0.0)
         if buffer > 0.0:
             # Soft buffer (四相断我 max B): hard waste only after buffer is full.
-            # excess is mean overshoot past the hard cap; buffer absorbs up to B
+            # D1.7 excess is mean overshoot past the hard cap; buffer absorbs up to B
             # units of that overshoot → hard waste = max(0, excess − B).
-            # (: removed unfounded 0.5×buffer coefficient.)
+            # (E1.1g-4: removed unfounded 0.5×buffer coefficient.)
             excess = max(0.0, excess - buffer)
         # Single consume action amount (Acheron: ult → 9)
         nominal = 0.0

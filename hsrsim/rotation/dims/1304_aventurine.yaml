@@ -1,0 +1,16 @@
+character_id: "1304"
+slug: aventurine
+decision_dims:
+  - name: sp_min
+    values: [1, 2, 99]
+    default: 1
+  - name: ult_timing
+    values: [immediate_when_full]
+    default: immediate_when_full
+cycle_signature_fields:
+  - {kind: energy, on: self}
+  # simulator/triggers.py:55 AVENTURINE_CHIP_ID = "aventurine_chip"
+  - {kind: modifier_stacks, id: aventurine_chip, on: self}
+  # LEVERAGE 不进签名：types.py:432 leverage_crit_rate 已烘焙进 stats.crit_rate，没有独立状态
+  - {kind: skill_points, on: team}
+  - {kind: av_phase, on: self}

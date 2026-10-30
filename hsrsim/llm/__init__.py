@@ -1,14 +1,16 @@
-"""LLM API clients (DeepSeek official OpenAI-compatible API)."""
+"""LLM API clients (DeepSeek official OpenAI-compatible API; flash-only)."""
 from hsrsim.llm.client import (
-    AnthropicChatClient,
+    FLASH_MODEL,
     DeepSeekChatClient,
     LLMClient,
     create_llm_client,
+    normalize_deepseek_model,
 )
 
 __all__ = [
+    "FLASH_MODEL",
     "LLMClient",
     "DeepSeekChatClient",
-    "AnthropicChatClient",
     "create_llm_client",
+    "normalize_deepseek_model",
 ]

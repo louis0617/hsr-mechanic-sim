@@ -1,0 +1,14 @@
+{
+  "team_id": "acheron_jq_fx",
+  "name": "黄泉新队·17173变体（椒丘+符玄市场）",
+  "description": "E1.5 外部对齐：黄泉 E2 + 椒丘 E0 + 花火 + 符玄/宇宙市场趋势；假人每轮受击×2",
+  "main_dps": "acheron",
+  "members": ["acheron", "jiaoqiu", "sparkle", "fu_xuan"],
+  "eidolons": {
+    "acheron": 2,
+    "jiaoqiu": 0,
+    "sparkle": 0,
+    "fu_xuan": 0
+  },
+  "max_rounds": 20
+}

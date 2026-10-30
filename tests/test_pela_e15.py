@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from hsrsim.catalog.loader import load_character_by_id
+from hsrsim.graph.loader import load_character_by_id
 from hsrsim.rules.wiring import WIRED_EIDOLON_MAX, lc_param_list
 from hsrsim.simulator.bots import GreedyBot
 from hsrsim.simulator.combat_rules import CombatRules
